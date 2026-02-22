@@ -1,0 +1,5 @@
+export * from './CaseStudy'
+export * from './HomePage'
+export * from './Resume'
+export * from './Skills'
+export * from './general'
