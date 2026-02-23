@@ -30,14 +30,15 @@ export const homepageContent = {
     atAGlance: {
       title: 'At a Glance',
       points: [
-        '5 years building production-ready React applications',
+        '5 years building production-ready React, Next.js applications',
         'Mentors and onboards developers, sharing knowledge and improving team workflows',
-        'Strong focus on reusable component architecture and maintainable UI systems',
+        'Designs reusable component architectures and scalable UI systems',
+        'Debugs complex state management and async data flows with confidence',
+        'Advocates for DRY, maintainable code and consistent patterns',
+        'Collaborates closely with designers, backend engineers, QA, and product in Agile environments',
+        'Self-driven and highly effective in remote environments',
+        'Thrives on teams built on trust, shared ownership, and open communication',
         'Takes ownership of projects from planning through production',
-        'Comfortable debugging complex state and data-fetching issues',
-        'Self-driven and effective in remote work environments',
-        'Organized, with a focus on DRY, maintainable code and scalable patterns',
-        'Collaborates closely with designers, backend engineers, QA, and product teams in Agile environments to deliver reliable releases',
       ],
     },
     experienceSummary: {
@@ -55,7 +56,7 @@ export const homepageContent = {
           duration: '4 yrs 8 mos',
           location: 'Kelowna · Remote',
           type: 'Permanent Full-time',
-          logo: '/logos/acro-commerce-logo.svg',
+          logo: '/techIcons/acro-commerce-logo.svg',
           description:
             'Acro Commerce is a Canadian digital commerce agency specializing in ERP-integrated ecommerce solutions for B2B organizations.',
           summary: [

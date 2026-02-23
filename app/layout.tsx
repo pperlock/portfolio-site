@@ -11,7 +11,12 @@ const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500', '600', '
 
 export const metadata = {
   title: `${NAME} - Portfolio`,
-  description: 'Portfolio website - Designer and Developer',
+  description: 'Portfolio website',
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
+  manifest: '/manifest.json',
 }
 
 type RootLayoutProps = { children: React.ReactNode }
