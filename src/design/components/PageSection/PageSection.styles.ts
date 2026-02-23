@@ -32,24 +32,24 @@ export const SectionHeader = styled.h2`
   justify-content: center;
   color: var(--color-text-muted);
   text-transform: uppercase;
+  font-size: ${typography.fontSizeLg};
   font-weight: normal;
   letter-spacing: 0.1rem;
   gap: 2rem;
   margin-bottom: 3rem;
 
-  &::before,
-  &::after {
-    content: '';
-    flex: 1 1 0;
-    min-width: 2rem;
-    height: 1px;
-    background-color: ${colors.border};
-    max-width: 400px;
-  }
-
   ${fromTablet`
-    font-size: ${typography.fontSizeLg};
     letter-spacing: 0.2rem;
     margin-bottom: 6rem;
+
+    &::before,
+    &::after {
+      content: '';
+      flex: 1 1 0;
+      min-width: 2rem;
+      height: 1px;
+      background-color: ${colors.border};
+      max-width: 400px;
+    }
   `}
 `

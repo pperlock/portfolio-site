@@ -42,7 +42,15 @@ export const NavWrapper = styled.div`
   `}
 `
 
-export const MobileMenuToggle = styled.button`
+export const MobileMenuToggleBar = styled.span`
+  width: 24px;
+  height: 2px;
+  background-color: ${colors.bg};
+  transition: ${motion.transition};
+  transform-origin: center;
+`
+
+export const MobileMenuToggle = styled.button<{ $isOpen?: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -52,15 +60,20 @@ export const MobileMenuToggle = styled.button`
   padding: 4px;
   margin-left: auto;
 
+  ${MobileMenuToggleBar}:nth-child(1) {
+    transform: ${({ $isOpen }) => ($isOpen ? 'translateY(6px) rotate(45deg)' : 'none')};
+  }
+
+  ${MobileMenuToggleBar}:nth-child(2) {
+    opacity: ${({ $isOpen }) => ($isOpen ? 0 : 1)};
+  }
+
+  ${MobileMenuToggleBar}:nth-child(3) {
+    transform: ${({ $isOpen }) => ($isOpen ? 'translateY(-6px) rotate(-45deg)' : 'none')};
+  }
+
   ${fromTablet`
     display: none;
     margin-left: 0;
   `}
-`
-
-export const MobileMenuToggleBar = styled.span`
-  width: 24px;
-  height: 2px;
-  background-color: ${colors.bg};
-  transition: ${motion.transition};
 `

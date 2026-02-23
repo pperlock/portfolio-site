@@ -16,7 +16,11 @@ const Header = () => {
             isMobileMenuOpen={isMenuOpen}
             onNavigate={() => setIsMenuOpen(false)}
           />
-          <MobileMenuToggle onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
+          <MobileMenuToggle
+            $isOpen={isMenuOpen}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+          >
             <MobileMenuToggleBar />
             <MobileMenuToggleBar />
             <MobileMenuToggleBar />

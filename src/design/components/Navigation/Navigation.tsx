@@ -3,7 +3,7 @@
 import React from 'react'
 import { usePathname } from 'next/navigation'
 import Socials from '../Socials/Socials'
-import { Nav, NavNextLink } from './Navigation.styles'
+import { Nav, NavNextLink, SocialsWrapper, SocialsLabel } from './Navigation.styles'
 import { NAV_LINKS } from '@/constants'
 
 type NavigationProps = {
@@ -34,7 +34,12 @@ const Navigation = ({
           {link.label}
         </NavNextLink>
       ))}
-      {variant !== 'footer' && <Socials variant={variant} />}
+      {variant !== 'footer' && (
+        <SocialsWrapper>
+          <SocialsLabel>Connect</SocialsLabel>
+          <Socials variant={variant} iconSize={28} />
+        </SocialsWrapper>
+      )}
     </Nav>
   )
 }

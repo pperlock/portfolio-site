@@ -48,8 +48,9 @@ type NavSocialProps = {
 
 export const NavSocial = styled.span<NavSocialProps>`
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   align-items: center;
+  justify-content: center;
   ${({ $variant }) => ($variant === 'footer' ? 'rgba(0, 0, 0, 0.15)' : 'rgba(255, 255, 255, 0.6)')};
 
   ${({ $variant, $iconSize }) =>
