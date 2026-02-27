@@ -1,76 +1,55 @@
-# Portfolio Website
+# 📌 Portfolio Website
 
-A clean, minimal portfolio website. Built with Next.js 14.
+A personal portfolio website for **Patti Perlock** showcasing skills, projects, and contact info — built with modern web technologies and deployed live.
 
-## Features
+🌐 Live Site: https://pattiperlock.com/
 
-- ✨ Clean, minimal design
-- ⚛️ Built with Next.js 14 and React 18
-- 📱 Fully responsive (mobile, tablet, desktop)
-- 🎯 Smooth scrolling navigation
-- 🎨 Modern typography and spacing
-- ⚡ Server-side rendering and optimized performance
-- 🎭 Fade-in animations on scroll
+---
 
-## Getting Started
+## 💡 Overview
+
+This is my personal developer portfolio website — a professional landing page that highlights who I am, what I build, and how to contact me. It prioritizes a clean aesthetic, responsive design, and smooth interactions.
+
+The site serves as a central hub linking to my work, GitHub profile, and other online presence.
+
+---
+
+## 🛠 Technologies Used
+
+Built with:
+
+- **Next.js 14** — React framework
+- **React 18** — Frontend library
+- **TypeScript** — Strong typing
+- **Styled Components** — Custom styles
+- **Vercel/Netlify** — Deployment
+
+---
+
+## 🚀 Features
+
+✨ Clean, minimalist design
+⚛️ Built with **Next.js 14** & **React 18** & **Typescript**
+📱 Fully responsive (mobile/tablet/desktop)
+💬 Smooth scrolling navigation
+⚡️ Optimized for performance and accessibility
+🎨 Custom styling (CSS3 — Grid + Flexbox)
+
+---
+
+## 🧑‍💻 Getting Started
+
+If you want to run this site locally for development:
 
 ### Prerequisites
 
-- Node.js (v18 or higher)
-- npm or yarn
+✔️ Node.js (v18+)
+✔️ npm or yarn
 
 ### Installation
 
-1. Navigate to the project directory:
+1. Clone the repo:
 
 ```bash
-cd portfolio-site
+git clone https://github.com/pperlock/portfolio-site.git
 ```
-
-2. Install dependencies:
-
-```bash
-npm install
-```
-
-3. Start the development server:
-
-```bash
-npm run dev
-```
-
-4. Open your browser and visit `http://localhost:3000`
-
-### Build for Production
-
-```bash
-npm run build
-```
-
-### Start Production Server
-
-```bash
-npm start
-```
-
-``
-
-## Technologies Used
-
-- Next.js 14
-- React 18
-- CSS3 (Custom properties, Grid, Flexbox)
-
-## Deployment
-
-### Vercel (Recommended)
-
-1. Push your code to GitHub
-2. Import your repository on [Vercel](https://vercel.com)
-3. Vercel will automatically detect Next.js and deploy
-
-### Netlify
-
-1. Build the project: `npm run build`
-2. Deploy to [Netlify](https://netlify.com)
-3. Or connect your GitHub repository for automatic deployments
