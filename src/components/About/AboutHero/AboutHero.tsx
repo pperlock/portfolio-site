@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 import { LowerCaseTitle } from '@/design'
 import {
   Hero,
@@ -8,7 +9,6 @@ import {
   HeroImageWrapper,
   HeroImageWrapperMobile,
   HeroImageInner,
-  HeroImage,
   HeroParagraph,
 } from './AboutHero.styles'
 
@@ -28,7 +28,14 @@ const AboutHero = ({ title, subtitle, heroBody }: AboutHeroProps) => {
             <HeroSubtitle>{subtitle}</HeroSubtitle>
             <HeroImageWrapperMobile>
               <HeroImageInner>
-                <HeroImage src="/portrait-right.png" alt="Portrait of Patti Perlock" />
+                <Image
+                  src="/portrait-right.png"
+                  alt="Portrait of Patti Perlock"
+                  width={250}
+                  height={250}
+                  priority
+                  style={{ objectFit: 'contain' }}
+                />
               </HeroImageInner>
             </HeroImageWrapperMobile>
             {heroBody.map((paragraph, index) => (
@@ -38,7 +45,14 @@ const AboutHero = ({ title, subtitle, heroBody }: AboutHeroProps) => {
 
           <HeroImageWrapper>
             <HeroImageInner>
-              <HeroImage src="/portrait-right.png" alt="Portrait of Patti Perlock" />
+              <Image
+                src="/portrait-right.png"
+                alt="Portrait of Patti Perlock"
+                width={400}
+                height={400}
+                priority
+                style={{ objectFit: 'contain' }}
+              />
             </HeroImageInner>
           </HeroImageWrapper>
         </HeroRow>

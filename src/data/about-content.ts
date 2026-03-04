@@ -1,5 +1,5 @@
 const aboutContent = {
-  title: 'About',
+  title: 'About Me',
   subtitle: "I'm a frontend developer based in Guelph, ON Canada.",
   heroBody: [
     'Since 2021, I’ve been building front-end interfaces that are clear, accessible, and thoughtfully structured — the kind that quietly do their job so well you barely notice them. That sweet spot where design systems, usability, and clean code overlap? That’s my comfort zone.',

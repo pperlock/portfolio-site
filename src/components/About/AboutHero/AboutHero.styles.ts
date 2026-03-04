@@ -8,7 +8,7 @@ export const Hero = styled.section`
   margin-bottom: ${spacing.xl};
   font-family: ${typography.fontFamily};
   ${fromTablet`
-    padding: 8rem ${spacing.md} ${spacing.xl};
+    padding: 9rem ${spacing.md} ${spacing.lg};
   `}
 `
 
@@ -28,15 +28,6 @@ export const HeroRow = styled.div`
     align-items: stretch;
     gap: ${spacing.xl};
   `}
-`
-
-export const HeroTitle = styled.h1`
-  font-family: ${typography.fontFamilyHeading};
-  font-size: ${typography.fontSize4xl};
-  text-transform: lowercase;
-  letter-spacing: ${typography.letterSpacingTight};
-  color: ${colors.text};
-  margin-bottom: ${spacing.sm};
 `
 
 export const HeroSubtitle = styled.p`
@@ -63,7 +54,7 @@ export const HeroImageWrapper = styled.div`
 `
 
 export const HeroImageWrapperMobile = styled.div`
-  width: 200px;
+  max-width: 250px;
   margin: ${spacing.md} 0;
   margin: 0 auto ${spacing.md};
 
@@ -73,14 +64,12 @@ export const HeroImageWrapperMobile = styled.div`
 `
 
 export const HeroImageInner = styled.div`
+  position: relative;
   width: 100%;
   overflow: hidden;
-`
-
-export const HeroImage = styled.img`
-  display: block;
-  width: 100%;
-  height: auto;
-  vertical-align: middle;
-  clip-path: ellipse(100% 90% at 50% 10%);
+  aspect-ratio: 4 / 5;
+  clip-path: ellipse(100% 70% at 50% 10%);
+  ${fromTablet`
+    clip-path: ellipse(100% 75% at 50% 10%);
+  `}
 `
