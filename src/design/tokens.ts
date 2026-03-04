@@ -7,6 +7,7 @@ export const colors = {
   primary: '#000',
   text: '#000',
   textLight: '#666',
+  textMedium: '#555',
   textMuted: '#757575',
   textHeader: '#333',
   bg: '#fff',

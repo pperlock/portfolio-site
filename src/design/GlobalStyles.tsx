@@ -62,12 +62,13 @@ const GlobalStyles = createGlobalStyle`
   html {
     scroll-behavior: smooth;
     font-size: ${typography.fontSizeBase};
+    font-family: ${typography.fontFamily};
     /* Reserve space for scrollbar so content doesn't shift when navigating between long and short pages */
     scrollbar-gutter: stable;
   }
 
   body {
-    font-family: ${typography.fontFamily};
+    font-family: inherit;
     color: ${colors.text};
     background-color: ${colors.bg};
     line-height: ${typography.lineHeight};

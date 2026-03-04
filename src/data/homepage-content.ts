@@ -7,17 +7,11 @@ export const homepageContent = {
       tagline: 'coder',
       image: '/portrait-left.png',
       buttons: [
-        // {
-        //   label: 'About',
-        //   href: '/about',
-        //   tip: 'left',
-        //   variant: 'filled',
-        // },
         {
-          label: 'Contact',
-          href: '/contact',
-          tip: 'left' as const,
-          variant: 'filled' as const,
+          label: 'About',
+          href: '/about',
+          tip: 'left',
+          variant: 'filled',
         },
         {
           label: 'View Resume',
