@@ -28,6 +28,7 @@ const aboutContent = {
       ],
     },
     howIWork: {
+      title: 'How I Work',
       tagline: 'Turning diverse perspectives into seamless experiences.',
       image: '/ui-vs-ux.png',
       description: [
@@ -46,8 +47,7 @@ const aboutContent = {
           text: 'The people you work with play a big part in making that possible. I take my work seriously, but I don’t take myself too seriously — positivity and curiosity go a long way toward building a great team and creating better solutions.',
         },
         {
-          description:
-            "I'm collaborative, communicative, and genuinely enjoy solving problems alongside others. I like keeping things clear and structured so everyone on the team knows what's happening and can focus on building, not guessing.",
+          text: "I'm collaborative, communicative, and genuinely enjoy solving problems alongside others. I like keeping things clear and structured so everyone on the team knows what's happening and can focus on building, not guessing.",
         },
         {
           pullQuote:
@@ -61,14 +61,5 @@ const aboutContent = {
     },
   },
 }
-
-export const galleryImages = [
-  '/sunflower.jpg',
-  '/canoe.jpg',
-  '/skydiving.png',
-  '/sunrise.png',
-  '/portrait-left.png',
-  '/sunflower.jpg',
-]
 
 export default aboutContent

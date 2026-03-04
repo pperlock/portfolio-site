@@ -1,16 +1,19 @@
 interface StorySection {
   title: string
   tagline: string
+  image: string
   description: string[]
 }
 
 interface HelloFriendDescription {
   miniQuote?: string
   pullQuote?: string
-  text: string
+  text?: string
 }
 
-interface HelloFriendSection extends Omit<StorySection, 'description'> {
+interface HelloFriendSection extends Omit<StorySection, 'description' | 'image'> {
+  imageOne: string
+  imageTwo: string
   description: HelloFriendDescription[]
 }
 

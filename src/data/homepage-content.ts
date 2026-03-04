@@ -10,8 +10,8 @@ export const homepageContent = {
         {
           label: 'About',
           href: '/about',
-          tip: 'left',
-          variant: 'filled',
+          tip: 'left' as const,
+          variant: 'filled' as const,
         },
         {
           label: 'View Resume',
