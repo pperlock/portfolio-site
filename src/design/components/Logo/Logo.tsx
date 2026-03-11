@@ -2,9 +2,13 @@ import React from 'react'
 import Image from 'next/image'
 import { LogoLink } from './Logo.styles'
 
-const Logo = () => {
+interface LogoProps {
+  onClick?: () => void
+}
+
+const Logo = ({ onClick }: LogoProps) => {
   return (
-    <LogoLink href="/">
+    <LogoLink href="/" onClick={onClick}>
       <Image
         src="/header-logo.png"
         alt="Home"

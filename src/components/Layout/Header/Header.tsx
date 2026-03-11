@@ -10,7 +10,7 @@ const Header = () => {
     <>
       <StyledHeader>
         <NavWrapper>
-          <Logo />
+          <Logo onClick={() => setIsMenuOpen(false)} />
           <Navigation
             variant="header"
             isMobileMenuOpen={isMenuOpen}
