@@ -18,25 +18,31 @@ interface WorkplaceProps {
 }
 
 const Workplace = ({ workplace }: WorkplaceProps) => {
+  const { title, images, description } = workplace
+
   return (
     <WorkplaceLayout>
-      <WorkplaceTitle>{workplace.title}</WorkplaceTitle>
+      <WorkplaceTitle>{title}</WorkplaceTitle>
       <WorkplaceImageOneWrapper>
-        <WorkplaceImage
-          src={contentfulImageUrl(workplace.images[0].file.url)}
-          alt={workplace.images[0].description}
-        />
-      </WorkplaceImageOneWrapper>
-      {workplace.images.length > 1 && (
-        <WorkplaceImageTwoWrapper>
+        {images[0] && (
           <WorkplaceImage
-            src={contentfulImageUrl(workplace.images[1].file.url)}
-            alt={workplace.images[1].description}
+            src={contentfulImageUrl(images[0].file.url)}
+            alt={images[0].description}
           />
+        )}
+      </WorkplaceImageOneWrapper>
+      {images.length > 0 && (
+        <WorkplaceImageTwoWrapper>
+          {images[1] && (
+            <WorkplaceImage
+              src={contentfulImageUrl(images[1].file.url)}
+              alt={images[1].description}
+            />
+          )}
         </WorkplaceImageTwoWrapper>
       )}
 
-      {workplace.description.map(({ miniQuote, pullQuote, text }, index: number) => (
+      {description.map(({ miniQuote, pullQuote, text }, index: number) => (
         <WorkplaceTextGroup key={index} $isFirst={index === 0}>
           {miniQuote && <MiniQuote>{miniQuote}</MiniQuote>}
           {pullQuote && <PullQuote>{pullQuote}</PullQuote>}

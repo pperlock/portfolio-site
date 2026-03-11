@@ -32,7 +32,8 @@ const workplaceDescriptions: WorkplaceDescriptionItem[] = [
     ]),
   },
   {
-    pullQuote: 'My goal is to make collaboration productive, enjoyable, and confidence-inspiring for the whole team.',
+    pullQuote:
+      'My goal is to make collaboration productive, enjoyable, and confidence-inspiring for the whole team.',
   },
   {
     miniQuote: 'I don’t just participate — I help make work easier for everyone.',
@@ -44,9 +45,12 @@ const workplaceDescriptions: WorkplaceDescriptionItem[] = [
 
 const aboutContent: AboutContent = {
   hero: {
-    title: 'About Patti Perlock',
-    subtitle: 'Frontend engineer with a nonlinear path and a love for thoughtful UX.',
-    body: null,
+    title: 'About Me',
+    subtitle: "I'm a frontend developer based in Guelph, ON Canada.",
+    body: toRichTextDocument([
+      'Since 2021, I’ve been building front-end interfaces that are clear, accessible, and thoughtfully structured — the kind that quietly do their job so well you barely notice them. That sweet spot where design systems, usability, and clean code overlap? That’s my comfort zone.',
+      'When I close my laptop, you might find me dangling off a rock wall, paddling across a lake, wandering a hidden trail, or digging in my garden. On quieter days, I keep my mind busy with crochet, a good book, or a challenging puzzle. Whether it’s a boulder problem or a codebase, working through something complex is where I thrive.,',
+    ]),
     image: {
       file: {
         url: '//images.ctfassets.net/83wvckqpi655/6ZhiU20MqwZ9Bhk8VMEIua/af5fe6fab0884b52a048f2c4d9c6fb9e/portrait-right.png',
@@ -57,15 +61,7 @@ const aboutContent: AboutContent = {
   myStory: {
     title: 'My Story',
     tagLine: 'From geophysics to frontend, code has been my constant.',
-    image: [
-      {
-        file: {
-          url: '/code-brain.png',
-          description: 'Illustration of code and brain',
-        },
-        description: 'Illustration of code and brain',
-      },
-    ],
+    image: [],
     description: toRichTextDocument([
       'I started in computer science and later applied that foundation to computational modeling and statistical analysis in geophysics.',
       'My path wasn’t linear. I ran my own dog training business, worked as a core logger at a gold mine, and eventually became a database administrator.',
@@ -99,22 +95,7 @@ const aboutContent: AboutContent = {
   },
   workplace: {
     title: 'Hello, Friend',
-    images: [
-      {
-        file: {
-          url: '/wonder-male.png',
-          description: 'Illustration of a person wondering',
-        },
-        description: 'Illustration of a person wondering',
-      },
-      {
-        file: {
-          url: '/speech-bubble.png',
-          description: 'Speech bubble illustration',
-        },
-        description: 'Speech bubble illustration',
-      },
-    ],
+    images: [],
     description: workplaceDescriptions,
   },
 }

@@ -10,23 +10,23 @@ interface CollaborationProps {
 }
 
 const Collaboration = ({ collaboration }: CollaborationProps) => {
+  const { tagLine, image, description } = collaboration
   return (
     <>
       <CollaborationRow>
-        <CollaborationTagline>{collaboration.tagLine}</CollaborationTagline>
-        <CollaborationImage>
-          <Image
-            src={contentfulImageUrl(collaboration.image[0].file.url)}
-            alt={collaboration.image[0].description ?? ''}
-            width={350}
-            height={350}
-          />
-        </CollaborationImage>
+        <CollaborationTagline>{tagLine}</CollaborationTagline>
+        {image?.length > 0 && (
+          <CollaborationImage>
+            <Image
+              src={contentfulImageUrl(image[0].file.url)}
+              alt={image[0].description ?? ''}
+              width={350}
+              height={350}
+            />
+          </CollaborationImage>
+        )}
       </CollaborationRow>
-      <RichText
-        document={collaboration.description}
-        paragraphProps={{ color: 'medium', align: 'center' }}
-      />
+      <RichText document={description} paragraphProps={{ color: 'medium', align: 'center' }} />
     </>
   )
 }

@@ -10,7 +10,7 @@ import {
   StoryImage,
   Timeline,
 } from './Story.styles'
-import { RichText } from '@/design'
+import { RichText } from '@/design/components/RichText'
 import { MyStorySection } from '@/types'
 
 interface StoryProps {
@@ -18,23 +18,25 @@ interface StoryProps {
 }
 
 const Story = ({ myStory }: StoryProps) => {
-  const { title, tagLine, image } = myStory
+  const { title, tagLine, image, description } = myStory
   return (
     <>
       <StoryTitle>{title}</StoryTitle>
       <StorySubtitle>
         <StoryTextWrapper>
           <StoryText>{tagLine}</StoryText>
-          <StoryTextImage src={image[0].file.url} alt={image[0].description} aria-hidden="true" />
+          {image[0] && (
+            <StoryTextImage src={image[0].file.url} alt={image[0].description} aria-hidden="true" />
+          )}
         </StoryTextWrapper>
       </StorySubtitle>
 
       <StoryRow>
         <StoryImageWrap>
-          <StoryImage src={myStory.image[1].file.url} alt={myStory.image[1].description} />
+          {image[1] && <StoryImage src={image[1].file.url} alt={image[1].description} />}
         </StoryImageWrap>
         <Timeline>
-          <RichText document={myStory.description} />
+          <RichText document={description} />
         </Timeline>
       </StoryRow>
     </>

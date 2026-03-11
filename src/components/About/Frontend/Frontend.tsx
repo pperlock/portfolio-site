@@ -8,11 +8,12 @@ interface FrontendProps {
 }
 
 const Frontend = ({ frontend }: FrontendProps) => {
+  const { title, description } = frontend
   return (
     <>
-      <FrontendTitle>{frontend.title}</FrontendTitle>
+      <FrontendTitle>{title}</FrontendTitle>
       <RichText
-        document={frontend.description}
+        document={description}
         paragraphProps={{ color: 'medium', align: 'center' }}
         renderEmbeddedAsset={({ src, alt }) => (
           <FrontEndImageContainer>
