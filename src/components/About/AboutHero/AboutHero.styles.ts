@@ -36,13 +36,6 @@ export const HeroSubtitle = styled.p`
   margin-bottom: ${spacing.md};
 `
 
-export const HeroParagraph = styled.p`
-  margin-bottom: ${spacing.sm};
-  font-size: ${typography.fontSizeLg};
-  color: ${colors.text};
-  line-height: 1.8;
-`
-
 export const HeroImageWrapper = styled.div`
   display: none;
 
