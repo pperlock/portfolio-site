@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import Image from 'next/image'
 import {
   HeroSection,
   HeroInner,
@@ -19,6 +20,21 @@ interface SimpleHeroProps {
   image?: string
   imageLink?: string
   paddingSize?: 'sm' | 'md' | 'lg'
+}
+
+const heroImage = (image: string) => {
+  return (
+    <HeroImage>
+      <Image
+        src={image}
+        alt=""
+        fill
+        sizes="(min-width: 768px) 320px, 70vw"
+        style={{ objectFit: 'cover' }}
+        priority
+      />
+    </HeroImage>
+  )
 }
 
 const SimpleHero = ({
@@ -48,10 +64,10 @@ const SimpleHero = ({
                 rel="noopener noreferrer"
                 aria-label="View LinkedIn profile"
               >
-                <HeroImage src={image} alt="" />
+                {heroImage(image ?? '')}
               </HeroImageLink>
             ) : (
-              <HeroImage src={image} alt="" />
+              heroImage(image ?? '')
             )}
           </HeroImageWrap>
         )}

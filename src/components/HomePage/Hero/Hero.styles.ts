@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Image from 'next/image'
 import { colors, shadow, layout, fromTablet, fromDesktop, typography } from '@/design'
 
 export const HeroSection = styled.section`
@@ -100,7 +101,7 @@ export const PortraitLeft = styled.div`
 
   ${fromTablet`
     height: auto;
-    min-height: 400px;
+    min-height: 753px;
     max-height: 753px;
   `}
 
@@ -110,9 +111,7 @@ export const PortraitLeft = styled.div`
   `}
 `
 
-export const PortraitImage = styled.img`
-  width: 100%;
-  height: 100%;
+export const PortraitImage = styled(Image)`
   object-fit: cover;
   object-position: center 60%;
 `

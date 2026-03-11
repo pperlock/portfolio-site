@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Image from 'next/image'
 import {
   WorkItem,
   WorkItemLink,
@@ -11,6 +12,7 @@ import {
   WorkTitle,
   WorkDescription,
 } from './PortfolioCard.styles'
+import { breakpoint } from '@/design'
 import { WorkItem as WorkItemType } from '@/types'
 
 interface PortfolioCardProps {
@@ -19,33 +21,34 @@ interface PortfolioCardProps {
 }
 
 const PortfolioCard = ({ item, wrapperRef }: PortfolioCardProps) => {
+  const { image, title, description, caseStudyUrl, category, placeholder } = item
+  const hasImage = Boolean(image)
+  const [imgError, setImgError] = useState(false)
   return (
     <WorkItem>
       <div ref={wrapperRef}>
-        <WorkItemLink href={item.caseStudyUrl}>
+        <WorkItemLink href={caseStudyUrl}>
           <WorkImageWrapper>
             <WorkImage>
-              {item.image ? (
-                <WorkScreenshot
-                  src={item.image}
-                  alt={item.title}
-                  onError={e => {
-                    const img = e.target as HTMLImageElement
-                    img.style.display = 'none'
-                    const placeholder = img.nextElementSibling as HTMLElement | null
-                    if (placeholder) placeholder.style.display = 'flex'
-                  }}
-                />
-              ) : null}
-              <WorkPlaceholder style={{ display: item.image ? 'none' : 'flex' }}>
-                {item.placeholder}
-              </WorkPlaceholder>
+              {hasImage && !imgError && (
+                <WorkScreenshot>
+                  <Image
+                    src={image}
+                    alt={title}
+                    fill
+                    sizes={`(min-width: ${breakpoint.tablet}px) 400px, 100vw`}
+                    style={{ objectFit: 'cover' }}
+                    onError={() => setImgError(true)}
+                  />
+                </WorkScreenshot>
+              )}
+              <WorkPlaceholder $visible={!hasImage || imgError}>{placeholder}</WorkPlaceholder>
             </WorkImage>
-            <WorkCategory>{item.category}</WorkCategory>
+            <WorkCategory>{category}</WorkCategory>
           </WorkImageWrapper>
           <WorkContent>
-            <WorkTitle>{item.title}</WorkTitle>
-            {item.description && <WorkDescription>{item.description}</WorkDescription>}
+            <WorkTitle>{title}</WorkTitle>
+            {description && <WorkDescription>{description}</WorkDescription>}
           </WorkContent>
         </WorkItemLink>
       </div>

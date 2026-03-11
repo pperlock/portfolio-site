@@ -17,7 +17,7 @@ import {
   CoderOverlay,
   HeroButtons,
 } from './Hero.styles'
-import { HeroContentType, TippedButton as TippedButtonType } from '@/types'
+import type { HeroContentType, TippedButton as TippedButtonType } from '@/types'
 
 interface HeroProps {
   content: HeroContentType
@@ -32,7 +32,13 @@ const Hero = ({ content }: HeroProps) => {
         <HeroLeft>
           <HeroImageLeft>
             <PortraitLeft>
-              <PortraitImage src={image} alt="portrait" />
+              <PortraitImage
+                src={image}
+                alt="portrait"
+                fill
+                sizes="(min-width: 1200px) 50vw, 100vw"
+                priority
+              />
             </PortraitLeft>
             <HeroTaglineLeft>
               <TaglineLabelLarge>{NAME}</TaglineLabelLarge>

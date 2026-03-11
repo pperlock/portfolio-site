@@ -9,6 +9,12 @@ export const WorkItem = styled.article`
   overflow: hidden;
   transition: ${motion.transition};
   cursor: pointer;
+  max-width: 400px;
+  margin: 0 auto;
+
+  ${fromTablet`
+    max-width: 100%;
+  `}
 
   &:hover {
     transform: translateY(-4px);
@@ -43,19 +49,17 @@ export const WorkImage = styled.div`
   position: relative;
 `
 
-export const WorkScreenshot = styled.img`
+export const WorkScreenshot = styled.div`
+  position: relative;
   width: 100%;
-  display: block;
+  height: 100%;
 `
 
-export const WorkPlaceholder = styled.div`
-  color: ${colors.bg};
+export const WorkPlaceholder = styled.div<{ $visible: boolean }>`
+  color: ${colors.textLight};
   font-size: ${typography.fontSizeXl};
   font-weight: 500;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: ${({ $visible }) => ($visible ? 'flex' : 'none')};
 `
 
 export const WorkContent = styled.div`

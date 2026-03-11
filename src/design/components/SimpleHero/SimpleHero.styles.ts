@@ -60,14 +60,26 @@ export const HeroImageWrap = styled.div`
   width: 100%;
   max-width: 280px;
   margin-top: 1.5rem;
-  overflow: hidden;
   background: transparent;
   aspect-ratio: 3 / 4;
 
   ${fromTablet`
     margin-top: 0;
     max-width: 320px;
-    overflow: visible;
+  `}
+`
+
+export const HeroImage = styled.div`
+  position: relative;
+  width: 80%;
+  height: 100%;
+  transform: rotate(10deg);
+  transition: ${motion.transition};
+  border-radius: ${layout.radiusMd};
+  overflow: hidden;
+
+  ${fromTablet`
+    width: 100%;
   `}
 `
 
@@ -78,21 +90,9 @@ export const HeroImageLink = styled.a`
   text-decoration: none;
   cursor: pointer;
 
-  &:hover img {
+  &:hover ${HeroImage} {
     transform: rotate(10deg) scale(1.1);
   }
-`
-
-export const HeroImage = styled.img`
-  width: 80%;
-  height: 100%;
-  object-fit: cover;
-  transform: rotate(10deg);
-  transition: ${motion.transition};
-  border-radius: ${layout.radiusMd};
-  ${fromTablet`
-    width: 100%;
-  `}
 `
 export const HeroSubtitle = styled.p<{ $hasImage?: boolean }>`
   line-height: 1.7;
