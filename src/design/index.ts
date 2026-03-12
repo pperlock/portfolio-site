@@ -1,4 +1,10 @@
+/* =============================== Utils =============================== */
+
 export * from './tokens'
+export * from './types'
+
+/* =============================== Components =============================== */
+
 export { default as GlobalStyles } from './GlobalStyles'
 export { default as SimpleHero } from './components/SimpleHero/SimpleHero'
 export { default as PageSection } from './components/PageSection/PageSection'
@@ -10,3 +16,5 @@ export { default as BackToTop } from './components/BackToTop/BackToTop'
 export { default as PortfolioCards } from './components/PortfolioCards/PortfolioCards'
 export { default as TippedButton } from './components/TippedButton/TippedButton'
 export { default as LowerCaseTitle } from './components/LowerCaseTitle/LowerCaseTitle'
+export { default as Paragraph } from './components/Typography/Paragraph/Paragraph'
+export { RichText } from './components/RichText'

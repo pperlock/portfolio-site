@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import { LowerCaseTitle } from '@/design'
+import { LowerCaseTitle, RichText } from '@/design'
 import {
   Hero,
   Container,
@@ -9,16 +9,21 @@ import {
   HeroImageWrapper,
   HeroImageWrapperMobile,
   HeroImageInner,
-  HeroParagraph,
 } from './AboutHero.styles'
+import { contentfulImageUrl } from '@/lib/contentful'
+import type { HeroSection } from '@/types'
 
 export interface AboutHeroProps {
-  title: string
-  subtitle: string
-  heroBody: string[]
+  content: HeroSection
 }
 
-const AboutHero = ({ title, subtitle, heroBody }: AboutHeroProps) => {
+const AboutHero = ({ content }: AboutHeroProps) => {
+  const { title, subtitle, body, image } = content
+  const url = image?.file?.url
+  const description = image?.file?.description
+  const imageSrc = url ? contentfulImageUrl(url) : '/portrait-right.png'
+  const imageAlt = description ?? 'Portrait of Patti Perlock'
+
   return (
     <Hero>
       <Container>
@@ -26,35 +31,36 @@ const AboutHero = ({ title, subtitle, heroBody }: AboutHeroProps) => {
           <div>
             <LowerCaseTitle>{title}</LowerCaseTitle>
             <HeroSubtitle>{subtitle}</HeroSubtitle>
-            <HeroImageWrapperMobile>
+            {image && (
+              <HeroImageWrapperMobile>
+                <HeroImageInner>
+                  <Image
+                    src={imageSrc}
+                    alt={imageAlt}
+                    width={250}
+                    height={250}
+                    priority
+                    style={{ objectFit: 'contain' }}
+                  />
+                </HeroImageInner>
+              </HeroImageWrapperMobile>
+            )}
+            <RichText document={body} />
+          </div>
+          {image && (
+            <HeroImageWrapper>
               <HeroImageInner>
                 <Image
-                  src="/portrait-right.png"
-                  alt="Portrait of Patti Perlock"
-                  width={250}
-                  height={250}
+                  src={imageSrc}
+                  alt={imageAlt}
+                  width={400}
+                  height={400}
                   priority
                   style={{ objectFit: 'contain' }}
                 />
               </HeroImageInner>
-            </HeroImageWrapperMobile>
-            {heroBody.map((paragraph, index) => (
-              <HeroParagraph key={index}>{paragraph}</HeroParagraph>
-            ))}
-          </div>
-
-          <HeroImageWrapper>
-            <HeroImageInner>
-              <Image
-                src="/portrait-right.png"
-                alt="Portrait of Patti Perlock"
-                width={400}
-                height={400}
-                priority
-                style={{ objectFit: 'contain' }}
-              />
-            </HeroImageInner>
-          </HeroImageWrapper>
+            </HeroImageWrapper>
+          )}
         </HeroRow>
       </Container>
     </Hero>
