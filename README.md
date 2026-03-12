@@ -53,3 +53,14 @@ If you want to run this site locally for development:
 ```bash
 git clone https://github.com/pperlock/portfolio-site.git
 ```
+
+2. From the **repository root**, install dependencies and run the app:
+
+```bash
+npm install
+npm run dev      # starts the Next.js app (apps/web) in dev mode
+npm run build    # builds all apps
+npm run lint     # lints all apps
+```
+
+The site is a **Turborepo** monorepo. The Next.js app lives in `apps/web`. All scripts are run from the root and Turbo runs the corresponding task in each workspace.
