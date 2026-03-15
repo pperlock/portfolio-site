@@ -90,5 +90,8 @@ export const Timeline = styled.div`
 
   > p {
     margin-bottom: ${spacing.sm};
+    ${fromTablet`
+      text-align: left;
+    `}
   }
 `

@@ -36,7 +36,7 @@ const Story = ({ myStory }: StoryProps) => {
           {image[1] && <StoryImage src={image[1].file.url} alt={image[1].description} />}
         </StoryImageWrap>
         <Timeline>
-          <RichText document={description} />
+          <RichText document={description} paragraphProps={{ align: 'center' }} />
         </Timeline>
       </StoryRow>
     </>

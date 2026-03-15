@@ -45,7 +45,7 @@ export const WorkplaceImageOneWrapper = styled.div`
   position: relative;
   width: 600px;
   top: -87px;
-  left: -135px;
+  left: -168px;
 
   ${fromTablet`
     position: absolute;
@@ -62,7 +62,7 @@ export const WorkplaceImage = styled.img`
 export const WorkplaceImageTwoWrapper = styled.div`
   display: block;
   position: absolute;
-  left: 117px;
+  left: 75px;
   top: -36px;
   width: 300px;
 

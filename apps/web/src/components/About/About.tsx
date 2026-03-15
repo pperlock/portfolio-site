@@ -3,7 +3,7 @@
 import React from 'react'
 import { Section, SectionAlt, Content } from './About.styles'
 import { AboutProps } from '@/types'
-import AboutHero from './AboutHero/AboutHero'
+import AboutHero from './AboutHero'
 import Story from './Story'
 import Frontend from './Frontend'
 import Collaboration from './Collaboration'
