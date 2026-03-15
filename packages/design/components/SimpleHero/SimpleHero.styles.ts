@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 import {
   colors,
   shadow,
@@ -8,29 +8,32 @@ import {
   fromDesktop,
   typography,
   spacing,
-} from '../../tokens'
+} from "../../tokens";
 
 const paddingSizes = {
   sm: spacing.md,
   md: spacing.lg,
   lg: spacing.xl,
-}
+};
 
-export const HeroSection = styled.section<{ $paddingSize?: keyof typeof paddingSizes }>`
+export const HeroSection = styled.section<{
+  $paddingSize?: keyof typeof paddingSizes;
+}>`
   position: relative;
   box-shadow: ${shadow.md};
-  padding: ${({ $paddingSize }) => paddingSizes[$paddingSize ?? 'lg'] || paddingSizes.lg}
+  padding: ${({ $paddingSize }) =>
+      paddingSizes[$paddingSize ?? "lg"] || paddingSizes.lg}
     ${spacing.sm};
 
   ${fromTablet`
     margin-top: 6rem;
-    padding: ${({ $paddingSize }) => paddingSizes[$paddingSize ?? 'lg'] || paddingSizes.lg} ${spacing.md};
+    padding: ${({ $paddingSize }) => paddingSizes[$paddingSize ?? "lg"] || paddingSizes.lg} ${spacing.md};
   `}
 
   ${fromDesktop`
-    padding: ${({ $paddingSize }) => paddingSizes[$paddingSize ?? 'lg'] || paddingSizes.lg} 0;
+    padding: ${({ $paddingSize }) => paddingSizes[$paddingSize ?? "lg"] || paddingSizes.lg} 0;
   `}
-`
+`;
 
 export const HeroInner = styled.div<{ $hasImage?: boolean }>`
   max-width: ${layout.containerMax};
@@ -49,11 +52,11 @@ export const HeroInner = styled.div<{ $hasImage?: boolean }>`
   ${fromTablet`
     margin-top: 0;
   `}
-`
+`;
 
 export const HeroContent = styled.div<{ $hasImage?: boolean }>`
   ${({ $hasImage }) => $hasImage && fromTablet`flex: 1; min-width: 0;`}
-`
+`;
 
 export const HeroImageWrap = styled.div`
   flex-shrink: 0;
@@ -67,13 +70,13 @@ export const HeroImageWrap = styled.div`
     margin-top: 0;
     max-width: 320px;
   `}
-`
+`;
 
-export const HeroImage = styled.div`
+export const HeroImage = styled.div<{ $tiltImage?: boolean }>`
   position: relative;
   width: 80%;
   height: 100%;
-  transform: rotate(10deg);
+  transform: ${({ $tiltImage }) => ($tiltImage ? "rotate(10deg)" : "none")};
   transition: ${motion.transition};
   border-radius: ${layout.radiusMd};
   overflow: hidden;
@@ -81,7 +84,7 @@ export const HeroImage = styled.div`
   ${fromTablet`
     width: 100%;
   `}
-`
+`;
 
 export const HeroImageLink = styled.a`
   display: block;
@@ -93,22 +96,26 @@ export const HeroImageLink = styled.a`
   &:hover ${HeroImage} {
     transform: rotate(10deg) scale(1.1);
   }
-`
-export const HeroSubtitle = styled.p<{ $hasImage?: boolean }>`
+`;
+export const HeroSubtitle = styled.p<{
+  $hasImage?: boolean;
+  $brushStrokes?: boolean;
+}>`
   line-height: 1.7;
   color: ${colors.textLight};
   margin-top: 1rem;
-  ${({ $hasImage }) => $hasImage && fromTablet`padding: 0 3rem 0 4rem;`}
+  ${({ $hasImage, $brushStrokes }) =>
+    $hasImage && $brushStrokes && fromTablet`padding: 0 3rem 0 4rem;`}
 
   ${fromTablet`
     flex: 0.85;
-    margin-left: auto;
+    margin-left: ${({ $brushStrokes }) => ($brushStrokes ? "auto" : "0")};
   `}
 
   ${fromDesktop`
     font-size: ${typography.fontSizeXl};
   `}
-`
+`;
 
 export const HeroTitleRow = styled.div`
   ${fromTablet`
@@ -118,4 +125,4 @@ export const HeroTitleRow = styled.div`
     align-items: flex-start;
     gap: 1rem;
   `}
-`
+`;

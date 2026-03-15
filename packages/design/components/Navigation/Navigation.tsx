@@ -29,6 +29,7 @@ const Navigation = ({
           $variant={variant}
           $isActive={pathname === link.href}
           $activeBrushColor={link.activeColor}
+          $isSubtle={variant === 'footer' && link.isSubtle}
           onClick={onNavigate}
         >
           {link.label}

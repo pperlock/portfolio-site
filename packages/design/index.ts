@@ -17,5 +17,6 @@ export { default as PortfolioCards } from './components/PortfolioCards/Portfolio
 export { default as TippedButton } from './components/TippedButton/TippedButton'
 export { default as LowerCaseTitle } from './components/LowerCaseTitle/LowerCaseTitle'
 export { default as Paragraph } from './components/Typography/Paragraph/Paragraph'
+export { default as Select } from './components/Select/Select'
 export { RichText, documentToReactComponents, BLOCKS, MARKS, INLINES } from './components/RichText'
 export type { RichTextDocument, RichTextProps, EmbeddedAssetProps } from './components/RichText'

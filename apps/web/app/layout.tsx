@@ -1,3 +1,4 @@
+import 'react-circular-progressbar/dist/styles.css'
 import React from 'react'
 import { Inter } from 'next/font/google'
 import { headers } from 'next/headers'

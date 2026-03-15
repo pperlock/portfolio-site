@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import React from 'react'
-import Image from 'next/image'
+import React from "react";
+import Image from "next/image";
 import {
   HeroSection,
   HeroInner,
@@ -11,48 +11,54 @@ import {
   HeroImageWrap,
   HeroImageLink,
   HeroImage,
-} from './SimpleHero.styles'
-import { LowerCaseTitle, BrushStrokes } from '../..'
+} from "./SimpleHero.styles";
+import { LowerCaseTitle, BrushStrokes } from "../..";
 
 interface SimpleHeroProps {
-  title?: string
-  subtitle?: string
-  image?: string
-  imageLink?: string
-  paddingSize?: 'sm' | 'md' | 'lg'
+  title?: string;
+  subtitle?: string;
+  image?: string;
+  imageLink?: string;
+  paddingSize?: "sm" | "md" | "lg";
+  brushStrokes?: boolean;
+  tiltImage?: boolean;
 }
 
-const heroImage = (image: string) => {
+const heroImage = (image: string, tiltImage?: boolean) => {
   return (
-    <HeroImage>
+    <HeroImage $tiltImage={tiltImage}>
       <Image
         src={image}
         alt=""
         fill
         sizes="(min-width: 768px) 320px, 70vw"
-        style={{ objectFit: 'cover' }}
+        style={{ objectFit: "cover" }}
         priority
       />
     </HeroImage>
-  )
-}
+  );
+};
 
 const SimpleHero = ({
-  title = '',
-  subtitle = '',
+  title = "",
+  subtitle = "",
   image,
   imageLink,
-  paddingSize = 'lg',
+  paddingSize = "lg",
+  brushStrokes = true,
+  tiltImage = true,
 }: SimpleHeroProps) => {
-  const hasImage = Boolean(image)
+  const hasImage = Boolean(image);
   return (
     <HeroSection $paddingSize={paddingSize}>
       <HeroInner $hasImage={hasImage}>
         <HeroContent $hasImage={hasImage}>
           <LowerCaseTitle>{title}</LowerCaseTitle>
           <HeroTitleRow>
-            <BrushStrokes />
-            <HeroSubtitle $hasImage={hasImage}>{subtitle}</HeroSubtitle>
+            {brushStrokes && <BrushStrokes />}
+            <HeroSubtitle $hasImage={hasImage} $brushStrokes={brushStrokes}>
+              {subtitle}
+            </HeroSubtitle>
           </HeroTitleRow>
         </HeroContent>
         {hasImage && (
@@ -64,16 +70,16 @@ const SimpleHero = ({
                 rel="noopener noreferrer"
                 aria-label="View LinkedIn profile"
               >
-                {heroImage(image ?? '')}
+                {heroImage(image ?? "", tiltImage)}
               </HeroImageLink>
             ) : (
-              heroImage(image ?? '')
+              heroImage(image ?? "", tiltImage)
             )}
           </HeroImageWrap>
         )}
       </HeroInner>
     </HeroSection>
-  )
-}
+  );
+};
 
-export default SimpleHero
+export default SimpleHero;
