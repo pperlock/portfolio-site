@@ -1,16 +1,19 @@
 import styled from 'styled-components'
-import { spacing, fromTablet, colors } from '@portfolio/design'
+import { spacing, fromTablet, colors, fromDesktop } from '@portfolio/design'
+
+const fromMidTablet = (strings: TemplateStringsArray, ...interpolations: unknown[]) =>
+  `@media (min-width: 937px) { ${strings.reduce((acc, str, i) => acc + str + (interpolations[i] ?? ''), '')} }`
 
 export const ArchitectureLayout = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: ${spacing.md};
   margin-bottom: ${spacing.lg};
-  ${fromTablet`
+
+  ${fromMidTablet`
     flex-direction: row;
     align-items: space-between;
-    }
-  `};
+  `}
 `
 
 export const ArchitectureDiagramWrapper = styled.div`
@@ -19,11 +22,15 @@ export const ArchitectureDiagramWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: ${spacing.md};
   position: relative;
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
 
-  ${fromTablet`
+  ${fromMidTablet`
     margin-top: 0;
+    overflow: visible;
   `}
 `
 
@@ -31,43 +38,66 @@ export const TechStackLayout = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1.5rem;
 
   ${fromTablet`
     flex-direction: row;
-    align-items: flex-start;
-    margin-top: 3rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: ${spacing.md};
   `}
 `
 
 export const TechStackTitle = styled.div`
   position: absolute;
   top: 5px;
-  left: 225px;
+  left: 57%;
   color: ${colors.textMedium};
   background: ${colors.bgMuted};
-  padding: 0.5rem;
+  padding: ${spacing.xs};
   border-radius: ${spacing.sm};
   border: 1px solid ${colors.BrushStrokeThree};
   box-shadow: 0 0 10px 0 ${colors.BrushStrokeThree};
   transform: rotate(-7deg);
+  ${fromTablet`
+    left: 40%;
+    top: 40px;
+  `}
+  ${fromMidTablet`
+    left: 38%;
+  `}
 `
 
 export const TechStackList = styled.ul`
   list-style: none;
-  padding-left: ${spacing.md};
+  margin: 0;
+  padding: 0;
 `
 
-export const TechStackItem = styled.li`
-  margin-bottom: 0.75rem;
-  display: flex;
-  align-items: center;
+export const TechStackGroupTitle = styled.p`
+  margin: ${spacing.md} 0 ${spacing.xs};
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.8rem;
+  color: ${colors.textMedium};
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+`
+
+export const TechStackItem = styled.li<{ $isLast?: boolean }>`
+  position: relative;
+  padding-left: 1.75rem;
 
   &::before {
-    content: '•';
-    color: #4caf50;
-    display: inline-block;
-    width: 1em;
-    margin-right: 0.5em;
+    content: ${({ $isLast }) => ($isLast ? "'└─'" : "'├─'")};
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: ${colors.textMedium};
+    font-size: 0.85rem;
   }
 `

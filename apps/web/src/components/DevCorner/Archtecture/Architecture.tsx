@@ -8,6 +8,7 @@ import {
   TechStackTitle,
   TechStackList,
   TechStackItem,
+  TechStackGroupTitle,
 } from './Architecture.styles'
 
 import ArchitectureDiagram from './ArchitectureDiagram/ArchitectureDiagram'
@@ -21,11 +22,35 @@ interface ArchitectureProps {
       title: string
       items: string[]
     }
+    architectureDiagram: {
+      mainApp: { title: string; tech: string; description: string }
+      designSystem: { title: string; tech: string; description: string }
+      cms: { title: string; tech: string; description: string }
+    }
   }
 }
 
 const Architecture = ({ content }: ArchitectureProps) => {
-  const { title, body, techStack } = content
+  const { title, body, techStack, architectureDiagram } = content
+
+  const techGroups = [
+    {
+      title: 'UI Layer',
+      items: ['Next.js', 'React', 'Styled Components'],
+    },
+    {
+      title: 'Content Layer',
+      items: ['Contentful CMS'],
+    },
+    {
+      title: 'Developer Tooling',
+      items: ['Turborepo', 'Vite', 'Storybook'],
+    },
+    {
+      title: 'Testing',
+      items: ['React Testing Library'],
+    },
+  ]
 
   return (
     <>
@@ -40,13 +65,23 @@ const Architecture = ({ content }: ArchitectureProps) => {
           </TechStackTitle>
           <Image src={techStack.image} alt={techStack.title} width={300} height={300} />
           <TechStackList>
-            {techStack.items.map(item => (
-              <TechStackItem key={item}>{item}</TechStackItem>
+            {techGroups.map(group => (
+              <React.Fragment key={group.title}>
+                <TechStackGroupTitle>{group.title}</TechStackGroupTitle>
+                {group.items.map((item, index) => (
+                  <TechStackItem
+                    key={item}
+                    $isLast={index === group.items.length - 1}
+                  >
+                    {item}
+                  </TechStackItem>
+                ))}
+              </React.Fragment>
             ))}
           </TechStackList>
         </TechStackLayout>
         <ArchitectureDiagramWrapper>
-          <ArchitectureDiagram />
+          <ArchitectureDiagram content={architectureDiagram} />
         </ArchitectureDiagramWrapper>
       </ArchitectureLayout>
     </>

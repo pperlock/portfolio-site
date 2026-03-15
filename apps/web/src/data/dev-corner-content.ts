@@ -2,15 +2,15 @@ export const devCornerContent = {
   hero: {
     title: 'Under the hood',
     subtitle:
-      'A peek behind the scenes of this portfolio: how it’s built, what’s currently in progress, and what’s coming next.',
-    image: '/tech-talk-front.png',
+      'Explore the engineering behind this portfolio — its architecture, design system, performance metrics, and the roadmap for what’s coming next.',
+    image: '/tech-talk-wide.png',
     brushStrokes: false as const,
     tiltImage: false as const,
   },
   architecture: {
     title: 'Architecture',
     body: [
-      'This portfolio is built with a modern React architecture using Next.js, TypeScript, and Turborepo. The project structure emphasizes separation of concerns, reusable component patterns, and maintainable project organization, reflecting how I typically structure production React applications.',
+      'This portfolio is built with a modern React architecture using Next.js, TypeScript, and Turborepo. The project structure emphasizes separation of concerns, reusable component patterns, and maintainable project organization, reflecting how I typically structure React applications.',
     ],
     techStack: {
       title: 'Tech Stack',
@@ -21,10 +21,28 @@ export const devCornerContent = {
         'Contentful CMS',
         'Styled Components',
         'Storybook',
-        'Vitest + React Testing Library',
-        'GitHub Projects for backlog tracking',
+        'Vite',
+        'React Testing Library',
+        'GitHub Projects',
       ],
       image: '/tech-stack.png',
+    },
+    architectureDiagram: {
+      mainApp: {
+        title: 'Portfolio App',
+        tech: 'Next.js + React + TypeScript',
+        description: 'Main Next.js application responsible for rendering pages and UI.',
+      },
+      designSystem: {
+        title: 'Design System',
+        tech: 'Storybook + Vite + Styled Components',
+        description: 'Reusable UI components shared across the application.',
+      },
+      cms: {
+        title: 'CMS Package',
+        tech: 'Contentful',
+        description: 'Contentful client, queries, and data mapping.',
+      },
     },
   },
 

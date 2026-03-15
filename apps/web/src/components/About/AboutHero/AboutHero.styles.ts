@@ -1,5 +1,13 @@
 import styled from 'styled-components'
-import { spacing, typography, colors, fromTablet, shadow, layout } from '@portfolio/design'
+import {
+  spacing,
+  typography,
+  colors,
+  fromTablet,
+  shadow,
+  layout,
+  fromDesktop,
+} from '@portfolio/design'
 
 export const Hero = styled.section`
   padding: 8rem ${spacing.sm} ${spacing.xl};
@@ -26,6 +34,9 @@ export const HeroRow = styled.div`
   ${fromTablet`
     flex-direction: row;
     align-items: stretch;
+    gap: 0.5rem;
+  `}
+  ${fromDesktop`
     gap: ${spacing.xl};
   `}
 `
