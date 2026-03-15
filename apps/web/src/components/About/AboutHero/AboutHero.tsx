@@ -9,6 +9,7 @@ import {
   HeroImageWrapper,
   HeroImageWrapperMobile,
   HeroImageInner,
+  HeroBody,
 } from './AboutHero.styles'
 import { contentfulImageUrl } from '@/lib/contentful'
 import type { HeroSection } from '@/types'
@@ -45,7 +46,9 @@ const AboutHero = ({ content }: AboutHeroProps) => {
                 </HeroImageInner>
               </HeroImageWrapperMobile>
             )}
-            <RichText document={body} />
+            <HeroBody>
+              <RichText document={body} paragraphProps={{ align: 'center' }} />
+            </HeroBody>
           </div>
           {image && (
             <HeroImageWrapper>

@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-import { colors, spacing, typography, fromTablet } from '@portfolio/design'
+import { colors, spacing, typography, fromTablet, fromDesktop } from '@portfolio/design'
 
 export const Section = styled.section`
   padding: 0 ${spacing.sm};
   font-size: ${typography.fontSizeLg};
 
-  ${fromTablet`
+  ${fromDesktop`
     margin: ${spacing.xl};
     padding: 0 ${spacing.md};
   `}
