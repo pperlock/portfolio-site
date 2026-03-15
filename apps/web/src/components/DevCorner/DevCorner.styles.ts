@@ -1,4 +1,4 @@
-import { fromTablet, spacing, colors } from '@portfolio/design'
+import { spacing } from '@portfolio/design'
 import styled from 'styled-components'
 
 export const PageWrapper = styled.div`
@@ -42,10 +42,6 @@ export const HeroNavList = styled.ul`
   margin: 0;
   padding: 0;
   justify-content: center;
-
-  ${fromTablet`
-    justify-content: flex-start;
-  `}
 `
 
 export const HeroNavItem = styled.li``
@@ -54,15 +50,5 @@ export const HeroNavLink = styled.a`
   font-size: 0.9rem;
   padding: 0.35rem 0.75rem;
   border-radius: 999px;
-  border: 1px solid ${colors.textMedium};
-  color: ${colors.textMedium};
   text-decoration: none;
-  background: ${colors.bg};
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-
-  &:hover {
-    background: ${colors.textMedium};
-    color: ${colors.bg};
-    border-color: ${colors.textMedium};
-  }
 `

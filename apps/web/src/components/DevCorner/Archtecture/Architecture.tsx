@@ -20,7 +20,10 @@ interface ArchitectureProps {
     techStack: {
       image: string
       title: string
-      items: string[]
+      items: {
+        category: string
+        items: string[]
+      }[]
     }
     architectureDiagram: {
       mainApp: { title: string; tech: string; description: string }
@@ -32,25 +35,7 @@ interface ArchitectureProps {
 
 const Architecture = ({ content }: ArchitectureProps) => {
   const { title, body, techStack, architectureDiagram } = content
-
-  const techGroups = [
-    {
-      title: 'UI Layer',
-      items: ['Next.js', 'React', 'Styled Components'],
-    },
-    {
-      title: 'Content Layer',
-      items: ['Contentful CMS'],
-    },
-    {
-      title: 'Developer Tooling',
-      items: ['Turborepo', 'Vite', 'Storybook'],
-    },
-    {
-      title: 'Testing',
-      items: ['React Testing Library'],
-    },
-  ]
+  const techGroups = techStack.items
 
   return (
     <>
@@ -65,14 +50,11 @@ const Architecture = ({ content }: ArchitectureProps) => {
           </TechStackTitle>
           <Image src={techStack.image} alt={techStack.title} width={300} height={300} />
           <TechStackList>
-            {techGroups.map(group => (
-              <React.Fragment key={group.title}>
-                <TechStackGroupTitle>{group.title}</TechStackGroupTitle>
-                {group.items.map((item, index) => (
-                  <TechStackItem
-                    key={item}
-                    $isLast={index === group.items.length - 1}
-                  >
+            {techGroups.map(({ category, items }) => (
+              <React.Fragment key={category}>
+                <TechStackGroupTitle>{category}</TechStackGroupTitle>
+                {items.map((item, index) => (
+                  <TechStackItem key={item} $isLast={index === items.length - 1}>
                     {item}
                   </TechStackItem>
                 ))}

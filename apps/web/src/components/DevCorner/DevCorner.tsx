@@ -32,7 +32,7 @@ const DevCorner = ({
         <Architecture content={architecture} />
       </PageSection>
 
-      <PageSection id="design-system">
+      <PageSection variant="outset" id="design-system">
         <LowerCaseTitle tag="h2">{designSystem.title}</LowerCaseTitle>
         <Paragraph color="medium">{designSystem.body}</Paragraph>
       </PageSection>
@@ -42,7 +42,7 @@ const DevCorner = ({
         <Paragraph color="medium">{performanceLab.body}</Paragraph>
       </PageSection>
 
-      <PageSection id="engineering-roadmap">
+      <PageSection variant="outset" id="engineering-roadmap">
         <LowerCaseTitle tag="h2">{engineeringRoadmap.title}</LowerCaseTitle>
         <Paragraph color="medium">{engineeringRoadmap.body}</Paragraph>
       </PageSection>
