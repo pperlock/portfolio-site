@@ -1,6 +1,6 @@
 export { getContentfulClient, getContentfulPreviewClient } from '@portfolio/cms'
 export { stripContentfulKeys, contentfulImageUrl, getSingleEntry } from '@portfolio/cms'
-export { getAboutContent } from './fetchPageContent'
+export { getAboutContent, getResumePageContent } from './fetchPageContent'
 export {
   RichText,
   documentToReactComponents,

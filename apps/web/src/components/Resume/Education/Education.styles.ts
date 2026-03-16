@@ -1,20 +1,20 @@
 import styled from 'styled-components'
 import { colors, spacing, fromTablet, typography } from '@portfolio/design'
 
-export const EducationSectionBlock = styled.div`
-  margin-bottom: 3rem;
+export const EducationSection = styled.div`
+  margin-bottom: ${spacing.md};
 `
 
-export const EducationSectionTitle = styled.h2`
+export const SectionTitle = styled.h2`
   font-size: ${typography.fontSizeXl};
   font-weight: 600;
   color: ${colors.text};
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.5rem;
+  margin-bottom: ${spacing.sm};
+  padding-bottom: ${spacing.xs};
   border-bottom: 2px solid ${colors.border};
 `
 
-export const EducationItem = styled.div`
+export const Entry = styled.div`
   margin-bottom: ${spacing.sm};
   padding-bottom: ${spacing.sm};
   border-bottom: 1px solid ${colors.bgMuted};
@@ -26,28 +26,28 @@ export const EducationItem = styled.div`
   }
 `
 
-export const EducationItemHeader = styled.div`
+export const EntryHeader = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 0.5rem;
+  margin-bottom: ${spacing.xs};
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: ${spacing.xs};
 
   ${fromTablet`
     flex-direction: row;
   `}
 `
 
-export const EducationItemTitle = styled.h3`
+export const Degree = styled.h3`
   font-size: ${typography.fontSizeLg};
   font-weight: 600;
   color: ${colors.text};
   margin: 0;
 `
 
-export const EducationItemInstitution = styled.p`
+export const Institution = styled.p`
   font-size: ${typography.fontSizeLg};
   font-weight: 500;
   color: ${colors.textLight};

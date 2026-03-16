@@ -8,6 +8,7 @@ import type { Options } from '@contentful/rich-text-react-renderer'
 import Paragraph from './Typography/Paragraph/Paragraph'
 import { BLOCKS } from '@contentful/rich-text-types'
 import { contentfulImageUrl } from '@portfolio/cms'
+import List from './List/List'
 
 type ParagraphColor = 'light' | 'medium' | 'normal'
 type ParagraphAlign = 'left' | 'center' | 'right'
@@ -62,6 +63,14 @@ const getAssetAlt = (target: unknown): string => {
   return ''
 }
 
+/** Extract plain text from a Rich Text node (for list items). */
+const getTextFromNode = (node: { nodeType?: string; value?: string; content?: unknown[] }): string => {
+  if (!node) return ''
+  if (node.nodeType === 'text' && typeof node.value === 'string') return node.value
+  if (Array.isArray(node.content)) return node.content.map((n: unknown) => getTextFromNode(n as Parameters<typeof getTextFromNode>[0])).join('')
+  return ''
+}
+
 const defaultParagraphRenderer =
   (
     paragraphProps?: RichTextProps['paragraphProps']
@@ -113,9 +122,16 @@ const buildOptions = (
         }
       : defaultEmbeddedAssetRenderer
 
+  const listRenderer = (node: { content?: unknown[] }) => {
+    const items = (node.content ?? []).map((item: unknown) => getTextFromNode(item as Parameters<typeof getTextFromNode>[0]))
+    return <List list={items} />
+  }
+
   return {
     renderNode: {
       [BLOCKS.PARAGRAPH]: defaultParagraphRenderer(paragraphProps),
+      [BLOCKS.UL_LIST]: listRenderer,
+      [BLOCKS.OL_LIST]: listRenderer,
       [BLOCKS.EMBEDDED_ASSET]: embeddedAssetRenderer,
       ...customOptions?.renderNode,
     },
