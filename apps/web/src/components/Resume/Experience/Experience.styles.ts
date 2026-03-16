@@ -1,20 +1,20 @@
 import styled from 'styled-components'
 import { colors, spacing, fromTablet, typography } from '@portfolio/design'
 
-export const ExperienceSectionBlock = styled.div`
-  margin-bottom: 3rem;
+export const ExperienceSection = styled.div`
+  margin-bottom: ${spacing.lg};
 `
 
-export const ExperienceSectionTitle = styled.h2`
+export const SectionTitle = styled.h2`
   font-size: ${typography.fontSizeXl};
   font-weight: 600;
   color: ${colors.text};
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.5rem;
+  margin-bottom: ${spacing.md};
+  padding-bottom: ${spacing.xs};
   border-bottom: 2px solid ${colors.border};
 `
 
-export const ExperienceItem = styled.div`
+export const Job = styled.div`
   margin-bottom: ${spacing.md};
   padding-bottom: ${spacing.md};
   border-bottom: 1px solid ${colors.bgMuted};
@@ -26,39 +26,38 @@ export const ExperienceItem = styled.div`
   }
 `
 
-export const ExperienceItemHeader = styled.div`
+export const JobHeader = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 0.5rem;
+  margin-bottom: ${spacing.xs};
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: ${spacing.xs};
 
   ${fromTablet`
     flex-direction: row;
   `}
 `
 
-export const ExperienceItemTitle = styled.h3`
+export const JobTitle = styled.h3`
   font-size: ${typography.fontSizeXl};
   font-weight: 600;
   color: ${colors.text};
   margin: 0;
 `
 
-export const ExperienceItemCompany = styled.p`
+export const Company = styled.p`
   font-size: ${typography.fontSizeLg};
   font-weight: 500;
   color: ${colors.textLight};
   margin: 0;
 `
 
-export const ExperienceItemDate = styled.span`
+export const JobDate = styled.span`
   font-size: ${typography.fontSizeSm};
   color: ${colors.textMuted};
   font-style: italic;
-  margin-top: 0.25rem;
 
   ${fromTablet`
     margin-top: 0;
@@ -72,24 +71,15 @@ export const JobLocation = styled.p`
   font-style: italic;
 `
 
-export const ExperienceItemDescription = styled.div`
+export const JobDescription = styled.div`
   color: ${colors.textLight};
   line-height: 1.7;
-  margin-top: 0.75rem;
-
-  ul {
-    margin: 0.75rem 0;
-    padding-left: 1.5rem;
-  }
-
-  li {
-    margin-bottom: 0.5rem;
-    line-height: 1.6;
-  }
+  margin-top: ${spacing.sm};
 `
 
-export const DescriptionSubtitle = styled.p<{ $first?: boolean }>`
+export const ProjectName = styled.p<{ $first?: boolean }>`
   font-weight: 600;
-  margin-bottom: 0.75rem;
+  margin-bottom: ${spacing.sm};
   margin-top: ${p => (p.$first ? 0 : '1.5rem')};
+  color: ${colors.text};
 `

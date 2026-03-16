@@ -1,57 +1,49 @@
 import React from 'react'
 import {
-  ExperienceSectionBlock,
-  ExperienceSectionTitle,
-  ExperienceItem,
-  ExperienceItemHeader,
-  ExperienceItemTitle,
-  ExperienceItemCompany,
-  ExperienceItemDate,
+  ExperienceSection,
+  JobDate,
   JobLocation,
-  ExperienceItemDescription,
-  DescriptionSubtitle,
+  JobDescription,
+  ProjectName,
+  SectionTitle,
+  Job,
+  JobHeader,
+  Company,
+  JobTitle,
 } from './Experience.styles'
 import { ExperienceJob } from '@/types'
+import { RichText } from '@portfolio/design'
 
-type ExperienceProps = { experience?: ExperienceJob[] }
+interface ExperienceProps {
+  experience?: ExperienceJob[]
+}
 
 export default function Experience({ experience = [] }: ExperienceProps) {
   return (
-    <ExperienceSectionBlock>
-      <ExperienceSectionTitle>Experience</ExperienceSectionTitle>
+    <ExperienceSection>
+      <SectionTitle>Experience</SectionTitle>
       {experience.map(job => (
-        <ExperienceItem key={`${job.company}-${job.title}`}>
-          <ExperienceItemHeader>
+        <Job key={`${job.company}-${job.title}`}>
+          <JobHeader>
             <div>
-              <ExperienceItemTitle>{job.title}</ExperienceItemTitle>
-              <ExperienceItemCompany>{job.company}</ExperienceItemCompany>
+              <JobTitle>{job.title}</JobTitle>
+              <Company>{job.company}</Company>
             </div>
-            <ExperienceItemDate>{job.date}</ExperienceItemDate>
-          </ExperienceItemHeader>
+            <JobDate>{job.date}</JobDate>
+          </JobHeader>
           <JobLocation>{job.location}</JobLocation>
-          <ExperienceItemDescription>
-            {job.description.map((block, i) => {
-              if (block.type === 'subtitle') {
-                return (
-                  <DescriptionSubtitle key={i} $first={i === 0}>
-                    {block.text}
-                  </DescriptionSubtitle>
-                )
-              }
-              if (block.type === 'list') {
-                return (
-                  <ul key={i}>
-                    {block.items.map((item, j) => (
-                      <li key={j}>{item}</li>
-                    ))}
-                  </ul>
-                )
-              }
-              return null
-            })}
-          </ExperienceItemDescription>
-        </ExperienceItem>
+          <JobDescription>
+            {job.projects?.map((block, i) => (
+              <>
+                <ProjectName key={i} $first={i === 0}>
+                  {block.title}
+                </ProjectName>
+                <RichText document={block.description} />
+              </>
+            ))}
+          </JobDescription>
+        </Job>
       ))}
-    </ExperienceSectionBlock>
+    </ExperienceSection>
   )
 }

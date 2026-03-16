@@ -22,27 +22,30 @@ import {
   ContactEmail,
   ResumeSocials,
 } from './Resume.styles'
-import { ExperienceJob, ResumeHeaderContent, EducationItem } from '@/types'
+import { ResumePage } from '@/types'
 import { CONTACT_INFO } from '@/constants'
+import { contentfulImageUrl } from '@portfolio/cms'
 
 interface ResumeProps {
-  header: ResumeHeaderContent
-  experience: ExperienceJob[]
-  education?: EducationItem[]
+  content: ResumePage
 }
 
-const Resume = ({ header, experience, education }: ResumeProps) => {
-  if (!header) return null
-
+const Resume = ({ content }: ResumeProps) => {
+  const { title, summary, downloadButton, experience, education } = content ?? {}
   const { email, phone } = CONTACT_INFO
+
+  const resumeUrl = contentfulImageUrl(downloadButton?.downloadFile?.file?.url ?? '')
+
+  console.log(content)
+
   return (
     <ResumeSection>
       <ResumeContainer>
         <ResumeHeader>
           <ResumeHeaderLeft>
             <h1>{NAME}</h1>
-            <HeaderTitle>{header.title}</HeaderTitle>
-            <HeaderSummary>{header.summary}</HeaderSummary>
+            <HeaderTitle>{title}</HeaderTitle>
+            <HeaderSummary>{summary}</HeaderSummary>
           </ResumeHeaderLeft>
           <ResumeHeaderRight>
             <ContactBlock>
@@ -54,13 +57,8 @@ const Resume = ({ header, experience, education }: ResumeProps) => {
               </ResumeSocials>
             </ContactBlock>
             <DownloadWrap>
-              <TippedButton
-                href={header.downloadPdf.href}
-                target="_blank"
-                variant="filled"
-                tip="right"
-              >
-                {header.downloadPdf.label}
+              <TippedButton href={resumeUrl} download target="_blank" variant="filled" tip="right">
+                {downloadButton?.label}
               </TippedButton>
             </DownloadWrap>
           </ResumeHeaderRight>

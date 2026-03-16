@@ -4,10 +4,10 @@ import { colors, spacing, layout, fromTablet, fromDesktop, typography } from '@p
 export const ResumeSection = styled.section`
   background-color: ${colors.bg};
   min-height: calc(100vh - 90px);
-  padding: 8rem 1rem;
+  padding: ${spacing.xxl} ${spacing.sm};
 
   ${fromTablet`
-    padding: 8rem 2rem;
+    padding: ${spacing.xxl} ${spacing.md};
   `}
 `
 
@@ -17,7 +17,7 @@ export const ResumeContainer = styled.div`
 `
 
 export const ResumeHeader = styled.div`
-  margin-bottom: ${spacing.lg};
+  margin-bottom: ${spacing.md};
   display: grid;
   align-items: start;
   grid-template-columns: 1fr;
@@ -33,7 +33,6 @@ export const ResumeHeaderLeft = styled.div`
   h1 {
     font-size: ${typography.fontSize2xl};
     margin-bottom: ${spacing.sm};
-    margin-bottom: 0.75rem;
     font-family: ${typography.fontFamily};
     text-transform: uppercase;
 
@@ -45,7 +44,7 @@ export const ResumeHeaderLeft = styled.div`
 
 export const HeaderTitle = styled.p`
   font-size: ${typography.fontSizeXl};
-  margin-bottom: 0.75rem;
+  margin-bottom: ${spacing.sm};
   font-weight: 700;
   font-family: ${typography.fontFamily};
 `
@@ -70,7 +69,7 @@ export const ContactBlock = styled.div`
   margin-bottom: ${spacing.sm};
 
   p {
-    margin-bottom: 0.5rem;
+    margin-bottom: ${spacing.xs};
   }
 
   }
@@ -79,7 +78,7 @@ export const ContactBlock = styled.div`
 export const ContactEmail = styled.a`
   color: ${colors.textLight};
   text-decoration: none;
-  margin-bottom: 0.5rem;
+  margin-bottom: ${spacing.xs};
   &:hover {
     color: ${colors.text};
   }
@@ -128,7 +127,7 @@ export const ResumeSidebar = styled.div`
 export const ResumeSocials = styled.div`
   display: flex;
   justify-content: center;
-  gap: 0.5rem;
+  gap: ${spacing.xs};
 
   ${fromTablet`
     justify-content: flex-end;
