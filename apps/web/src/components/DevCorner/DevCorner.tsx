@@ -6,12 +6,24 @@ import { LowerCaseTitle, PageSection, Paragraph } from '@portfolio/design'
 import type { DevCornerContent } from '@/data/dev-corner-content'
 import Architecture from './Archtecture'
 import DevCornerHero from './DevCornerHero'
+import RoadMap from './RoadMap'
 
-interface DevCornerProps {
-  content: DevCornerContent
+export interface GitHubIssueItem {
+  id: number
+  number?: number
+  html_url: string
+  title: string
+  labels?: { name: string }[]
+  /** Set when fetching from GitHub Project V2 (GraphQL); otherwise derived from labels. */
+  project_status?: string
 }
 
+interface DevCornerProps {
+  issues: GitHubIssueItem[]
+  content: DevCornerContent
+}
 const DevCorner = ({
+  issues,
   content: { hero, architecture, designSystem, performanceLab, engineeringRoadmap },
 }: DevCornerProps) => {
   return (
@@ -42,9 +54,8 @@ const DevCorner = ({
         <Paragraph color="medium">{performanceLab.body}</Paragraph>
       </PageSection>
 
-      <PageSection variant="outset" id="engineering-roadmap">
-        <LowerCaseTitle tag="h2">{engineeringRoadmap.title}</LowerCaseTitle>
-        <Paragraph color="medium">{engineeringRoadmap.body}</Paragraph>
+      <PageSection>
+        <RoadMap content={engineeringRoadmap} issues={issues} />
       </PageSection>
     </>
   )

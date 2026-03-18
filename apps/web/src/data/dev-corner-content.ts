@@ -60,6 +60,22 @@ export const devCornerContent = {
       cms: { title: 'Contentful', tag: 'Contentful Integration' },
       accessibility: { title: 'Accessibility', tag: 'Accessibility' },
     },
+    devLinks: [
+      {
+        label: 'GitHub',
+        subtitle: 'Portfolio Repository',
+        href: 'https://github.com/pperlock/portfolio-site',
+        description:
+          'Source code for this site, including the Turborepo, design system, and CMS packages.',
+      },
+      {
+        label: 'GitHub Projects',
+        subtitle: 'Portfolio Roadmap',
+        href: 'https://github.com/users/pperlock/projects/1/views/3',
+        description:
+          'High-level backlog of improvements, refactors, and experiments for this portfolio.',
+      },
+    ],
   },
 }
 
