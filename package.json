@@ -2,7 +2,10 @@
   "name": "portfolio-site",
   "version": "1.0.0",
   "private": true,
-  "workspaces": ["apps/*", "packages/*"],
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
@@ -15,5 +18,8 @@
     "husky": "^9.1.7",
     "turbo": "^2.3.0"
   },
-  "packageManager": "npm@10.2.4"
+  "packageManager": "npm@10.2.4",
+  "dependencies": {
+    "react-circular-progressbar": "^2.2.0"
+  }
 }

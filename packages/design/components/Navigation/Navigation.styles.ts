@@ -42,7 +42,8 @@ export const Nav = styled.nav<{ $variant?: string; $isMobileMenuOpen?: boolean }
       order: 3;
       gap: 1.5rem;
       padding-top: ${$isMobileMenuOpen ? '0.5rem' : '0'};
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: ${$isMobileMenuOpen ? 'auto' : 'hidden'};
       max-height: ${$isMobileMenuOpen ? '50vh' : '0'};
       opacity: ${$isMobileMenuOpen ? '1' : '0'};
       transition: max-height 0.65s cubic-bezier(0.4, 0, 0.2, 1),
@@ -106,7 +107,7 @@ export const SocialsLabel = styled.span`
 `
 
 const navLinkStyles = props => `
-  color: ${linkColor(props)};
+  color: ${props.$variant === 'footer' && props.$isSubtle ? colors.textMuted : linkColor(props)};
   text-decoration: none;
   text-transform: lowercase;
   transition: ${motion.transition};
@@ -118,7 +119,12 @@ const navLinkStyles = props => `
   }
 `
 
-type NavLinkProps = { $variant?: string; $isActive?: boolean; $activeBrushColor?: string }
+type NavLinkProps = {
+  $variant?: string
+  $isActive?: boolean
+  $activeBrushColor?: string
+  $isSubtle?: boolean
+}
 
 export const NavLink = styled.a<NavLinkProps>`
   ${props => navLinkStyles(props)}
