@@ -9,9 +9,7 @@ export const devCornerContent = {
   },
   architecture: {
     title: 'Architecture',
-    body: [
-      'This portfolio is built with a modern React architecture using Next.js, TypeScript, and Turborepo. The project structure emphasizes separation of concerns, reusable component patterns, and maintainable project organization, reflecting how I typically structure React applications.',
-    ],
+    body: 'This portfolio is built with a modern React architecture using Next.js, TypeScript, and Turborepo. The project structure emphasizes separation of concerns, reusable component patterns, and maintainable project organization, reflecting how I typically structure React applications.',
     techStack: {
       title: 'Tech Stack',
       items: [

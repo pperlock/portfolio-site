@@ -21,7 +21,7 @@ const Paragraph = ({
   size = "md",
 }: ParagraphProps) => {
   const sizes = {
-    xs: "0.5rem",
+    xs: typography.fontSizeXs,
     sm: typography.fontSizeSm,
     md: typography.fontSizeLg,
     lg: typography.fontSizeXl,

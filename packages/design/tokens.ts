@@ -53,6 +53,7 @@ export const typography = {
   fontFamilyHeading:
     '"proxima nova semibold", "Helvetica Neue", Helvetica, Arial, sans-serif',
   fontSizeBase: "1rem",
+  fontSizeXs: "0.5rem",
   fontSizeSm: "0.875rem",
   fontSizeLg: "1.125rem",
   fontSizeXl: "1.5rem",

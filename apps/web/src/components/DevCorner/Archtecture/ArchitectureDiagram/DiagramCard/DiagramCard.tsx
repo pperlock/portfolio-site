@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card, CardInner, CardFront, CardBack, IconWrapper } from './DiagramCard.styles'
+import { Paragraph } from '@portfolio/design'
 
 export interface DiagramCardProps {
   title: string
@@ -11,7 +12,7 @@ export interface DiagramCardProps {
 
 const DiagramCard = React.forwardRef<HTMLDivElement, DiagramCardProps>(function DiagramCard(
   { title, tech, description, Icon, iconColor },
-  ref,
+  ref
 ) {
   return (
     <Card ref={ref}>
@@ -21,8 +22,9 @@ const DiagramCard = React.forwardRef<HTMLDivElement, DiagramCardProps>(function 
             <Icon color={iconColor} />
           </IconWrapper>
           {title}
-          <br />
-          <small>{tech}</small>
+          <Paragraph size="sm" align="center">
+            {tech}
+          </Paragraph>
         </CardFront>
         <CardBack>{description}</CardBack>
       </CardInner>

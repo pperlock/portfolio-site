@@ -16,7 +16,7 @@ import ArchitectureDiagram from './ArchitectureDiagram/ArchitectureDiagram'
 interface ArchitectureProps {
   content: {
     title: string
-    body: string[]
+    body: string
     techStack: {
       image: string
       title: string
@@ -40,7 +40,7 @@ const Architecture = ({ content }: ArchitectureProps) => {
   return (
     <>
       <LowerCaseTitle tag="h2">{title}</LowerCaseTitle>
-      <Paragraph color="medium">{body[0]}</Paragraph>
+      <Paragraph color="medium">{body}</Paragraph>
       <ArchitectureLayout>
         <TechStackLayout>
           <TechStackTitle>

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { fromTablet, fromDesktop } from '@portfolio/design'
 
-type CardProps = {
+interface CardProps {
   bg?: string
 }
 

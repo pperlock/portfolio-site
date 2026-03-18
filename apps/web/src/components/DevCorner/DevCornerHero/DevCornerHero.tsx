@@ -2,16 +2,16 @@ import React from 'react'
 import Image from 'next/image'
 import { LowerCaseTitle, Paragraph } from '@portfolio/design'
 import {
-  DevCornerHeroBody,
-  DevCornerHeroContent,
-  DevCornerHeroImageWrap,
-  DevCornerHeroInner,
-  DevCornerHeroSection,
-  DevCornerHeroTitle,
-  HeroNav,
-  HeroNavItem,
-  HeroNavLink,
-  HeroNavList,
+  Section,
+  InnerContainer,
+  Title,
+  Body,
+  Content,
+  ImageWrap,
+  PageNavList,
+  PageNavItem,
+  PageNavLink,
+  PageNav,
 } from './DevCornerHero.styles'
 
 interface DevCornerHeroProps {
@@ -22,30 +22,30 @@ interface DevCornerHeroProps {
 }
 
 const DevCornerHero = ({ title, subtitle, image, navLinks }: DevCornerHeroProps) => (
-  <DevCornerHeroSection>
-    <DevCornerHeroInner>
-      <DevCornerHeroBody>
-        <DevCornerHeroContent>
-          <DevCornerHeroTitle>
+  <Section>
+    <InnerContainer>
+      <Body>
+        <Content>
+          <Title>
             <LowerCaseTitle>{title}</LowerCaseTitle>
-          </DevCornerHeroTitle>
+          </Title>
           <Paragraph color="medium">{subtitle}</Paragraph>
-          <HeroNav aria-label="Dev Corner sections">
-            <HeroNavList>
+          <PageNav aria-label="Dev Corner sections">
+            <PageNavList>
               {navLinks.map(link => (
-                <HeroNavItem key={link.href}>
-                  <HeroNavLink href={link.href}>{link.label}</HeroNavLink>
-                </HeroNavItem>
+                <PageNavItem key={link.href}>
+                  <PageNavLink href={link.href}>{link.label}</PageNavLink>
+                </PageNavItem>
               ))}
-            </HeroNavList>
-          </HeroNav>
-        </DevCornerHeroContent>
-        <DevCornerHeroImageWrap>
+            </PageNavList>
+          </PageNav>
+        </Content>
+        <ImageWrap>
           <Image src={image} alt="" fill sizes="100vw" style={{ objectFit: 'cover' }} priority />
-        </DevCornerHeroImageWrap>
-      </DevCornerHeroBody>
-    </DevCornerHeroInner>
-  </DevCornerHeroSection>
+        </ImageWrap>
+      </Body>
+    </InnerContainer>
+  </Section>
 )
 
 export default DevCornerHero

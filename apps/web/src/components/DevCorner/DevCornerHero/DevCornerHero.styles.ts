@@ -9,24 +9,24 @@ import {
   shadow,
 } from '@portfolio/design'
 
-export const DevCornerHeroSection = styled.section`
+export const Section = styled.section`
   padding: ${spacing.lg} ${spacing.sm};
 
   ${fromTablet`
-    margin: 8rem 0 2rem 0;
+    margin: 8rem 0 ${spacing.md} 0;
   `}
 `
 
-export const DevCornerHeroInner = styled.div`
+export const InnerContainer = styled.div`
   max-width: ${layout.containerMax};
-  margin: 4rem auto 0;
+  margin: ${spacing.lg} auto 0;
 
   ${fromTablet`
     margin-top: 0;
   `}
 `
 
-export const DevCornerHeroTitle = styled.div`
+export const Title = styled.div`
   text-align: left;
   margin-bottom: ${spacing.md};
   h1 {
@@ -37,7 +37,7 @@ export const DevCornerHeroTitle = styled.div`
   }
 `
 
-export const DevCornerHeroBody = styled.div`
+export const Body = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${spacing.lg};
@@ -48,12 +48,12 @@ export const DevCornerHeroBody = styled.div`
   `}
 `
 
-export const DevCornerHeroContent = styled.div`
+export const Content = styled.div`
   flex: 1;
   text-align: left;
 `
 
-export const DevCornerHeroImageWrap = styled.div`
+export const ImageWrap = styled.div`
   width: 100%;
   max-width: 500px;
   margin: 0 auto;
@@ -61,7 +61,7 @@ export const DevCornerHeroImageWrap = styled.div`
   position: relative;
 `
 
-export const HeroNav = styled.nav`
+export const PageNav = styled.nav`
   margin-top: ${spacing.md};
 
   ${fromDesktop`
@@ -69,7 +69,7 @@ export const HeroNav = styled.nav`
   `}
 `
 
-export const HeroNavList = styled.ul`
+export const PageNavList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   gap: ${spacing.sm};
@@ -84,10 +84,10 @@ export const HeroNavList = styled.ul`
   `}
 `
 
-export const HeroNavItem = styled.li``
+export const PageNavItem = styled.li``
 
-export const HeroNavLink = styled.a`
-  font-size: 0.9rem;
+export const PageNavLink = styled.a`
+  font-size: ${typography.fontSizeSm};
   padding: 0.35rem 0.75rem;
   border-radius: 999px;
   border: 1px solid ${colors.textMedium};
@@ -109,16 +109,5 @@ export const HeroNavLink = styled.a`
   &:nth-child(1) {
     background: rgba(135, 206, 235, 0.08);
     border-color: rgba(135, 206, 235, 0.5);
-  }
-
-  &:nth-child(2) {
-    background: rgba(255, 215, 0, 0.08);
-    border-color: rgba(255, 215, 0, 0.4);
-  }
-
-  &:nth-child(3),
-  &:nth-child(4) {
-    background: rgba(255, 105, 180, 0.06);
-    border-color: rgba(255, 105, 180, 0.35);
   }
 `

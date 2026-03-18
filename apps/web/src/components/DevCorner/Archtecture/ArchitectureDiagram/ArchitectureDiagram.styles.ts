@@ -11,7 +11,6 @@ export const DiagramWrapper = styled.div`
   min-width: min-content;
 `
 
-// Layer for boxes — compact until desktop, then larger
 export const Layer = styled.div`
   display: flex;
   justify-content: center;
@@ -33,7 +32,6 @@ export const Layer = styled.div`
   `}
 `
 
-// Icons (used by ArchitectureDiagram to configure DiagramCard)
 export const ReactIcon = FaReact
 export const DatabaseIcon = FaDatabase
 export const CubesIcon = FaCubes
