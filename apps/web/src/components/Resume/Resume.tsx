@@ -36,8 +36,6 @@ const Resume = ({ content }: ResumeProps) => {
 
   const resumeUrl = contentfulImageUrl(downloadButton?.downloadFile?.file?.url ?? '')
 
-  console.log(content)
-
   return (
     <ResumeSection>
       <ResumeContainer>

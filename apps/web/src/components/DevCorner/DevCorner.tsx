@@ -7,16 +7,7 @@ import type { DevCornerContent } from '@/data/dev-corner-content'
 import Architecture from './Archtecture'
 import DevCornerHero from './DevCornerHero'
 import RoadMap from './RoadMap'
-
-export interface GitHubIssueItem {
-  id: number
-  number?: number
-  html_url: string
-  title: string
-  labels?: { name: string }[]
-  /** Set when fetching from GitHub Project V2 (GraphQL); otherwise derived from labels. */
-  project_status?: string
-}
+import { GitHubIssueItem } from '@/types'
 
 interface DevCornerProps {
   issues: GitHubIssueItem[]
@@ -54,7 +45,7 @@ const DevCorner = ({
         <Paragraph color="medium">{performanceLab.body}</Paragraph>
       </PageSection>
 
-      <PageSection>
+      <PageSection id="engineering-roadmap">
         <RoadMap content={engineeringRoadmap} issues={issues} />
       </PageSection>
     </>

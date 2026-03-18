@@ -1,32 +1,26 @@
 import styled from 'styled-components'
+import { hexToRgba } from '@/utils'
+import { statusGroups } from '@/constants'
 
 const KANBAN_CARD_BG = '#21262d'
 const KANBAN_BORDER = '#30363d'
 const KANBAN_TEXT = '#e6edf3'
 const KANBAN_TEXT_MUTED = '#8b949e'
+const KANBAN_HEADER_BG = '#161b22'
+
+const KANBAN_STATUS_COLORS = [
+  '#58a6ff' /* blue */,
+  '#a371f7' /* purple */,
+  '#f0883e' /* orange */,
+  '#2ea8a1' /* teal */,
+]
 
 const DEFAULT_LABEL_BG = 'rgba(110, 118, 129, 0.4)'
 
-/** Colors for status labels (To Do, In Progress, Done, etc.) */
-const STATUS_COLORS: Record<string, { bg: string; color: string }> = {
-  // To Do: purple
-  'To Do': { bg: '#a371f7', color: '#fff' },
-  'To do': { bg: '#a371f7', color: '#fff' },
-  // In Progress: blue‑green (teal)
-  'In progress': { bg: '#2ea8a1', color: '#fff' },
-  'In Progress': { bg: '#2ea8a1', color: '#fff' },
-  // Done: green
-  Done: { bg: '#2ea043', color: '#fff' },
-  'Tech Review': { bg: '#58a6ff', color: '#fff' },
-  'Ready for Production': { bg: '#a371f7', color: '#fff' },
-  'Ready for review': { bg: '#58a6ff', color: '#fff' },
-  // Backlog: orange
-  Backlog: { bg: '#f0883e', color: '#fff' },
-}
-
-export function getStatusStyle(name: string): { bg: string; color: string } {
-  const normalized = STATUS_COLORS[name] ?? STATUS_COLORS[name.toLowerCase()]
-  return normalized ?? { bg: DEFAULT_LABEL_BG, color: KANBAN_TEXT_MUTED }
+export const getStatusStyle = (name: string): { bg: string; color: string } => {
+  const group = statusGroups.find(group => group.key === name.toLowerCase())
+  const bg = group?.color ?? DEFAULT_LABEL_BG
+  return { bg, color: KANBAN_TEXT_MUTED }
 }
 
 export const IssueStatusPill = styled.span<{ $bg?: string; $color?: string }>`
@@ -141,4 +135,86 @@ export const IssueLabel = styled.span<{ $bg?: string; $color?: string }>`
   border-radius: 12px;
   background: ${({ $bg }) => $bg ?? DEFAULT_LABEL_BG};
   color: ${({ $color }) => $color ?? KANBAN_TEXT_MUTED};
+`
+
+export const KanbanColumnHeader = styled.div<{ $index?: number }>`
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem 1rem;
+  background: ${KANBAN_HEADER_BG};
+  border-bottom: 1px solid ${KANBAN_BORDER};
+  flex-shrink: 0;
+
+  @media (max-width: 767px) {
+    margin-top: ${({ $index = 0 }) => ($index === 0 ? 0 : '2rem')};
+  }
+`
+
+export const KanbanColumnHeaderRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+`
+
+export const KanbanStatusDot = styled.span<{ $index?: number }>`
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: transparent;
+  border: 2px solid ${({ $index = 0 }) => statusGroups[$index % statusGroups.length].color};
+  flex-shrink: 0;
+`
+
+export const KanbanColumnTitle = styled.span<{ $index?: number }>`
+  color: ${KANBAN_TEXT};
+  font-size: 0.875rem;
+  font-weight: 600;
+  flex: 1;
+  min-width: 0;
+  word-break: break-word;
+
+  @media (max-width: 767px) {
+    background: ${({ $index = 0 }) =>
+      hexToRgba(KANBAN_STATUS_COLORS[$index % KANBAN_STATUS_COLORS.length], 0.18)};
+    padding: 0.125rem 0.5rem;
+    border-radius: 999px;
+  }
+`
+
+export const KanbanColumnCount = styled.span`
+  color: ${KANBAN_TEXT_MUTED};
+  font-size: 0.8125rem;
+  font-weight: 500;
+  background: rgba(110, 118, 129, 0.4);
+  padding: 0.125rem 0.5rem;
+  border-radius: 20px;
+  margin-left: auto;
+  flex-shrink: 0;
+`
+
+export const KanbanColumnSubtitle = styled.p`
+  margin: 0;
+  font-size: 0.75rem;
+  color: ${KANBAN_TEXT_MUTED};
+  font-weight: 400;
+  padding-left: 1.25rem;
+`
+
+export const KanbanColumnContent = styled.div`
+  flex: 1;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-height: 0;
+`
+
+export const KanbanEmptyState = styled.p`
+  margin: 0;
+  font-size: 0.8125rem;
+  color: ${KANBAN_TEXT_MUTED};
+  font-style: italic;
+  padding: 0.5rem 0;
 `

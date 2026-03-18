@@ -15,42 +15,17 @@ import {
   DevTooltipDescription,
   BodyWrap,
   DevTooltipSubtitle,
+  RoadmapColumn,
 } from './RoadMap.styles'
 import { Paragraph, LowerCaseTitle } from '@portfolio/design'
-import { GitHubIssueItem } from '..'
 import GithubIssueList from './GithubIssueList'
+import { getAllIssues } from '@/utils'
 
 const RoadMap = ({ content, issues }) => {
   const { title, body, sections, devLinks } = content
+
   const sectionNames = ['mainApp', 'designSystem', 'cms', 'accessibility']
-
-  // Sort helper: In Progress → To Do → Backlog → everything else
-  const statusPriority: Record<string, number> = {
-    'In Progress': 0,
-    'In progress': 0,
-    'To Do': 1,
-    'To do': 1,
-    Backlog: 2,
-  }
-
-  const getStatusRank = (issue: GitHubIssueItem) => {
-    const status = issue.project_status ?? ''
-    return statusPriority[status] ?? 99
-  }
-
-  const hasLabel = (issue: GitHubIssueItem, labelName: string) =>
-    issue.labels?.some(
-      (label: { name: string }) => label.name.toLowerCase() === labelName.toLowerCase()
-    ) ?? false
-
-  const allIssues = sectionNames.map(sectionName => ({
-    title: sections[sectionName].title,
-    tag: sections[sectionName].tag,
-    issues: issues
-      .filter((issue: GitHubIssueItem) => hasLabel(issue, sections[sectionName].tag))
-      .slice()
-      .sort((a: GitHubIssueItem, b: GitHubIssueItem) => getStatusRank(a) - getStatusRank(b)),
-  }))
+  const allIssues = getAllIssues(issues, sectionNames, sections)
 
   return (
     <>
@@ -97,13 +72,15 @@ const RoadMap = ({ content, issues }) => {
       <KanbanBoardWrapper>
         <RoadmapGrid>
           {allIssues.map((issue, index) => (
-            <GithubIssueList
-              key={issue.title}
-              issues={issue.issues}
-              title={issue.title}
-              subtitle={issue.tag}
-              columnIndex={index}
-            />
+            <RoadmapColumn key={issue.title} $index={index}>
+              <GithubIssueList
+                key={issue.title}
+                issues={issue.issues}
+                title={issue.title}
+                subtitle={issue.tag}
+                columnIndex={index}
+              />
+            </RoadmapColumn>
           ))}
         </RoadmapGrid>
       </KanbanBoardWrapper>

@@ -1,20 +1,9 @@
 import styled from 'styled-components'
-import { fromTablet, colors } from '@portfolio/design'
+import { fromTablet } from '@portfolio/design'
 
 /* GitHub Projects–style dark kanban theme */
 const KANBAN_BG = '#0d1117'
 const KANBAN_BORDER = '#30363d'
-const KANBAN_CARD_BG = '#21262d'
-const KANBAN_TEXT = '#e6edf3'
-const KANBAN_TEXT_MUTED = '#8b949e'
-const KANBAN_HEADER_BG = '#161b22'
-
-const KANBAN_STATUS_COLORS = [
-  '#3fb950' /* green - To Do */,
-  '#d29922' /* orange - In progress */,
-  '#58a6ff' /* blue - Tech Review */,
-  '#a371f7' /* purple - Ready */,
-]
 
 export const KanbanBoardWrapper = styled.div`
   background: ${KANBAN_BG};
@@ -48,73 +37,6 @@ export const RoadmapColumn = styled.div<{ $index?: number }>`
   ${fromTablet`
     min-height: 220px;
   `}
-`
-
-export const KanbanColumnHeader = styled.div<{ $index?: number }>`
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  padding: 0.75rem 1rem;
-  background: ${KANBAN_HEADER_BG};
-  border-bottom: 1px solid ${KANBAN_BORDER};
-  flex-shrink: 0;
-`
-
-export const KanbanColumnHeaderRow = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-`
-
-export const KanbanStatusDot = styled.span<{ $index?: number }>`
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: transparent;
-  border: 2px solid
-    ${({ $index = 0 }) => KANBAN_STATUS_COLORS[$index % KANBAN_STATUS_COLORS.length]};
-  flex-shrink: 0;
-`
-
-export const KanbanColumnTitle = styled.span`
-  color: ${KANBAN_TEXT};
-  font-size: 0.875rem;
-  font-weight: 600;
-`
-
-export const KanbanColumnCount = styled.span`
-  color: ${KANBAN_TEXT_MUTED};
-  font-size: 0.8125rem;
-  font-weight: 500;
-  background: rgba(110, 118, 129, 0.4);
-  padding: 0.125rem 0.5rem;
-  border-radius: 20px;
-  margin-left: auto;
-`
-
-export const KanbanColumnSubtitle = styled.p`
-  margin: 0;
-  font-size: 0.75rem;
-  color: ${KANBAN_TEXT_MUTED};
-  font-weight: 400;
-  padding-left: 1.25rem;
-`
-
-export const KanbanColumnContent = styled.div`
-  flex: 1;
-  padding: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  min-height: 0;
-`
-
-export const KanbanEmptyState = styled.p`
-  margin: 0;
-  font-size: 0.8125rem;
-  color: ${KANBAN_TEXT_MUTED};
-  font-style: italic;
-  padding: 0.5rem 0;
 `
 
 export const TitleAndLinksRow = styled.div`
