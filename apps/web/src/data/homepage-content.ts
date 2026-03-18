@@ -24,15 +24,16 @@ export const homepageContent = {
     atAGlance: {
       title: 'At a Glance',
       points: [
-        '5 years building production-ready React, Next.js applications',
-        'Mentors and onboards developers, sharing knowledge and improving team workflows',
-        'Designs reusable component architectures and scalable UI systems',
+        '5+ years building production-ready React + Next.js + Typescript applications',
+        'Mentors and onboards developers while improving team workflows',
+        'Designs scalable component architectures and reusable UI systems',
+        'Translates complex product designs into accessible, performant UI components',
         'Debugs complex state management and async data flows with confidence',
-        'Advocates for DRY, maintainable code and consistent patterns',
-        'Collaborates closely with designers, backend engineers, QA, and product in Agile environments',
-        'Self-driven and highly effective in remote environments',
-        'Thrives on teams built on trust, shared ownership, and open communication',
+        'Collaborates closely with design, backend, QA, and product in Agile teams',
+        'Advocates for DRY, maintainable code and consistent engineering patterns',
+        'Thrives in remote teams built on trust, autonomy, and shared ownership',
         'Takes ownership of projects from planning through production',
+        'Uses AI-assisted development workflows to accelerate delivery and explore new technologies',
       ],
     },
     experienceSummary: {

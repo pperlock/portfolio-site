@@ -1,33 +1,31 @@
-import React from 'react'
+import type { EducationItem } from '@/types'
 import {
-  EducationSectionBlock,
-  EducationSectionTitle,
-  EducationItem,
-  EducationItemHeader,
-  EducationItemTitle,
-  EducationItemInstitution,
+  EducationSection,
+  Entry,
+  EntryHeader,
+  Degree,
+  Institution,
+  SectionTitle,
 } from './Education.styles'
 
-type EducationItemType = { institution: string; title: string }
-
-type EducationProps = {
-  education?: EducationItemType[]
+interface EducationProps {
+  education?: EducationItem[]
 }
 
 export default function Education({ education = [] }: EducationProps) {
   return (
-    <EducationSectionBlock>
-      <EducationSectionTitle>Education</EducationSectionTitle>
-      {education.map(item => (
-        <EducationItem key={`${item.institution}-${item.title}`}>
-          <EducationItemHeader>
+    <EducationSection>
+      <SectionTitle>Education</SectionTitle>
+      {education.map(({ degree, institution }) => (
+        <Entry key={`${institution}-${degree}`}>
+          <EntryHeader>
             <div>
-              <EducationItemTitle>{item.title}</EducationItemTitle>
-              <EducationItemInstitution>{item.institution}</EducationItemInstitution>
+              <Degree>{degree}</Degree>
+              <Institution>{institution}</Institution>
             </div>
-          </EducationItemHeader>
-        </EducationItem>
+          </EntryHeader>
+        </Entry>
       ))}
-    </EducationSectionBlock>
+    </EducationSection>
   )
 }

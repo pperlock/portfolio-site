@@ -1,16 +1,19 @@
-import React from 'react'
-import { StyledButton, StyledButtonLink } from './Button.styles'
+import React from "react";
+import { StyledButton, StyledButtonLink } from "./Button.styles";
 
 type TippedButtonProps = {
-  variant?: 'filled' | 'outlined'
-  tip?: 'left' | 'right'
-  href?: string
-  target?: string
-  type?: 'button' | 'submit' | 'reset'
-  children?: React.ReactNode
-  onClick?: (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void
-  text?: string
-}
+  variant?: "filled" | "outlined";
+  tip?: "left" | "right";
+  href?: string;
+  target?: string;
+  download?: boolean | string;
+  type?: "button" | "submit" | "reset";
+  children?: React.ReactNode;
+  onClick?: (
+    e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
+  ) => void;
+  text?: string;
+};
 
 /**
  * Shared button with optional tip (left/right) and variant (filled/outlined).
@@ -18,33 +21,37 @@ type TippedButtonProps = {
  * Links open in a new tab by default; pass target="_self" to open in the same tab.
  */
 const TippedButton = ({
-  variant = 'filled',
-  tip = 'right',
+  variant = "filled",
+  tip = "right",
   href,
-  target = '_self',
+  target = "_self",
+  download,
   children,
   ...rest
 }: TippedButtonProps) => {
   if (href != null) {
+    // Use plain <a> for external or download links so the link works (Next.js Link doesn't support download).
+    const fullHref = href || "#";
     return (
       <StyledButtonLink
-        href={href || '#'}
+        as={download ? "a" : undefined}
+        href={fullHref}
         $variant={variant}
         $tip={tip}
         target={target}
-        rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+        rel={target === "_blank" ? "noopener noreferrer" : undefined}
         {...rest}
       >
         {children}
       </StyledButtonLink>
-    )
+    );
   }
   return (
     <StyledButton $variant={variant} $tip={tip} {...rest}>
       {children}
     </StyledButton>
-  )
-}
+  );
+};
 
-export default TippedButton
-export { StyledButton, StyledButtonLink } from './Button.styles'
+export default TippedButton;
+export { StyledButton, StyledButtonLink } from "./Button.styles";

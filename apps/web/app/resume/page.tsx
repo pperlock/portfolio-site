@@ -1,16 +1,7 @@
 import Resume from '@/components/Resume'
-import {
-  resumeHeader,
-  experience,
-  education,
-} from '@/data/resume-content'
+import { getResumePageContent } from '@/lib/contentful'
 
-export default function ResumePage() {
-  return (
-    <Resume
-      header={resumeHeader}
-      experience={experience}
-      education={education}
-    />
-  )
+export default async function ResumePage() {
+  const content = await getResumePageContent()
+  return <Resume content={content ?? {}} />
 }

@@ -47,12 +47,12 @@ export const SectionHeader = styled.h2`
   font-size: ${typography.fontSizeLg};
   font-weight: normal;
   letter-spacing: 0.1rem;
-  gap: 2rem;
+  gap: ${spacing.md};
   margin-bottom: 3rem;
 
   ${fromTablet`
     letter-spacing: 0.2rem;
-    margin-bottom: 6rem;
+    margin-bottom: ${spacing.xl};
 
     &::before,
     &::after {

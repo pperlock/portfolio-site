@@ -34,7 +34,7 @@ export const HeroRow = styled.div`
   ${fromTablet`
     flex-direction: row;
     align-items: stretch;
-    gap: 0.5rem;
+    gap: ${spacing.xs};
   `}
   ${fromDesktop`
     gap: ${spacing.xl};
@@ -45,6 +45,10 @@ export const HeroSubtitle = styled.p`
   font-size: ${typography.fontSizeLg};
   color: ${colors.textLight};
   margin-bottom: ${spacing.md};
+  text-align: center;
+  ${fromTablet`
+    text-align: left;
+  `}
 `
 
 export const HeroImageWrapper = styled.div`
@@ -75,5 +79,13 @@ export const HeroImageInner = styled.div`
   clip-path: ellipse(100% 70% at 50% 10%);
   ${fromTablet`
     clip-path: ellipse(100% 75% at 50% 10%);
+  `}
+`
+
+export const HeroBody = styled.div`
+  ${fromTablet`
+    p {
+      text-align: left;
+    }
   `}
 `
