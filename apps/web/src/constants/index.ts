@@ -24,3 +24,4 @@ export const NAV_LINKS: Record<string, NavLink> = {
 
 export * from './skills'
 export * from './github'
+export * from './lighthouse'

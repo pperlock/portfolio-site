@@ -1,17 +1,15 @@
 'use client'
 
 import React from 'react'
-import Image from 'next/image'
 
 import { LowerCaseTitle, PageSection, Paragraph } from '@portfolio/design'
 import type { DevCornerContent } from '@/data/dev-corner-content'
 import Architecture from './Archtecture'
 import DevCornerHero from './DevCornerHero'
 import RoadMap from './RoadMap'
-import { PullQuote } from './DevCorner.styles'
 import { GitHubIssueItem } from '@/types'
 import UnderDevelopment from './UnderDevelopment'
-
+import PerformanceLab from './PerformanceLab'
 interface DevCornerProps {
   issues: GitHubIssueItem[]
   content: DevCornerContent
@@ -44,14 +42,15 @@ const DevCorner = ({
         <UnderDevelopment />
       </PageSection>
 
-      <PageSection id="engineering-roadmap">
-        <RoadMap content={engineeringRoadmap} issues={issues} />
-      </PageSection>
-
-      {/* <PageSection id="performance-lab">
+      <PageSection id="performance-lab">
         <LowerCaseTitle tag="h2">{performanceLab.title}</LowerCaseTitle>
         <Paragraph color="medium">{performanceLab.body}</Paragraph>
-      </PageSection> */}
+        <PerformanceLab content={performanceLab} />
+      </PageSection>
+
+      <PageSection variant="outset" id="engineering-roadmap">
+        <RoadMap content={engineeringRoadmap} issues={issues} />
+      </PageSection>
     </>
   )
 }

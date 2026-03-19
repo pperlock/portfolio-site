@@ -44,7 +44,10 @@ export const devCornerContent = {
   },
   performanceLab: {
     title: 'Performance Lab',
-    body: 'Lighthouse-powered insights into performance, accessibility, and SEO.',
+    body: "Automated performance profiling and accessibility auditing. This interface leverages the Lighthouse engine to generate deep-dive insights into the application's speed, crawlability, and inclusive design patterns.",
+    selectLabel: 'Choose a page to generate a live performance report:',
+    reportLinkText: 'View full Lighthouse report',
+    selectPlaceHolder: '-- Select a page --',
   },
   engineeringRoadmap: {
     title: 'Engineering roadmap',

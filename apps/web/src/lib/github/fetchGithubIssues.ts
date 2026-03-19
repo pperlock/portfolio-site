@@ -26,12 +26,14 @@ interface ProjectV2Response {
 
 export const fetchGitHubIssues = async (): Promise<GitHubIssueItem[]> => {
   try {
+    const headers = GITHUB_TOKEN ? { Authorization: `Bearer ${GITHUB_TOKEN}` } : undefined
     const { data } = await axios.get<GitHubIssueItem[]>(
       `https://api.github.com/repos/${GITHUB_REPO}/issues`,
-      { params: { state: 'all', per_page: 100 } }
+      { params: { state: 'all', per_page: 100 }, headers }
     )
     return Array.isArray(data) ? data : []
-  } catch {
+  } catch (err) {
+    console.error('GitHub issues fetch error:', err)
     return []
   }
 }
