@@ -1,4 +1,4 @@
-import { spacing } from '@portfolio/design'
+import { spacing, typography, colors, fromTablet } from '@portfolio/design'
 import styled from 'styled-components'
 
 export const PageWrapper = styled.div`
@@ -51,4 +51,19 @@ export const HeroNavLink = styled.a`
   padding: 0.35rem 0.75rem;
   border-radius: 999px;
   text-decoration: none;
+`
+
+export const PullQuote = styled.blockquote`
+  font-size: ${typography.fontSizeXl};
+  font-weight: 300;
+  text-align: center;
+  margin: ${spacing.md} auto;
+  padding: 0 ${spacing.sm};
+  max-width: 50ch;
+  color: ${colors.textMuted};
+
+  ${fromTablet`
+    font-size: ${typography.fontSize2xl};
+    margin: ${spacing.lg} auto;
+  `}
 `
