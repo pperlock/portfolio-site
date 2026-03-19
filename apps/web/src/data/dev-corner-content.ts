@@ -38,14 +38,9 @@ export const devCornerContent = {
       },
     },
   },
-
-  mainApp: {
-    title: 'Application Layer',
-    body: 'The design system components live in a shared package and are viewable in Storybook. Each component is documented and accessible for reuse across the portfolio.',
-  },
   designSystem: {
     title: 'Design System',
-    body: 'The design system components live in a shared package and are viewable in Storybook. Each component is documented and accessible for reuse across the portfolio.',
+    body: 'To ensure visual consistency and streamline the development workflow, I am currently architecting a centralized design system hosted as a shared package. Each component will be fully documented within an isolated Storybook environment, with a live link provided here as soon as the first iteration is live.',
   },
   performanceLab: {
     title: 'Performance Lab',
@@ -53,13 +48,29 @@ export const devCornerContent = {
   },
   engineeringRoadmap: {
     title: 'Engineering roadmap',
-    body: 'A living snapshot of the technical work underway across the application layer, design system, CMS, and accessibility.',
+    body: "A real-time synchronization of active development across the application layer, design system, and CMS integration. This board pulls directly from GitHub Issues serving as a functional 'command center' for the continuous integration and deployment of new features.",
     sections: {
       mainApp: { title: 'Application Layer', tag: 'App Development' },
       designSystem: { title: 'Design System', tag: 'Design System' },
       cms: { title: 'Contentful', tag: 'Contentful Integration' },
       accessibility: { title: 'Accessibility', tag: 'Accessibility' },
     },
+    devLinks: [
+      {
+        label: 'GitHub',
+        subtitle: 'Portfolio Repository',
+        href: 'https://github.com/pperlock/portfolio-site',
+        description:
+          'Source code for this site, including the Turborepo, design system, and CMS packages.',
+      },
+      {
+        label: 'GitHub Projects',
+        subtitle: 'Portfolio Roadmap',
+        href: 'https://github.com/users/pperlock/projects/1/views/3',
+        description:
+          'High-level backlog of improvements, refactors, and experiments for this portfolio.',
+      },
+    ],
   },
 }
 
