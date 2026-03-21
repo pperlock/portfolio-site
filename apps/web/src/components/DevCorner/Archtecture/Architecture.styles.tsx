@@ -1,5 +1,8 @@
 import styled from 'styled-components'
-import { spacing, fromTablet, colors, fromDesktop } from '@portfolio/design'
+import { spacing, fromTablet, colors, typography } from '@portfolio/design'
+
+/** Same stack as UnderDevelopment `Headline` (“Stay Tuned”). */
+const underDevHeadlineFont = `'Helvetica Neue', Helvetica, Arial, sans-serif`
 
 const fromMidTablet = (strings: TemplateStringsArray, ...interpolations: unknown[]) =>
   `@media (min-width: 937px) { ${strings.reduce((acc, str, i) => acc + str + (interpolations[i] ?? ''), '')} }`
@@ -13,6 +16,28 @@ export const ArchitectureLayout = styled.div`
   ${fromMidTablet`
     flex-direction: row;
     align-items: space-between;
+  `}
+`
+
+/** Nested block under Architecture (e.g. server / BFF data flow). */
+export const ArchitectureSubsection = styled.section`
+  margin-top: ${spacing.xl};
+  padding-top: ${spacing.lg};
+  border-top: 1px solid ${colors.border};
+`
+
+export const ServerDataFetchingTitle = styled.h3`
+  font-family: ${underDevHeadlineFont};
+  font-size: ${typography.fontSizeLg};
+  font-weight: 700;
+  color: ${colors.textHeader};
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  line-height: 1.2;
+  margin: 0 0 ${spacing.sm};
+
+  ${fromTablet`
+    font-size: ${typography.fontSize2xl};
   `}
 `
 

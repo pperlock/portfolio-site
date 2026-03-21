@@ -20,7 +20,7 @@ export const devCornerContent = {
         { category: 'Content Layer', items: ['Contentful CMS'] },
         {
           category: 'Integration & APIs',
-          items: ['REST', 'GraphQL '],
+          items: ['REST', 'GraphQL'],
         },
         { category: 'Developer Tooling', items: ['Turborepo', 'Vite', 'Storybook'] },
         { category: 'Testing', items: ['React Testing Library'] },
@@ -42,6 +42,31 @@ export const devCornerContent = {
         title: 'CMS Package',
         tech: 'Contentful',
         description: 'Contentful client, queries, and data mapping.',
+      },
+    },
+    serverDataFetching: {
+      title: 'Secure By Design',
+      body: 'Upstream Github and Lighthouse APIs are proxied through a **Next.js BFF** (Backend-for-Frontend) architecture. This server-side bridge keeps sensitive API tokens strictly in the environment—delivering clean, pre-processed data to the UI without exposing credentials to the browser’s Network tab.',
+      diagram: {
+        serverZoneLabel: 'Next.js server · Node.js runtime',
+        callout: 'Auth headers injected here—**0%** exposure to client',
+        steps: [
+          {
+            title: 'Client',
+            description:
+              'Client triggers a {{code}}GET{{/code}} request to server {{code}}/api/<route>{{/code}}',
+          },
+          { title: 'API routes', description: 'Route handler receives call on the secure server' },
+          {
+            title: 'Environment',
+            description:
+              'Private keys are injected via {{code}}process.env{{/code}} into the server environment',
+          },
+          {
+            title: 'Upstream',
+            description: 'Secure HTTPS outbound request to upstream Github and Lighthouse APIs',
+          },
+        ],
       },
     },
   },

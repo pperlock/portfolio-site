@@ -1,94 +1,113 @@
 import React from 'react'
-import { FaGlobe, FaServer, FaKey, FaExternalLinkAlt } from 'react-icons/fa'
+import { FaGlobe, FaServer, FaKey, FaExternalLinkAlt, FaUserShield } from 'react-icons/fa'
 
+import { renderRichCopy } from '@/lib/richCopy'
+import { BffDiagramPipelineStep } from './BffDiagramPipelineStep'
 import {
   DiagramFigure,
-  DiagramLead,
   PipelineContainer,
   ServerZone,
+  ServerZoneOutlineSvg,
+  ServerZoneOutlineRect,
   ServerZoneLabel,
-  Step,
-  IconCircle,
-  StepContent,
-  StepTitle,
-  StepDescription,
   Connector,
   ConnectorShort,
+  ServerZoneContent,
+  ServerZoneCallout,
+  ServerZoneCalloutIcon,
+  ServerZoneCalloutText,
 } from './BffServerCallFlowDiagram.styles'
 
 const SERVER_ICON_COLOR = '#171717'
 
+export interface BffDiagramStepCopy {
+  title: string
+  description: string
+}
+
+export interface BffServerCallFlowDiagramContent {
+  serverZoneLabel: string
+  callout: string
+  steps: BffDiagramStepCopy[]
+}
+
 export interface BffServerCallFlowDiagramProps {
-  /** Optional figure title (schematic line). Pass empty string to omit. */
-  caption?: string
+  content: BffServerCallFlowDiagramContent
   className?: string
 }
 
+const STEP_META = [
+  { Icon: FaGlobe, color: '#2563eb' },
+  { Icon: FaServer, color: SERVER_ICON_COLOR },
+  { Icon: FaKey, color: '#0d9488' },
+  { Icon: FaExternalLinkAlt, color: '#4f46e5' },
+] as const
+
+/** Stable React keys for `renderRichCopy` fragments; index-aligned with `STEP_META` and `content.steps`. */
+const RICH_COPY_PREFIXES = ['bff-client', 'bff-api', 'bff-env', 'bff-upstream'] as const
+
+/** Step indices rendered inside the server zone (API routes → environment). */
+const SERVER_ZONE_STEP_INDICES = [1, 2] as const
+
 /** Schematic BFF path: client → Next.js (handlers + env) → upstream. */
-const BffServerCallFlowDiagram = ({ className }: BffServerCallFlowDiagramProps) => (
-  <DiagramFigure
-    className={className}
-    aria-label="Schematic: client, Next.js server, upstream APIs"
-  >
-    <PipelineContainer>
-      <Step>
-        <IconCircle $color="#2563eb" aria-hidden>
-          <FaGlobe />
-        </IconCircle>
-        <StepContent>
-          <StepTitle>Client</StepTitle>
-          <StepDescription>
-            User triggers a <code>GET</code> request to <code>{'/api/<route>'}</code> on the client
-            side.
-          </StepDescription>
-        </StepContent>
-      </Step>
+const BffServerCallFlowDiagram = ({ content, className }: BffServerCallFlowDiagramProps) => {
+  const { steps } = content
 
-      <Connector aria-hidden />
+  const renderPipelineStep = (stepIndex: number, variant: 'endpoint' | 'zone') => {
+    const copy = steps[stepIndex]
+    const { Icon, color } = STEP_META[stepIndex]
+    return (
+      <BffDiagramPipelineStep
+        variant={variant}
+        icon={Icon}
+        iconColor={color}
+        title={copy.title}
+        description={copy.description}
+        richCopyKeyPrefix={RICH_COPY_PREFIXES[stepIndex]}
+      />
+    )
+  }
 
-      <ServerZone role="group" aria-label="Next.js server">
-        <ServerZoneLabel>Next.js server</ServerZoneLabel>
+  return (
+    <DiagramFigure
+      className={className}
+      aria-label="Schematic: client, Next.js server, upstream APIs"
+    >
+      <PipelineContainer>
+        {renderPipelineStep(0, 'endpoint')}
 
-        <Step>
-          <IconCircle $color={SERVER_ICON_COLOR} aria-hidden>
-            <FaServer />
-          </IconCircle>
-          <StepContent>
-            <StepTitle>API routes</StepTitle>
-            <StepDescription>Route handler receives call on the secure server.</StepDescription>
-          </StepContent>
-        </Step>
+        <Connector aria-hidden />
 
-        <ConnectorShort aria-hidden />
+        <ServerZone role="group" aria-label="Next.js server">
+          <ServerZoneOutlineSvg>
+            <ServerZoneOutlineRect />
+          </ServerZoneOutlineSvg>
+          <ServerZoneLabel>{content.serverZoneLabel}</ServerZoneLabel>
 
-        <Step>
-          <IconCircle $color="#0d9488" aria-hidden>
-            <FaKey />
-          </IconCircle>
-          <StepContent>
-            <StepTitle>Environment</StepTitle>
-            <StepDescription>
-              Private keys are injected via<code>process.env</code>into the server environment.
-            </StepDescription>
-          </StepContent>
-        </Step>
-      </ServerZone>
+          <ServerZoneContent>
+            {SERVER_ZONE_STEP_INDICES.map((stepIndex, i) => (
+              <React.Fragment key={RICH_COPY_PREFIXES[stepIndex]}>
+                {i > 0 ? <ConnectorShort aria-hidden /> : null}
+                {renderPipelineStep(stepIndex, 'zone')}
+              </React.Fragment>
+            ))}
+          </ServerZoneContent>
+          <ServerZoneCallout role="note">
+            <ServerZoneCalloutIcon aria-hidden>
+              <FaUserShield />
+            </ServerZoneCalloutIcon>
+            <ServerZoneCalloutText>
+              {renderRichCopy(content.callout, 'bff-callout')}
+            </ServerZoneCalloutText>
+          </ServerZoneCallout>
+        </ServerZone>
 
-      <Connector aria-hidden />
+        <Connector aria-hidden />
 
-      <Step>
-        <IconCircle $color="#4f46e5" aria-hidden>
-          <FaExternalLinkAlt />
-        </IconCircle>
-        <StepContent>
-          <StepTitle>Upstream</StepTitle>
-          <StepDescription>
-            Secure HTTPS outbound request is sent to the upstream API.
-          </StepDescription>
-        </StepContent>
-      </Step>
-    </PipelineContainer>
-  </DiagramFigure>
-)
+        {renderPipelineStep(3, 'endpoint')}
+      </PipelineContainer>
+    </DiagramFigure>
+  )
+}
 
 export default BffServerCallFlowDiagram
