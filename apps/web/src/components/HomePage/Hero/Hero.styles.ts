@@ -1,6 +1,15 @@
 import styled from 'styled-components'
 import Image from 'next/image'
-import { colors, shadow, layout, fromTablet, fromDesktop, typography } from '@portfolio/design'
+import {
+  colors,
+  shadow,
+  layout,
+  fromTablet,
+  fromDesktop,
+  typography,
+  fromWide,
+  spacing,
+} from '@portfolio/design'
 
 export const HeroSection = styled.section`
   padding-top: 150px;
@@ -40,11 +49,11 @@ export const HeroTaglineLeft = styled.div`
   margin-bottom: 0;
   max-width: 100%;
   text-align: left;
-  padding: 0 1rem;
+  padding: 0 ${spacing.sm};
   ${fromTablet`
-    padding: 0 2rem;
+    padding: 0 ${spacing.md};
   `}
-  ${fromDesktop`
+  ${fromWide`
     padding: 0;
   `}
 `
@@ -129,7 +138,7 @@ export const CoderOverlay = styled.div`
     right: 2rem;
   `}
 
-  ${fromDesktop`
+  ${fromWide`
     right:0;
     max-width: 500px;
   `}
