@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import { LowerCaseTitle, RichText } from '@portfolio/design'
+import { LowerCaseTitle, PageAlignmentWrapper, RichText } from '@portfolio/design'
 import {
   Hero,
   Container,
@@ -27,45 +27,47 @@ const AboutHero = ({ content }: AboutHeroProps) => {
 
   return (
     <Hero>
-      <Container>
-        <HeroRow>
-          <div>
-            <LowerCaseTitle>{title}</LowerCaseTitle>
-            <HeroSubtitle>{subtitle}</HeroSubtitle>
+      <PageAlignmentWrapper>
+        <Container>
+          <HeroRow>
+            <div>
+              <LowerCaseTitle>{title}</LowerCaseTitle>
+              <HeroSubtitle>{subtitle}</HeroSubtitle>
+              {image && (
+                <HeroImageWrapperMobile>
+                  <HeroImageInner>
+                    <Image
+                      src={imageSrc}
+                      alt={imageAlt}
+                      width={250}
+                      height={250}
+                      priority
+                      style={{ objectFit: 'contain' }}
+                    />
+                  </HeroImageInner>
+                </HeroImageWrapperMobile>
+              )}
+              <HeroBody>
+                <RichText document={body} paragraphProps={{ align: 'center' }} />
+              </HeroBody>
+            </div>
             {image && (
-              <HeroImageWrapperMobile>
+              <HeroImageWrapper>
                 <HeroImageInner>
                   <Image
                     src={imageSrc}
                     alt={imageAlt}
-                    width={250}
-                    height={250}
+                    width={400}
+                    height={400}
                     priority
                     style={{ objectFit: 'contain' }}
                   />
                 </HeroImageInner>
-              </HeroImageWrapperMobile>
+              </HeroImageWrapper>
             )}
-            <HeroBody>
-              <RichText document={body} paragraphProps={{ align: 'center' }} />
-            </HeroBody>
-          </div>
-          {image && (
-            <HeroImageWrapper>
-              <HeroImageInner>
-                <Image
-                  src={imageSrc}
-                  alt={imageAlt}
-                  width={400}
-                  height={400}
-                  priority
-                  style={{ objectFit: 'contain' }}
-                />
-              </HeroImageInner>
-            </HeroImageWrapper>
-          )}
-        </HeroRow>
-      </Container>
+          </HeroRow>
+        </Container>
+      </PageAlignmentWrapper>
     </Hero>
   )
 }

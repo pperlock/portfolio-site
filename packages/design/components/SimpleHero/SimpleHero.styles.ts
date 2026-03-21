@@ -23,11 +23,11 @@ export const HeroSection = styled.section<{
   box-shadow: ${shadow.md};
   padding: ${({ $paddingSize }) =>
       paddingSizes[$paddingSize ?? "lg"] || paddingSizes.lg}
-    ${spacing.sm};
+    0;
 
   ${fromTablet`
     margin-top: 6rem;
-    padding: ${({ $paddingSize }) => paddingSizes[$paddingSize ?? "lg"] || paddingSizes.lg} ${spacing.md};
+    padding: ${({ $paddingSize }) => paddingSizes[$paddingSize ?? "lg"] || paddingSizes.lg} 0;
   `}
 
   ${fromDesktop`
@@ -72,11 +72,11 @@ export const HeroImageWrap = styled.div`
   `}
 `;
 
-export const HeroImage = styled.div<{ $tiltImage?: boolean }>`
+export const HeroImage = styled.div`
   position: relative;
   width: 80%;
   height: 100%;
-  transform: ${({ $tiltImage }) => ($tiltImage ? "rotate(10deg)" : "none")};
+  transform: rotate(10deg);
   transition: ${motion.transition};
   border-radius: ${layout.radiusMd};
   overflow: hidden;
@@ -97,19 +97,15 @@ export const HeroImageLink = styled.a`
     transform: rotate(10deg) scale(1.1);
   }
 `;
-export const HeroSubtitle = styled.p<{
-  $hasImage?: boolean;
-  $brushStrokes?: boolean;
-}>`
+export const HeroSubtitle = styled.p<{ $hasImage?: boolean }>`
   line-height: 1.7;
   color: ${colors.textLight};
   margin-top: 1rem;
-  ${({ $hasImage, $brushStrokes }) =>
-    $hasImage && $brushStrokes && fromTablet`padding: 0 3rem 0 4rem;`}
+  ${({ $hasImage }) => $hasImage && fromTablet`padding: 0 3rem 0 4rem;`}
 
   ${fromTablet`
     flex: 0.85;
-    margin-left: ${({ $brushStrokes }) => ($brushStrokes ? "auto" : "0")};
+    margin-left: auto;
   `}
 
   ${fromDesktop`

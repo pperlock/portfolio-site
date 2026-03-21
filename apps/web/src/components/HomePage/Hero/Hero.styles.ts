@@ -8,6 +8,7 @@ import {
   fromDesktop,
   typography,
   fromWide,
+  spacing,
 } from '@portfolio/design'
 
 export const HeroSection = styled.section`
@@ -48,9 +49,9 @@ export const HeroTaglineLeft = styled.div`
   margin-bottom: 0;
   max-width: 100%;
   text-align: left;
-  padding: 0 1rem;
+  padding: 0 ${spacing.sm};
   ${fromTablet`
-    padding: 0 2rem;
+    padding: 0 ${spacing.md};
   `}
   ${fromWide`
     padding: 0;

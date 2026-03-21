@@ -12,7 +12,7 @@ import {
   TitleBadge,
 } from './CaseStudy.styles'
 
-import { TippedButton } from '@portfolio/design'
+import { PageAlignmentWrapper, TippedButton } from '@portfolio/design'
 import CaseStudyNavigation from './CaseStudyNavigation/CaseStudyNavigation'
 import HeroBottomBar from './HeroBottomBar/HeroBottomBar'
 import TechIcons from './TechIcons/TechIcons'
@@ -56,33 +56,35 @@ const CaseStudy = ({ project, content }: CaseStudyProps) => {
     <>
       <HeroBottomBar visible={showHeroBottomBar} project={project} />
       <CaseStudyHeroWrapper>
-        <CaseStudyHeroContainer>
-          <TitleRow>
-            <TitleBadge>
-              {typeof badge === 'string' || typeof badge === 'number' ? badge : ''}
-            </TitleBadge>
-            <ProjectTitle>{String(project.title ?? '')}</ProjectTitle>
-          </TitleRow>
-          {productionLinks.length > 0 && (
-            <BadgeGroup>
-              {productionLinks.map(({ title, url }, i) => (
-                <TippedButton
-                  key={title}
-                  target="_blank"
-                  href={url}
-                  tip={i % 2 === 0 ? 'left' : 'right'}
-                >
-                  {title}
-                </TippedButton>
-              ))}
-            </BadgeGroup>
-          )}
-          <CaseStudyHeroMetaRow>
-            <TechIcons project={project} />
-            <CaseStudyNavigation project={project} navigation={navigation} />
-          </CaseStudyHeroMetaRow>
-        </CaseStudyHeroContainer>
-        <div ref={sentinelRef} style={{ height: 1, pointerEvents: 'none' }} aria-hidden="true" />
+        <PageAlignmentWrapper>
+          <CaseStudyHeroContainer>
+            <TitleRow>
+              <TitleBadge>
+                {typeof badge === 'string' || typeof badge === 'number' ? badge : ''}
+              </TitleBadge>
+              <ProjectTitle>{String(project.title ?? '')}</ProjectTitle>
+            </TitleRow>
+            {productionLinks.length > 0 && (
+              <BadgeGroup>
+                {productionLinks.map(({ title, url }, i) => (
+                  <TippedButton
+                    key={title}
+                    target="_blank"
+                    href={url}
+                    tip={i % 2 === 0 ? 'left' : 'right'}
+                  >
+                    {title}
+                  </TippedButton>
+                ))}
+              </BadgeGroup>
+            )}
+            <CaseStudyHeroMetaRow>
+              <TechIcons project={project} />
+              <CaseStudyNavigation project={project} navigation={navigation} />
+            </CaseStudyHeroMetaRow>
+          </CaseStudyHeroContainer>
+          <div ref={sentinelRef} style={{ height: 1, pointerEvents: 'none' }} aria-hidden="true" />
+        </PageAlignmentWrapper>
       </CaseStudyHeroWrapper>
       <ProjectSummary project={project} summaryTitle={summaryTitle} />
       <Contributions contributions={contributions} contributionsTitle={contributionsTitle} />

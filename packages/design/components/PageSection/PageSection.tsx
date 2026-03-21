@@ -6,8 +6,9 @@ import {
   SectionContainerContent,
   SectionHeader,
 } from "./PageSection.styles";
+import PageAlignmentWrapper from "../PageAlignmentWrapper";
 
-interface PageSectionProps {
+export interface PageSectionProps {
   children?: React.ReactNode;
   title?: string;
   id?: string;
@@ -26,10 +27,12 @@ const PageSection = forwardRef<HTMLElement, PageSectionProps>(
 
     return (
       <Section ref={ref} id={id}>
-        <Container>
-          {title ? <SectionHeader>{title}</SectionHeader> : null}
-          {children}
-        </Container>
+        <PageAlignmentWrapper>
+          <Container>
+            {title ? <SectionHeader>{title}</SectionHeader> : null}
+            {children}
+          </Container>
+        </PageAlignmentWrapper>
       </Section>
     );
   },

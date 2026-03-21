@@ -12,7 +12,7 @@ import {
   HeroImageLink,
   HeroImage,
 } from "./SimpleHero.styles";
-import { LowerCaseTitle, BrushStrokes } from "../..";
+import { LowerCaseTitle, BrushStrokes, PageAlignmentWrapper } from "../..";
 
 interface SimpleHeroProps {
   title?: string;
@@ -20,13 +20,11 @@ interface SimpleHeroProps {
   image?: string;
   imageLink?: string;
   paddingSize?: "sm" | "md" | "lg";
-  brushStrokes?: boolean;
-  tiltImage?: boolean;
 }
 
-const heroImage = (image: string, tiltImage?: boolean) => {
+const heroImage = (image: string) => {
   return (
-    <HeroImage $tiltImage={tiltImage}>
+    <HeroImage>
       <Image
         src={image}
         alt=""
@@ -45,39 +43,37 @@ const SimpleHero = ({
   image,
   imageLink,
   paddingSize = "lg",
-  brushStrokes = true,
-  tiltImage = true,
 }: SimpleHeroProps) => {
   const hasImage = Boolean(image);
   return (
     <HeroSection $paddingSize={paddingSize}>
-      <HeroInner $hasImage={hasImage}>
-        <HeroContent $hasImage={hasImage}>
-          <LowerCaseTitle>{title}</LowerCaseTitle>
-          <HeroTitleRow>
-            {brushStrokes && <BrushStrokes />}
-            <HeroSubtitle $hasImage={hasImage} $brushStrokes={brushStrokes}>
-              {subtitle}
-            </HeroSubtitle>
-          </HeroTitleRow>
-        </HeroContent>
-        {hasImage && (
-          <HeroImageWrap>
-            {imageLink ? (
-              <HeroImageLink
-                href={imageLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="View LinkedIn profile"
-              >
-                {heroImage(image ?? "", tiltImage)}
-              </HeroImageLink>
-            ) : (
-              heroImage(image ?? "", tiltImage)
-            )}
-          </HeroImageWrap>
-        )}
-      </HeroInner>
+      <PageAlignmentWrapper>
+        <HeroInner $hasImage={hasImage}>
+          <HeroContent $hasImage={hasImage}>
+            <LowerCaseTitle>{title}</LowerCaseTitle>
+            <HeroTitleRow>
+              <BrushStrokes />
+              <HeroSubtitle $hasImage={hasImage}>{subtitle}</HeroSubtitle>
+            </HeroTitleRow>
+          </HeroContent>
+          {hasImage && (
+            <HeroImageWrap>
+              {imageLink ? (
+                <HeroImageLink
+                  href={imageLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View LinkedIn profile"
+                >
+                  {heroImage(image ?? "")}
+                </HeroImageLink>
+              ) : (
+                heroImage(image ?? "")
+              )}
+            </HeroImageWrap>
+          )}
+        </HeroInner>
+      </PageAlignmentWrapper>
     </HeroSection>
   );
 };

@@ -20,12 +20,12 @@ export const OutsetSection = styled.section`
 `;
 
 export const SectionContainer = styled.div`
-  padding: ${spacing.lg} ${spacing.sm};
+  padding: ${spacing.lg} 0;
   max-width: ${layout.containerMax};
   margin: 0 auto;
 
   ${fromTablet`
-    padding: ${spacing.lg} ${spacing.md};
+    padding: ${spacing.lg} 0;
   `}
 
   ${fromWide`
