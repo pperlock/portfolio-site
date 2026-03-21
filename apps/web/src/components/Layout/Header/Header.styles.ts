@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors, motion, fromTablet, fromDesktop, layout } from '@portfolio/design'
+import { colors, motion, fromTablet, layout } from '@portfolio/design'
 
 export const StyledHeader = styled.header`
   position: fixed;
@@ -21,7 +21,6 @@ export const NavWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 100%;
-  padding: 0 1rem;
   /* Mobile: Logo and toggle on first row, nav (when open) on second row */
   & > *:nth-child(2) {
     order: 3;
@@ -30,15 +29,11 @@ export const NavWrapper = styled.div`
     order: 2;
   }
   ${fromTablet`
-    padding: 0 2rem;
     flex-wrap: nowrap;
     & > *:nth-child(2),
     & > *:nth-child(3) {
       order: unset;
     }
-    ${fromDesktop`
-      padding: 0;
-    `}
   `}
 `
 

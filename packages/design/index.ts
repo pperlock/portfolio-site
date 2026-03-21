@@ -31,3 +31,5 @@ export type {
   RichTextProps,
   EmbeddedAssetProps,
 } from "./components/RichText";
+
+export { default as PageAlignmentWrapper } from "./components/PageAlignmentWrapper/PageAlignmentWrapper";

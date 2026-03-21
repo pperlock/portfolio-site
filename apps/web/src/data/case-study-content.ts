@@ -23,17 +23,17 @@ export const koodoRebrand = {
         'Contributed to a high-priority rebrand of the Koodo Mobile homepage, a key marketing entry point with significant traffic and visibility across Canada.',
     },
     {
+      title: 'Challenge',
+      description:
+        'The project had an aggressive deadline tied to a marketing launch, but the team lacked consistent technical direction due to limited resources, developers new to React, and an often-unavailable lead. Requirements around localization, personalization, and CMS-driven content needed to be implemented reliably, yet scope was unclear, refinement sessions were unfocused, and missing functionality and redundant code created risk of late-stage delays.',
+    },
+    {
       title: 'Impact',
       description: [
         'MVP and post-MVP scope delivered 1 week ahead of deadline, enabling the marketing launch to proceed on schedule.',
         'By clarifying scope, improving refinements, and aligning development with business priorities, the team reduced rework and late-stage surprises while increasing delivery confidence and velocity.',
         'The homepage reliably delivered accurate localized and personalized content, and team members across QA, development, and scrum publicly recognized the improvements in collaboration, process efficiency, and overall delivery quality.',
       ],
-    },
-    {
-      title: 'Challenge',
-      description:
-        'The project had an aggressive deadline tied to a marketing launch, but the team lacked consistent technical direction due to limited resources, developers new to React, and an often-unavailable lead. Requirements around localization, personalization, and CMS-driven content needed to be implemented reliably, yet scope was unclear, refinement sessions were unfocused, and missing functionality and redundant code created risk of late-stage delays.',
     },
   ],
   contributions: [

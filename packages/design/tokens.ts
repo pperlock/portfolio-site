@@ -132,7 +132,7 @@ export const shadow = {
 /** Breakpoint values (px) and media query helpers. Use as template literal tags: ${fromTablet` padding: 2rem; `} */
 export const breakpoint = {
   mobile: 375,
-  tablet: 767,
+  tablet: 768,
   desktop: 1200,
   wide: 1440,
 };
@@ -166,10 +166,10 @@ const media =
     return `@media (${minOrMax}-width: ${px}px) { ${content} }`;
   };
 
-export const fromMobile = media("min", breakpoint.mobile + 1);
-export const fromTablet = media("min", breakpoint.tablet + 1);
-export const fromDesktop = media("min", breakpoint.desktop + 1);
-export const fromWide = media("min", breakpoint.wide + 1);
+export const fromMobile = media("min", breakpoint.mobile);
+export const fromTablet = media("min", breakpoint.tablet);
+export const fromDesktop = media("min", breakpoint.desktop);
+export const fromWide = media("min", breakpoint.wide);
 
 /** Styled-components theme object (use with ThemeProvider) */
 export const theme = {

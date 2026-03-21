@@ -10,13 +10,13 @@ import {
 } from '@portfolio/design'
 
 export const Hero = styled.section`
-  padding: 8rem ${spacing.sm} ${spacing.xl};
+  padding: 8rem 0 ${spacing.xl};
   background-color: ${colors.bg};
   box-shadow: ${shadow.md};
   margin-bottom: ${spacing.xl};
   font-family: ${typography.fontFamily};
   ${fromTablet`
-    padding: 9rem ${spacing.md} ${spacing.lg};
+    padding: 9rem 0 ${spacing.lg};
   `}
 `
 
