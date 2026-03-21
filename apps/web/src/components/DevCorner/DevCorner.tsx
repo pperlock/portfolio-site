@@ -7,19 +7,19 @@ import type { DevCornerContent } from '@/data/dev-corner-content'
 import Architecture from './Archtecture'
 import DevCornerHero from './DevCornerHero'
 import RoadMap from './RoadMap'
-import { GitHubIssueItem } from '@/types'
 import UnderDevelopment from './UnderDevelopment'
 import PerformanceLab from './PerformanceLab'
+import { DevCornerLighthousePrefetcher } from './DevCornerLighthousePrefetcher'
+
 interface DevCornerProps {
-  issues: GitHubIssueItem[]
   content: DevCornerContent
 }
 const DevCorner = ({
-  issues,
   content: { hero, architecture, designSystem, performanceLab, engineeringRoadmap },
 }: DevCornerProps) => {
   return (
     <>
+      <DevCornerLighthousePrefetcher />
       <DevCornerHero
         title={hero.title}
         subtitle={hero.subtitle}
@@ -49,7 +49,7 @@ const DevCorner = ({
       </PageSection>
 
       <PageSection variant="outset" id="engineering-roadmap">
-        <RoadMap content={engineeringRoadmap} issues={issues} />
+        <RoadMap content={engineeringRoadmap} />
       </PageSection>
     </>
   )

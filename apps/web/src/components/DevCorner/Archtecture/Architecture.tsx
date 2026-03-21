@@ -12,6 +12,7 @@ import {
 } from './Architecture.styles'
 
 import ArchitectureDiagram from './ArchitectureDiagram/ArchitectureDiagram'
+import { BffServerCallFlowDiagram } from '../BffFlowDiagram'
 
 interface ArchitectureProps {
   content: {
@@ -66,6 +67,7 @@ const Architecture = ({ content }: ArchitectureProps) => {
           <ArchitectureDiagram content={architectureDiagram} />
         </ArchitectureDiagramWrapper>
       </ArchitectureLayout>
+      <BffServerCallFlowDiagram />
     </>
   )
 }

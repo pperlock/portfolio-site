@@ -13,8 +13,15 @@ export const devCornerContent = {
     techStack: {
       title: 'Tech Stack',
       items: [
-        { category: 'UI Layer', items: ['Next.js', 'React', 'Styled Components'] },
+        {
+          category: 'UI Layer',
+          items: ['Next.js', 'React', 'Styled Components', 'TanStack Query (React Query)'],
+        },
         { category: 'Content Layer', items: ['Contentful CMS'] },
+        {
+          category: 'Integration & APIs',
+          items: ['REST', 'GraphQL '],
+        },
         { category: 'Developer Tooling', items: ['Turborepo', 'Vite', 'Storybook'] },
         { category: 'Testing', items: ['React Testing Library'] },
       ],

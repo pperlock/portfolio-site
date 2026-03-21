@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from '@portfolio/design'
+import { colors, fromTablet } from '@portfolio/design'
 
 export const PerformanceSection = styled.section`
   width: 100%;
@@ -167,11 +167,10 @@ export const TunerReadout = styled.div`
   justify-content: center;
   font-family: 'JetBrains Mono', monospace;
   color: #ffca73;
-  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.18em;
   line-height: 1;
-  padding: 4px 14px;
+  padding: 8px 14px;
   margin-left: auto;
   margin-right: auto;
   margin-top: -6px;
@@ -185,13 +184,6 @@ export const TunerReadout = styled.div`
   box-shadow:
     inset 0 0 10px rgba(0, 0, 0, 0.35),
     0 0 16px rgba(255, 202, 115, 0.06);
-
-  @media (max-width: 520px) {
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    padding: 3px 12px;
-    margin-top: -5px;
-  }
 `
 
 export const TunerControls = styled.div`

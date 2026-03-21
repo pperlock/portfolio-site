@@ -68,3 +68,14 @@ export const fetchProjectStatusByIssueNumber = async (): Promise<Map<number, str
     return new Map()
   }
 }
+
+export const fetchIssuesWithProjectStatus = async (): Promise<GitHubIssueItem[]> => {
+  const [issues, statusByNumber] = await Promise.all([
+    fetchGitHubIssues(),
+    fetchProjectStatusByIssueNumber(),
+  ])
+  return issues.map(issue => {
+    const projectStatus = statusByNumber.get(issue.number ?? issue.id)
+    return projectStatus ? { ...issue, project_status: projectStatus } : issue
+  })
+}

@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, useMemo, useRef } from 'react'
+import { useState, useMemo } from 'react'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 import { fetchLighthouse, getLighthouseQueryKey } from '@/lib/lighthouse/fetchLighthouse'
@@ -13,8 +13,9 @@ interface UseLighthouseLabsOptions {
 
 const useLighthouseLabs = (options?: UseLighthouseLabsOptions) => {
   const queryClient = useQueryClient()
-  const [selectedPageId, setSelectedPageId] = useState<string>(options?.initialSelectedPageId ?? '')
-  const hasRunInitialHomeCheck = useRef(Boolean(options?.initialPageState?.home))
+  const [selectedPageId, setSelectedPageId] = useState<string>(
+    options?.initialSelectedPageId ?? 'home'
+  )
 
   const selectedPage = useMemo(
     () => LIGHTHOUSE_PAGES.find(p => p.id === selectedPageId),
@@ -38,14 +39,6 @@ const useLighthouseLabs = (options?: UseLighthouseLabsOptions) => {
     enabled: Boolean(selectedPageId && selectedPage?.url),
     staleTime: LIGHTHOUSE_STALE_MS,
   })
-
-  // Defer selecting home until after first paint so the request doesn't block initial load
-  useEffect(() => {
-    if (hasRunInitialHomeCheck.current) return
-    hasRunInitialHomeCheck.current = true
-    const id = setTimeout(() => setSelectedPageId('home'), 0)
-    return () => clearTimeout(id)
-  }, [])
 
   // Build pageLighthouseState: current page from query, others from cache
   const pageLighthouseState = useMemo(() => {

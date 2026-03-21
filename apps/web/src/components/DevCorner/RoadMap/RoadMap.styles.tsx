@@ -1,9 +1,28 @@
-import styled from 'styled-components'
-import { fromDesktop, fromTablet } from '@portfolio/design'
+import styled, { keyframes } from 'styled-components'
+import { colors, fromDesktop, fromTablet } from '@portfolio/design'
 
 /* GitHub Projects–style dark kanban theme */
 const KANBAN_BG = '#0d1117'
 const KANBAN_BORDER = '#30363d'
+const KANBAN_CARD_BG = '#21262d'
+
+const kanbanSkeletonShimmer = keyframes`
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+`
+
+const skeletonGradient = `
+  linear-gradient(
+    90deg,
+    #1a1f26 0%,
+    #2d333b 42%,
+    #1a1f26 100%
+  )
+`
 
 export const KanbanBoardWrapper = styled.div`
   background: ${KANBAN_BG};
@@ -217,4 +236,58 @@ export const DevTooltipDescription = styled.span`
   opacity: 0.95;
   line-height: 1.45;
   text-align: center;
+`
+
+export const KanbanStateMessage = styled.div`
+  padding: 2rem 1.25rem;
+  text-align: center;
+  color: ${colors.textMuted};
+  font-size: 0.9rem;
+`
+
+export const KanbanRetryButton = styled.button`
+  margin-top: 0.75rem;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #e6edf3;
+  background: #21262d;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:hover {
+    background: #30363d;
+  }
+`
+
+/** Placeholder “ticket” rows while GitHub issues load */
+export const SkeletonTicketCard = styled.div`
+  border-radius: 8px;
+  border: 1px solid ${KANBAN_BORDER};
+  background: ${KANBAN_CARD_BG};
+  padding: 0.6rem 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+`
+
+export const SkeletonLine = styled.div<{ $width?: string }>`
+  height: 0.65rem;
+  border-radius: 4px;
+  width: ${({ $width }) => $width ?? '100%'};
+  background: ${skeletonGradient};
+  background-size: 200% 100%;
+  animation: ${kanbanSkeletonShimmer} 1.35s ease-in-out infinite;
+`
+
+export const SkeletonCountBadge = styled.div`
+  width: 1.85rem;
+  height: 1.15rem;
+  border-radius: 20px;
+  margin-left: auto;
+  flex-shrink: 0;
+  background: ${skeletonGradient};
+  background-size: 200% 100%;
+  animation: ${kanbanSkeletonShimmer} 1.35s ease-in-out infinite;
 `

@@ -37,7 +37,7 @@ export const HeroLeft = styled.div`
   position: relative;
   max-width: ${layout.containerMax};
   width: 100%;
-  margin-top: 2rem;
+  margin-top: ${spacing.md};
 `
 
 export const HeroTaglineLeft = styled.div`

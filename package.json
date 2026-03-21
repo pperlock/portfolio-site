@@ -20,6 +20,7 @@
   },
   "packageManager": "npm@10.2.4",
   "dependencies": {
+    "lucide-react": "^0.577.0",
     "react-circular-progressbar": "^2.2.0"
   }
 }
