@@ -1,15 +1,15 @@
-import Link from 'next/link'
-import styled from 'styled-components'
-import { motion, colors, fromTablet, spacing } from '../../tokens'
+import Link from "next/link";
+import styled from "styled-components";
+import { motion, colors, fromTablet, spacing } from "../../tokens";
 
 const linkColor = ({ $variant, $isActive, $activeBrushColor }) =>
-  $variant === 'header' && $isActive && $activeBrushColor
+  $variant === "header" && $isActive && $activeBrushColor
     ? colors[$activeBrushColor]
-    : $variant === 'footer'
+    : $variant === "footer"
       ? colors.text
-      : colors.bg
+      : colors.bg;
 
-const navTabletStyles = props => `
+const navTabletStyles = (props) => `
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -27,11 +27,14 @@ const navTabletStyles = props => `
     transform: none;
     transition-delay: 0;
   }
-`
+`;
 
-export const Nav = styled.nav<{ $variant?: string; $isMobileMenuOpen?: boolean }>`
+export const Nav = styled.nav<{
+  $variant?: string;
+  $isMobileMenuOpen?: boolean;
+}>`
   ${({ $variant, $isMobileMenuOpen }) =>
-    $variant === 'header' &&
+    $variant === "header" &&
     `
       display: flex;
       flex-direction: column;
@@ -40,32 +43,48 @@ export const Nav = styled.nav<{ $variant?: string; $isMobileMenuOpen?: boolean }
       flex-basis: 100%;
       width: 100%;
       order: 3;
-      gap: 1.5rem;
-      padding-top: ${$isMobileMenuOpen ? '0.5rem' : '0'};
+       padding-top: ${$isMobileMenuOpen ? "0.5rem" : "0"};
       overflow: hidden;
-      max-height: ${$isMobileMenuOpen ? '50vh' : '0'};
-      opacity: ${$isMobileMenuOpen ? '1' : '0'};
+      max-height: ${$isMobileMenuOpen ? "50vh" : "0"};
+      opacity: ${$isMobileMenuOpen ? "1" : "0"};
       transition: max-height 0.65s cubic-bezier(0.4, 0, 0.2, 1),
                   opacity 0.5s ease,
                   padding-top 0.5s ease;
 
       & > * {
-        opacity: ${$isMobileMenuOpen ? '1' : '0'};
+        opacity: ${$isMobileMenuOpen ? "1" : "0"};
         transition: opacity 0.4s ease;
       }
-      & > *:nth-child(1) { transition-delay: ${$isMobileMenuOpen ? '0.08s' : '0'}; }
-      & > *:nth-child(2) { transition-delay: ${$isMobileMenuOpen ? '0.16s' : '0'}; }
-      & > *:nth-child(3) { transition-delay: ${$isMobileMenuOpen ? '0.24s' : '0'}; }
-      & > *:nth-child(4) { transition-delay: ${$isMobileMenuOpen ? '0.32s' : '0'}; }
-      & > *:nth-child(5) { transition-delay: ${$isMobileMenuOpen ? '0.4s' : '0'}; }
-      & > *:nth-child(6) { transition-delay: ${$isMobileMenuOpen ? '0.48s' : '0'}; }
+      & > *:nth-child(1) { transition-delay: ${$isMobileMenuOpen ? "0.08s" : "0"}; }
+      & > *:nth-child(2) { transition-delay: ${$isMobileMenuOpen ? "0.16s" : "0"}; }
+      & > *:nth-child(3) { transition-delay: ${$isMobileMenuOpen ? "0.24s" : "0"}; }
+      & > *:nth-child(4) { transition-delay: ${$isMobileMenuOpen ? "0.32s" : "0"}; }
+      & > *:nth-child(5) { transition-delay: ${$isMobileMenuOpen ? "0.4s" : "0"}; }
+      & > *:nth-child(6) { transition-delay: ${$isMobileMenuOpen ? "0.48s" : "0"}; }
     `}
+  gap: 1.5rem;
 
-  ${props => fromTablet`${navTabletStyles(props)}`}
+  /* Footer: row layout on all breakpoints; gap stays 1.5rem until tablet+ (below). */
+  ${({ $variant }) =>
+    $variant === "footer" &&
+    `
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    color: ${colors.text};
+    & > * {
+      opacity: 1;
+      transform: none;
+      transition-delay: 0;
+    }
+  `}
 
-  ${({ $variant, ...props }) =>
-    $variant === 'footer' && `${navTabletStyles({ $variant, ...props })}`}
-`
+  ${(props) => fromTablet`${navTabletStyles(props)}`}
+`;
 
 export const SocialsWrapper = styled.div`
   display: flex;
@@ -80,7 +99,7 @@ export const SocialsWrapper = styled.div`
     width: auto;
     gap: 0.75rem;
   `}
-`
+`;
 
 export const SocialsLabel = styled.span`
   display: flex;
@@ -94,7 +113,7 @@ export const SocialsLabel = styled.span`
 
   &::before,
   &::after {
-    content: '';
+    content: "";
     flex: 1;
     height: 1px;
     background-color: rgba(255, 255, 255, 0.4);
@@ -103,27 +122,31 @@ export const SocialsLabel = styled.span`
   ${fromTablet`
     display: none;
   `}
-`
+`;
 
-const navLinkStyles = props => `
+const navLinkStyles = (props) => `
   color: ${linkColor(props)};
   text-decoration: none;
   text-transform: lowercase;
   transition: ${motion.transition};
-  font-weight: ${props.$variant === 'header' ? '600' : '400'};
+  font-weight: ${props.$variant === "header" ? "600" : "400"};
   margin-left: -2px;
 
   &:hover {
     opacity: 0.7;
   }
-`
+`;
 
-type NavLinkProps = { $variant?: string; $isActive?: boolean; $activeBrushColor?: string }
+type NavLinkProps = {
+  $variant?: string;
+  $isActive?: boolean;
+  $activeBrushColor?: string;
+};
 
 export const NavLink = styled.a<NavLinkProps>`
-  ${props => navLinkStyles(props)}
-`
+  ${(props) => navLinkStyles(props)}
+`;
 
 export const NavNextLink = styled(Link)<NavLinkProps>`
-  ${props => navLinkStyles(props)}
-`
+  ${(props) => navLinkStyles(props)}
+`;

@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import React from 'react'
-import Image from 'next/image'
+import React from "react";
+import Image from "next/image";
 import {
   HeroSection,
   HeroInner,
@@ -11,15 +11,15 @@ import {
   HeroImageWrap,
   HeroImageLink,
   HeroImage,
-} from './SimpleHero.styles'
-import { LowerCaseTitle, BrushStrokes } from '../..'
+} from "./SimpleHero.styles";
+import { LowerCaseTitle, BrushStrokes, PageAlignmentWrapper } from "../..";
 
 interface SimpleHeroProps {
-  title?: string
-  subtitle?: string
-  image?: string
-  imageLink?: string
-  paddingSize?: 'sm' | 'md' | 'lg'
+  title?: string;
+  subtitle?: string;
+  image?: string;
+  imageLink?: string;
+  paddingSize?: "sm" | "md" | "lg";
 }
 
 const heroImage = (image: string) => {
@@ -30,50 +30,52 @@ const heroImage = (image: string) => {
         alt=""
         fill
         sizes="(min-width: 768px) 320px, 70vw"
-        style={{ objectFit: 'cover' }}
+        style={{ objectFit: "cover" }}
         priority
       />
     </HeroImage>
-  )
-}
+  );
+};
 
 const SimpleHero = ({
-  title = '',
-  subtitle = '',
+  title = "",
+  subtitle = "",
   image,
   imageLink,
-  paddingSize = 'lg',
+  paddingSize = "lg",
 }: SimpleHeroProps) => {
-  const hasImage = Boolean(image)
+  const hasImage = Boolean(image);
   return (
     <HeroSection $paddingSize={paddingSize}>
-      <HeroInner $hasImage={hasImage}>
-        <HeroContent $hasImage={hasImage}>
-          <LowerCaseTitle>{title}</LowerCaseTitle>
-          <HeroTitleRow>
-            <BrushStrokes />
-            <HeroSubtitle $hasImage={hasImage}>{subtitle}</HeroSubtitle>
-          </HeroTitleRow>
-        </HeroContent>
-        {hasImage && (
-          <HeroImageWrap>
-            {imageLink ? (
-              <HeroImageLink
-                href={imageLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="View LinkedIn profile"
-              >
-                {heroImage(image ?? '')}
-              </HeroImageLink>
-            ) : (
-              heroImage(image ?? '')
-            )}
-          </HeroImageWrap>
-        )}
-      </HeroInner>
+      <PageAlignmentWrapper>
+        <HeroInner $hasImage={hasImage}>
+          <HeroContent $hasImage={hasImage}>
+            <LowerCaseTitle>{title}</LowerCaseTitle>
+            <HeroTitleRow>
+              <BrushStrokes />
+              <HeroSubtitle $hasImage={hasImage}>{subtitle}</HeroSubtitle>
+            </HeroTitleRow>
+          </HeroContent>
+          {hasImage && (
+            <HeroImageWrap>
+              {imageLink ? (
+                <HeroImageLink
+                  href={imageLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View LinkedIn profile"
+                >
+                  {heroImage(image ?? "")}
+                </HeroImageLink>
+              ) : (
+                heroImage(image ?? "")
+              )}
+            </HeroImageWrap>
+          )}
+        </HeroInner>
+      </PageAlignmentWrapper>
     </HeroSection>
-  )
-}
+  );
+};
 
-export default SimpleHero
+export default SimpleHero;
