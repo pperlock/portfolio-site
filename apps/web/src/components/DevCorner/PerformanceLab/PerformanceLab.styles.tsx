@@ -1,4 +1,4 @@
-import { spacing, fromTablet, colors, typography } from '@portfolio/design'
+import { spacing, fromTablet, colors, typography, fromDesktop } from '@portfolio/design'
 import styled from 'styled-components'
 
 export const AccessibilityLayout = styled.div`
@@ -250,12 +250,14 @@ export const MetricsNote = styled.p`
   color: #6b7280;
 `
 export const PerformanceSection = styled.div`
-  margin-top: ${spacing.lg};
   display: flex;
   flex-direction: column;
+  margin: ${spacing.lg} auto 0;
   gap: ${spacing.lg};
   flex: 0 0 auto;
-  ${fromTablet`
+  max-width: 800px;
+  ${fromDesktop`
+    max-width: 100%;
     flex-direction: row;
     align-items: flex-start;
   `}

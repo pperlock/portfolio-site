@@ -1,8 +1,17 @@
 import styled from 'styled-components'
+import { fromTablet } from '@portfolio/design'
+
+export const PagePreviewWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`
 
 // 1. The outer casing of the phone
 export const PhoneFrame = styled.div`
-  width: 375px;
+  width: 100%;
+  max-width: 343px;
   height: 700px;
   background-color: #1a1a1a;
   border-radius: 40px;
@@ -14,6 +23,9 @@ export const PhoneFrame = styled.div`
   display: flex;
   flex-direction: column;
   border: 4px solid #333;
+  ${fromTablet`
+    max-width: 375px;
+  `}
 
   /* The Notch/Speaker */
   &::before {
@@ -45,9 +57,13 @@ export const PhoneScreen = styled.div`
 export const StyledIframe = styled.iframe`
   /* Render the real page a bit wider, then scale it down so
      desktop min-width layouts fit without horizontal scroll */
-  width: 430px;
+  width: 382px;
   height: 800px;
   border: none;
   transform: scale(0.85);
   transform-origin: top left;
+
+  ${fromTablet`
+    width: 418px;
+  `}
 `

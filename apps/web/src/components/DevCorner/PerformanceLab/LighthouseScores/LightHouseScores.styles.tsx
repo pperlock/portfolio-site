@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from 'styled-components'
-import { colors, spacing, typography } from '@portfolio/design'
+import { colors, fromTablet, spacing, typography } from '@portfolio/design'
 
 const pulse = keyframes`
   0% {
@@ -38,8 +38,13 @@ export const ScoresBlock = styled.div`
 `
 
 export const ScoresGrid = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.35rem;
+
+  ${fromTablet`
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  `}
 `
 
 export const LighthouseScoreCard = styled.div<{ $score?: number; $loading?: boolean }>`

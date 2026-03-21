@@ -27,9 +27,13 @@ export const UnderDevTextWrapper = styled.div`
 `
 
 export const ImageContainer = styled.div`
-  max-width: 600px;
+  max-width: 350px;
   width: 100%;
   margin-bottom: ${spacing.md};
+
+  ${fromTablet`
+    max-width: 600px;
+  `}
 
   img {
     width: 100%;

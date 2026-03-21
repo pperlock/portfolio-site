@@ -57,6 +57,9 @@ const runSweep = keyframes`
 export const Shell = styled.div`
   /* Wrapper kept only for layout spacing; no visible chrome */
   border-radius: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 export const ConsoleContainer = styled.div`
   /* Main panel surface – match the lighter \"Latest Audit\" background tone */

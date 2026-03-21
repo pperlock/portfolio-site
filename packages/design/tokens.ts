@@ -133,8 +133,8 @@ export const shadow = {
 export const breakpoint = {
   mobile: 375,
   tablet: 767,
-  desktop: 1200,
-  wide: 1440,
+  desktop: 1199,
+  wide: 1439,
 };
 
 /**

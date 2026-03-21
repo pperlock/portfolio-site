@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors, motion, fromTablet, fromDesktop, layout } from '@portfolio/design'
+import { colors, motion, fromTablet, fromWide, layout, fromDesktop } from '@portfolio/design'
 
 export const StyledHeader = styled.header`
   position: fixed;
@@ -37,6 +37,9 @@ export const NavWrapper = styled.div`
       order: unset;
     }
     ${fromDesktop`
+      padding: 0 2rem;
+    `}
+    ${fromWide`
       padding: 0;
     `}
   `}

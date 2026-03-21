@@ -1,12 +1,14 @@
-import { PhoneFrame, PhoneScreen, StyledIframe } from './PagePreview.styles'
+import { PagePreviewWrapper, PhoneFrame, PhoneScreen, StyledIframe } from './PagePreview.styles'
 
 const PagePreview = ({ page }) => {
   return (
-    <PhoneFrame>
-      <PhoneScreen>
-        <StyledIframe src={page} title="Page Preview" />
-      </PhoneScreen>
-    </PhoneFrame>
+    <PagePreviewWrapper>
+      <PhoneFrame>
+        <PhoneScreen>
+          <StyledIframe src={page} title="Page Preview" />
+        </PhoneScreen>
+      </PhoneFrame>
+    </PagePreviewWrapper>
   )
 }
 

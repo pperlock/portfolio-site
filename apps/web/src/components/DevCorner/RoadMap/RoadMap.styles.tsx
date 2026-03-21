@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { fromTablet } from '@portfolio/design'
+import { fromDesktop, fromTablet } from '@portfolio/design'
 
 /* GitHub Projects–style dark kanban theme */
 const KANBAN_BG = '#0d1117'
@@ -120,38 +120,42 @@ export const DevLinkIcon = styled.span`
 `
 
 export const DevTooltip = styled.span`
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%) translateY(6px) scale(0.94);
-  margin-bottom: 0.5rem;
-  padding: 0.65rem 0.9rem;
-  min-width: 200px;
-  max-width: 280px;
-  background: #0f172a;
-  color: #e5e7eb;
-  font-size: 0.8rem;
-  line-height: 1.4;
-  border-radius: 10px;
-  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.25);
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  text-align: left;
-  transition:
-    opacity 0.22s ease,
-    visibility 0.22s ease,
-    transform 0.28s cubic-bezier(0.34, 1.2, 0.64, 1);
+  display: none;
 
-  &::after {
-    content: '';
+  ${fromDesktop`
     position: absolute;
-    top: 100%;
+    bottom: 100%;
     left: 50%;
-    margin-left: -6px;
-    border: 6px solid transparent;
-    border-top-color: #0f172a;
-  }
+    transform: translateX(-50%) translateY(6px) scale(0.94);
+    margin-bottom: 0.5rem;
+    padding: 0.65rem 0.9rem;
+    min-width: 200px;
+    max-width: 280px;
+    background: #0f172a;
+    color: #e5e7eb;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(15, 23, 42, 0.25);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    text-align: left;
+    transition:
+      opacity 0.22s ease,
+      visibility 0.22s ease,
+      transform 0.28s cubic-bezier(0.34, 1.2, 0.64, 1);
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -6px;
+      border: 6px solid transparent;
+      border-top-color: #0f172a;
+    }
+  `}
 `
 
 export const DevLink = styled.a`
