@@ -30,3 +30,5 @@ export type {
 export { default as SimpleHero } from "./components/SimpleHero/SimpleHero";
 export { default as Socials } from "./components/Socials/Socials";
 export { default as TippedButton } from "./components/TippedButton/TippedButton";
+
+export { default as PageAlignmentWrapper } from "./components/PageAlignmentWrapper/PageAlignmentWrapper";

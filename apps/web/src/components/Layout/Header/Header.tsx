@@ -2,13 +2,13 @@
 
 import React, { useState } from 'react'
 import { StyledHeader, NavWrapper, MobileMenuToggle, MobileMenuToggleBar } from './Header.styles'
-import { Navigation, Logo } from '@portfolio/design'
+import { Navigation, Logo, PageAlignmentWrapper } from '@portfolio/design'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   return (
-    <>
-      <StyledHeader>
+    <StyledHeader>
+      <PageAlignmentWrapper>
         <NavWrapper>
           <Logo onClick={() => setIsMenuOpen(false)} />
           <Navigation
@@ -26,8 +26,8 @@ const Header = () => {
             <MobileMenuToggleBar />
           </MobileMenuToggle>
         </NavWrapper>
-      </StyledHeader>
-    </>
+      </PageAlignmentWrapper>
+    </StyledHeader>
   )
 }
 
