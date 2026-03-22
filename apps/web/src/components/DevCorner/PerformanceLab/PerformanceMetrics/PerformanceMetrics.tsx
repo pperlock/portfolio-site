@@ -41,7 +41,7 @@ const PerformanceMetrics = ({
         <DialCornerScrews />
 
         <Header>
-          <HeaderLabel isLoading={isLoading}>{headerLabel}</HeaderLabel>
+          <HeaderLabel $isLoading={isLoading}>{headerLabel}</HeaderLabel>
           {!isLoading && <LiveTag>● LIVE_SYSTEM_READY</LiveTag>}
         </Header>
         {isLoading && <RunProgress aria-label="Lighthouse audit in progress" />}

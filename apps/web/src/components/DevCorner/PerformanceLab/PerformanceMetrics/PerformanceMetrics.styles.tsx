@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 import { VINTAGE_THEME } from '@portfolio/design'
 
 const { shell, ink, console: vintageConsole, ui, glow, rgba, neutralRail } = VINTAGE_THEME
@@ -8,6 +8,19 @@ export const pulse = keyframes`
   0% { opacity: 0.4; }
   50% { opacity: 1; }
   100% { opacity: 0.4; }
+`
+
+/** Stronger pulse while `> RUNNING_AUDIT...` is shown (matches vintage pipe glow). */
+const runAuditPulse = keyframes`
+  0%,
+  100% {
+    opacity: 0.55;
+    text-shadow: 0 0 0 transparent;
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 14px ${rgba.pipe(0.45)};
+  }
 `
 
 export const scan = keyframes`
@@ -96,7 +109,9 @@ export const RunProgress = styled.div`
       ${glow.pipeHot}
     );
     box-shadow: 0 0 8px ${rgba.pipe(0.6)};
-    animation: ${runSweep} 1.25s linear infinite;
+    ${css`
+      animation: ${runSweep} 1.25s linear infinite;
+    `}
   }
 `
 
@@ -171,6 +186,15 @@ export const LiveTag = styled.span`
   animation: ${pulse} 2s infinite;
 `
 
-export const HeaderLabel = styled.span<{ isLoading: boolean }>`
-  animation: ${props => (props.isLoading ? pulse : 'none')};
+export const HeaderLabel = styled.span<{ $isLoading: boolean }>`
+  ${({ $isLoading }) =>
+    $isLoading
+      ? css`
+          animation: ${runAuditPulse} 1.1s ease-in-out infinite;
+        `
+      : ''}
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
 `
