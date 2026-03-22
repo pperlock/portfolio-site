@@ -26,12 +26,14 @@ interface ProjectV2Response {
 
 export const fetchGitHubIssues = async (): Promise<GitHubIssueItem[]> => {
   try {
+    const headers = GITHUB_TOKEN ? { Authorization: `Bearer ${GITHUB_TOKEN}` } : undefined
     const { data } = await axios.get<GitHubIssueItem[]>(
       `https://api.github.com/repos/${GITHUB_REPO}/issues`,
-      { params: { state: 'all', per_page: 100 } }
+      { params: { state: 'all', per_page: 100 }, headers }
     )
     return Array.isArray(data) ? data : []
-  } catch {
+  } catch (err) {
+    console.error('GitHub issues fetch error:', err)
     return []
   }
 }
@@ -65,4 +67,15 @@ export const fetchProjectStatusByIssueNumber = async (): Promise<Map<number, str
     console.error('GitHub projectV2 error:', err)
     return new Map()
   }
+}
+
+export const fetchIssuesWithProjectStatus = async (): Promise<GitHubIssueItem[]> => {
+  const [issues, statusByNumber] = await Promise.all([
+    fetchGitHubIssues(),
+    fetchProjectStatusByIssueNumber(),
+  ])
+  return issues.map(issue => {
+    const projectStatus = statusByNumber.get(issue.number ?? issue.id)
+    return projectStatus ? { ...issue, project_status: projectStatus } : issue
+  })
 }

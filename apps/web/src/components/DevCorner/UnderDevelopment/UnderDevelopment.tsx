@@ -20,8 +20,8 @@ const UnderDevelopment = () => {
         <StatusBadge>Signal Incoming</StatusBadge>
         <Headline>Stay Tuned</Headline>
         <Subtext>
-          We&apos;re currently fine-tuning the frequencies. This section is under development and will be
-          broadcasting soon.
+          We&apos;re currently fine-tuning the frequencies. This section is under development and
+          will be broadcasting soon.
         </Subtext>
 
         <LoadingBar />

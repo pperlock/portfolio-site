@@ -4,6 +4,8 @@ import { LowerCaseTitle, Paragraph } from '@portfolio/design'
 import {
   ArchitectureLayout,
   ArchitectureDiagramWrapper,
+  ArchitectureSubsection,
+  ServerDataFetchingTitle,
   TechStackLayout,
   TechStackTitle,
   TechStackList,
@@ -12,6 +14,11 @@ import {
 } from './Architecture.styles'
 
 import ArchitectureDiagram from './ArchitectureDiagram/ArchitectureDiagram'
+import {
+  BffServerCallFlowDiagram,
+  type BffServerCallFlowDiagramContent,
+} from '../BffFlowDiagram'
+import { renderRichCopy } from '@/lib/richCopy'
 
 interface ArchitectureProps {
   content: {
@@ -30,11 +37,16 @@ interface ArchitectureProps {
       designSystem: { title: string; tech: string; description: string }
       cms: { title: string; tech: string; description: string }
     }
+    serverDataFetching: {
+      title: string
+      body: string
+      diagram: BffServerCallFlowDiagramContent
+    }
   }
 }
 
 const Architecture = ({ content }: ArchitectureProps) => {
-  const { title, body, techStack, architectureDiagram } = content
+  const { title, body, techStack, architectureDiagram, serverDataFetching } = content
   const techGroups = techStack.items
 
   return (
@@ -66,6 +78,12 @@ const Architecture = ({ content }: ArchitectureProps) => {
           <ArchitectureDiagram content={architectureDiagram} />
         </ArchitectureDiagramWrapper>
       </ArchitectureLayout>
+
+      <ArchitectureSubsection>
+        <ServerDataFetchingTitle>{serverDataFetching.title}</ServerDataFetchingTitle>
+        <Paragraph color="medium">{renderRichCopy(serverDataFetching.body, 'arch-sdf')}</Paragraph>
+        <BffServerCallFlowDiagram content={serverDataFetching.diagram} />
+      </ArchitectureSubsection>
     </>
   )
 }

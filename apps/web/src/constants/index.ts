@@ -16,3 +16,4 @@ export type NavLink = {
 
 export * from './skills'
 export * from './github'
+export * from './lighthouse'

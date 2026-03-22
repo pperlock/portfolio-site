@@ -1,2 +1,2 @@
 export * from './useRevealOnIntersection'
-export * from './useRevealOnIntersection'
+export * from './useDevCornerIssues'

@@ -13,8 +13,15 @@ export const devCornerContent = {
     techStack: {
       title: 'Tech Stack',
       items: [
-        { category: 'UI Layer', items: ['Next.js', 'React', 'Styled Components'] },
+        {
+          category: 'UI Layer',
+          items: ['Next.js', 'React', 'Styled Components', 'TanStack Query (React Query)'],
+        },
         { category: 'Content Layer', items: ['Contentful CMS'] },
+        {
+          category: 'Integration & APIs',
+          items: ['REST', 'GraphQL'],
+        },
         { category: 'Developer Tooling', items: ['Turborepo', 'Vite', 'Storybook'] },
         { category: 'Testing', items: ['React Testing Library'] },
       ],
@@ -37,6 +44,31 @@ export const devCornerContent = {
         description: 'Contentful client, queries, and data mapping.',
       },
     },
+    serverDataFetching: {
+      title: 'Secure By Design',
+      body: 'Upstream Github and Lighthouse APIs are proxied through a **Next.js BFF** (Backend-for-Frontend) architecture. This server-side bridge keeps sensitive API tokens strictly in the environment—delivering clean, pre-processed data to the UI without exposing credentials to the browser’s Network tab.',
+      diagram: {
+        serverZoneLabel: 'Next.js server · Node.js runtime',
+        callout: 'Auth headers injected here—**0%** exposure to client',
+        steps: [
+          {
+            title: 'Client',
+            description:
+              'Client triggers a {{code}}GET{{/code}} request to server {{code}}/api/<route>{{/code}}',
+          },
+          { title: 'API routes', description: 'Route handler receives call on the secure server' },
+          {
+            title: 'Environment',
+            description:
+              'Private keys are injected via {{code}}process.env{{/code}} into the server environment',
+          },
+          {
+            title: 'Upstream',
+            description: 'Secure HTTPS outbound request to upstream Github and Lighthouse APIs',
+          },
+        ],
+      },
+    },
   },
   designSystem: {
     title: 'Design System',
@@ -44,7 +76,10 @@ export const devCornerContent = {
   },
   performanceLab: {
     title: 'Performance Lab',
-    body: 'Lighthouse-powered insights into performance, accessibility, and SEO.',
+    body: "Automated performance profiling and accessibility auditing. This interface leverages the Lighthouse engine to generate deep-dive insights into the application's speed, crawlability, and inclusive design patterns.",
+    selectLabel: 'Choose a page to generate a live performance report:',
+    reportLinkText: 'View full Lighthouse report',
+    selectPlaceHolder: '-- Select a page --',
   },
   engineeringRoadmap: {
     title: 'Engineering roadmap',

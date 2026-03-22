@@ -1,2 +1,5 @@
-export { fetchGitHubIssues } from './fetchGithubIssues'
-export { fetchProjectStatusByIssueNumber } from './fetchGithubIssues'
+export {
+  fetchGitHubIssues,
+  fetchProjectStatusByIssueNumber,
+  fetchIssuesWithProjectStatus,
+} from './fetchGithubIssues'

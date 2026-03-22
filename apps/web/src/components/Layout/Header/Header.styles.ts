@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors, motion, fromTablet, layout } from '@portfolio/design'
+import { colors, motion, fromTablet, fromWide, layout, fromDesktop } from '@portfolio/design'
 
 export const StyledHeader = styled.header`
   position: fixed;

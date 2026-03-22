@@ -10,10 +10,10 @@ import {
 } from '@portfolio/design'
 
 export const Section = styled.section`
-  padding: ${spacing.lg} ${spacing.sm};
+  padding: ${spacing.lg} 0;
 
   ${fromTablet`
-    margin: 8rem 0 ${spacing.md} 0;
+    margin: ${spacing.xl} 0 ${spacing.md} 0;
   `}
 `
 
