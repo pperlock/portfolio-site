@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors, fromTablet } from '@portfolio/design'
+import { colors } from '@portfolio/design'
 
 export const PerformanceSection = styled.section`
   width: 100%;
@@ -135,7 +135,11 @@ export const FrequencyMark = styled.div<{ $active?: boolean }>`
   }
 `
 
-export const Needle = styled.div<{ $position: number }>`
+export const Needle = styled.div<{
+  $position: number
+  $instant?: boolean
+  $isAligned?: boolean
+}>`
   position: absolute;
   top: 0px;
   bottom: 0px;
@@ -143,8 +147,13 @@ export const Needle = styled.div<{ $position: number }>`
   background: linear-gradient(180deg, #ff6e54 0%, #ff573d 100%);
   box-shadow: 0 0 16px rgba(255, 87, 61, 0.7);
   left: ${({ $position }) => `${$position}%`};
-  transition: left 0.15s ease-out;
+  transition: ${({ $instant }) =>
+    $instant ? 'none' : 'left 0.2s cubic-bezier(0.22, 1, 0.36, 1), filter 0.3s ease'};
   z-index: 5;
+  filter: ${({ $isAligned }) =>
+    $isAligned
+      ? 'drop-shadow(0 0 8px rgba(255, 87, 61, 1))'
+      : 'drop-shadow(0 0 2px rgba(255, 87, 61, 0.4))'};
 
   &::after {
     content: '';
@@ -204,53 +213,143 @@ export const KnobBase = styled.div`
   box-shadow:
     0 0 0 9px rgba(157, 193, 216, 0.35),
     0 14px 22px rgba(0, 0, 0, 0.45);
-  cursor: grab;
   user-select: none;
   z-index: 10;
-  touch-action: none;
-
-  &:active {
-    cursor: grabbing;
-  }
 `
 
-export const RotatingPart = styled.div<{ $rotation: number }>`
+export const RotatingPart = styled.div<{ $rotation: number; $instant?: boolean }>`
   position: absolute;
   inset: 0;
   border-radius: 50%;
   transform: rotate(${props => props.$rotation}deg);
-  transition: transform 0.15s ease-out;
+  transition: ${({ $instant }) =>
+    $instant ? 'none' : 'transform 0.2s cubic-bezier(0.22, 1, 0.36, 1)'};
 `
 
 export const NumberedSkirt = styled.div`
   position: absolute;
-  inset: -8px;
+  inset: -12px; /* Pull it out slightly further */
   border-radius: 50%;
-  background: #111;
-  box-shadow: inset 0 0 14px rgba(255, 255, 255, 0.04);
+
+  /* Conic gradient creates a 'lathe-turned' plastic look with subtle highlights */
+  background: conic-gradient(
+    from 160deg,
+    #111 0%,
+    #222 10%,
+    #111 20%,
+    #050505 45%,
+    #2a2a2a 50%,
+    #050505 55%,
+    #111 100%
+  );
+
+  /* This is the magic: multiple shadows to create a 3D rim */
+  box-shadow:
+    /* External rim highlight (top-left) */
+    inset 0 2px 3px rgba(255, 255, 255, 0.15),
+    /* External rim shadow (bottom-right) */ inset 0 -2px 3px rgba(0, 0, 0, 0.8),
+    /* The main shadow that separates it from the silver cap */ 0 4px 10px rgba(0, 0, 0, 0.5);
+
+  /* Add a subtle "texture" layer */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, transparent 60%, rgba(0, 0, 0, 0.4) 100%);
+  }
 `
 
 export const SkirtNumber = styled.span<{ $deg: number }>`
   position: absolute;
   left: 50%;
   top: 50%;
-  /* angle in degrees; rotate then push outward so tick touches knob edge */
-  transform: translate(-50%, -50%) rotate(${props => props.$deg}deg) translateY(-50px);
-  width: 2px;
+
+  transform: translate(-50%, -50%) rotate(${props => props.$deg}deg) translateY(-52px)
+    rotate(180deg);
+
+  width: 4px; /* Slightly wider */
   height: 10px;
-  border-radius: 2px;
-  background: white;
+
+  /* The Taper: wider at the bottom than the top */
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+
+  /* Metallic Etched Look */
+  background: linear-gradient(to bottom, #444 0%, #eee 50%, #fff 100%);
+
+  /* Inner shadow to make it look "stamped" into the plastic */
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.8);
+
+  opacity: 0.9;
+  filter: drop-shadow(0 1px 0px rgba(255, 255, 255, 0.2));
 `
 
 export const SilverCap = styled.div`
   position: absolute;
-  top: 15%;
-  left: 15%;
-  right: 15%;
-  bottom: 15%;
+  inset: 15%; /* Shorthand for top/left/right/bottom */
   border-radius: 50%;
-  background: conic-gradient(from 180deg, #999, #eee, #888, #999);
+  z-index: 14;
+  cursor: grab;
+  touch-action: none;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  /* The "Brushed" Conic Gradient */
+  background: conic-gradient(
+    from 180deg,
+    #777 0%,
+    #eee 10%,
+    #888 20%,
+    #fff 35%,
+    #999 50%,
+    #eee 65%,
+    #777 80%,
+    #999 100%
+  );
+
   box-shadow:
-    inset 0 0 5px rgba(0, 0, 0, 0.5),
-    0 2px 5px rgba(0, 0, 0, 0.4);
+    0 0 0 1px rgba(0, 0, 0, 0.5),
+    /* The "gap" between metal and plastic */ 0 4px 8px rgba(0, 0, 0, 0.4),
+    /* Soft shadow cast onto the skirt */ inset 0 0 5px rgba(0, 0, 0, 0.2);
+
+  /* This inner pseudo-element creates the "top face" of the knob */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 10%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #fff 0%, #bbb 50%, #999 100%);
+    box-shadow:
+      inset 0 1px 2px rgba(255, 255, 255, 0.8),
+      0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+`
+export const KnobIndicator = styled.div`
+  position: absolute;
+  top: 22%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ff573d; /* Matching your needle color */
+  box-shadow:
+    0 0 5px rgba(255, 87, 61, 0.8),
+    inset 0 1px 1px rgba(0, 0, 0, 0.4);
+  z-index: 15;
+  pointer-events: none;
+`
+
+export const KnobReflection = styled.div`
+  position: absolute;
+  top: -10%;
+  left: 10%;
+  right: 10%;
+  height: 40%;
+  background: linear-gradient(to bottom, rgba(255, 202, 115, 0.15) 0%, transparent 100%);
+  filter: blur(8px);
+  pointer-events: none;
+  z-index: 20;
 `

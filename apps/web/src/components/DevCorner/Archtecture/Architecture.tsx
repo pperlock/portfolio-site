@@ -14,10 +14,7 @@ import {
 } from './Architecture.styles'
 
 import ArchitectureDiagram from './ArchitectureDiagram/ArchitectureDiagram'
-import {
-  BffServerCallFlowDiagram,
-  type BffServerCallFlowDiagramContent,
-} from '../BffFlowDiagram'
+import { BffServerCallFlowDiagram, type BffServerCallFlowDiagramContent } from '../BffFlowDiagram'
 import { renderRichCopy } from '@/lib/richCopy'
 
 interface ArchitectureProps {

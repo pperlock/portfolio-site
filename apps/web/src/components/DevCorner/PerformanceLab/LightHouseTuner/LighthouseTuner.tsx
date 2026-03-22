@@ -16,6 +16,8 @@ import {
   SkirtNumber,
   SilverCap,
   TunerControls,
+  KnobIndicator,
+  KnobReflection,
 } from './LighthouseTuner.styles'
 
 import useLighthouseTuner from './useLighthouseTuner'
@@ -26,8 +28,19 @@ interface LighthouseTunerProps {
 }
 
 const LighthouseTuner = ({ selectedPageId, onChange }: LighthouseTunerProps) => {
-  const { tunerPoints, rotation, needlePos, previewPageId, knobRef, startDragging } =
-    useLighthouseTuner({ selectedPageId, onChange })
+  const {
+    tunerPoints,
+    rotation,
+    needlePos,
+    previewPageId,
+    isDialDragging,
+    isPhysicsRunning,
+    knobRef,
+    startDragging,
+  } = useLighthouseTuner({ selectedPageId, onChange })
+
+  const dialMotionInstant = isDialDragging || isPhysicsRunning
+  const isNeedleAligned = tunerPoints.some(p => Math.abs(p.frequency - needlePos) < 0.65)
 
   const currentReadout = selectedPageId
     ? tunerPoints.find(p => p.pageId === selectedPageId)?.readoutLabel
@@ -63,25 +76,13 @@ const LighthouseTuner = ({ selectedPageId, onChange }: LighthouseTunerProps) => 
             </FrequencyMark>
           ))}
 
-          <Needle $position={needlePos} />
+          <Needle $position={needlePos} $instant={dialMotionInstant} $isAligned={isNeedleAligned} />
         </FrequencyScale>
       </TunerDisplay>
 
       <TunerControls>
-        <KnobBase
-          ref={knobRef as React.RefObject<HTMLDivElement>}
-          onPointerDown={e => {
-            e.preventDefault()
-            startDragging()
-          }}
-          onMouseDown={e => {
-            // Fallback for environments where pointer events aren't used.
-            e.preventDefault()
-            startDragging()
-          }}
-          aria-label="Tune Lighthouse page"
-        >
-          <RotatingPart $rotation={rotation}>
+        <KnobBase>
+          <RotatingPart $rotation={rotation} $instant={dialMotionInstant}>
             <NumberedSkirt />
             {tunerPoints.map((p, i) => {
               const endDeg = 300
@@ -89,8 +90,21 @@ const LighthouseTuner = ({ selectedPageId, onChange }: LighthouseTunerProps) => 
               const deg = i * step
               return <SkirtNumber key={p.pageId} $deg={deg} aria-hidden />
             })}
-            <SilverCap />
+            <SilverCap
+              ref={knobRef as React.RefObject<HTMLDivElement>}
+              onPointerDown={e => {
+                e.preventDefault()
+                startDragging(e)
+              }}
+              onMouseDown={e => {
+                e.preventDefault()
+                startDragging()
+              }}
+              aria-label="Tune Lighthouse page"
+            />
+            <KnobIndicator />
           </RotatingPart>
+          <KnobReflection />
         </KnobBase>
       </TunerControls>
     </PerformanceSection>
