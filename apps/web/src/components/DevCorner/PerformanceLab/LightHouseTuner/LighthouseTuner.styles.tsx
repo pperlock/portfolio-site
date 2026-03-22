@@ -215,6 +215,12 @@ export const KnobBase = styled.div`
     0 14px 22px rgba(0, 0, 0, 0.45);
   user-select: none;
   z-index: 10;
+  cursor: grab;
+  touch-action: none;
+
+  &:active {
+    cursor: grabbing;
+  }
 `
 
 export const RotatingPart = styled.div<{ $rotation: number; $instant?: boolean }>`
@@ -289,12 +295,7 @@ export const SilverCap = styled.div`
   inset: 15%; /* Shorthand for top/left/right/bottom */
   border-radius: 50%;
   z-index: 14;
-  cursor: grab;
-  touch-action: none;
-
-  &:active {
-    cursor: grabbing;
-  }
+  pointer-events: none;
 
   /* The "Brushed" Conic Gradient */
   background: conic-gradient(

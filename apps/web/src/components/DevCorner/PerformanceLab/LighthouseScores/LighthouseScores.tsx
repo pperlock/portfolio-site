@@ -1,6 +1,6 @@
 import React from 'react'
 import type { PageLighthouseState } from '@/types'
-import { CATEGORY_LABELS } from '@/constants'
+import { LIGHTHOUSE_SCORE_CATEGORIES } from '@/constants'
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar'
 import { DialScrew } from '../PerformanceLab.styles'
 import {
@@ -23,7 +23,7 @@ const LighthouseScores: React.FC<LighthouseScoresProps> = ({ scores, loading }) 
       <DialScrew $x="left" $y="bottom" aria-hidden />
       <DialScrew $x="right" $y="bottom" aria-hidden />
       <ScoresGrid aria-label="Lighthouse scores for selected page">
-        {Object.keys(CATEGORY_LABELS).map((id, index) => {
+        {LIGHTHOUSE_SCORE_CATEGORIES.map(({ id, label }) => {
           const isLoading = Boolean(loading)
           const rawScore = scores?.[id]
 
@@ -34,12 +34,11 @@ const LighthouseScores: React.FC<LighthouseScoresProps> = ({ scores, loading }) 
 
           return (
             <LighthouseScoreCard
-              // eslint-disable-next-line react/no-array-index-key
-              key={index}
+              key={id}
               $score={!isLoading && typeof rawScore === 'number' ? numericScore : undefined}
               $loading={isLoading}
             >
-              <LighthouseScoreLabel>{CATEGORY_LABELS[id] ?? id}</LighthouseScoreLabel>
+              <LighthouseScoreLabel>{label}</LighthouseScoreLabel>
               <div style={{ width: 80, margin: '6px auto 0' }}>
                 <CircularProgressbar
                   value={numericScore}

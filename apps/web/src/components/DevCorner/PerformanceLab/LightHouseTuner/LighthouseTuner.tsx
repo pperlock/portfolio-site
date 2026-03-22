@@ -81,7 +81,18 @@ const LighthouseTuner = ({ selectedPageId, onChange }: LighthouseTunerProps) => 
       </TunerDisplay>
 
       <TunerControls>
-        <KnobBase>
+        <KnobBase
+          ref={knobRef as React.RefObject<HTMLDivElement>}
+          onPointerDown={e => {
+            e.preventDefault()
+            startDragging(e)
+          }}
+          onMouseDown={e => {
+            e.preventDefault()
+            startDragging()
+          }}
+          aria-label="Tune Lighthouse page"
+        >
           <RotatingPart $rotation={rotation} $instant={dialMotionInstant}>
             <NumberedSkirt />
             {tunerPoints.map((p, i) => {
@@ -90,18 +101,7 @@ const LighthouseTuner = ({ selectedPageId, onChange }: LighthouseTunerProps) => 
               const deg = i * step
               return <SkirtNumber key={p.pageId} $deg={deg} aria-hidden />
             })}
-            <SilverCap
-              ref={knobRef as React.RefObject<HTMLDivElement>}
-              onPointerDown={e => {
-                e.preventDefault()
-                startDragging(e)
-              }}
-              onMouseDown={e => {
-                e.preventDefault()
-                startDragging()
-              }}
-              aria-label="Tune Lighthouse page"
-            />
+            <SilverCap />
             <KnobIndicator />
           </RotatingPart>
           <KnobReflection />
