@@ -45,12 +45,15 @@ const reducedMotionVertical = `
 `
 
 export const DiagramFigure = styled.figure`
-  margin: ${spacing.lg} 0 ${spacing.xl};
+  margin: ${spacing.lg} 0 ${spacing.md};
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
 export const DiagramLead = styled.figcaption`
-  margin: 0 0 ${spacing.md};
+  margin-bottom: ${spacing.md};
   font-size: ${typography.fontSizeSm};
   color: ${colors.textMedium};
   line-height: 1.55;
@@ -62,6 +65,7 @@ export const PipelineContainer = styled.div`
   flex-direction: column;
   align-items: stretch;
   gap: ${spacing.sm};
+  max-width: 420px;
 
   ${fromTablet`
     flex-direction: row;
@@ -69,6 +73,7 @@ export const PipelineContainer = styled.div`
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 0;
+    max-width: none;
   `}
 `
 

@@ -3,12 +3,16 @@ import { fromDesktop, fromTablet, colors, VINTAGE_THEME } from '@portfolio/desig
 
 const { pagePreview, white } = VINTAGE_THEME
 
-/** Captures touches on viewports below tablet so the iframe cannot scroll. */
+/**
+ * Sits above the iframe on small viewports so the embed does not steal scroll.
+ * `pan-y` lets the document scroll vertically when the user drags here; `none`
+ * blocked that and froze page scroll for any gesture starting on the overlay.
+ */
 export const MobilePreviewScrollBlocker = styled.div`
   position: absolute;
   inset: 0;
   z-index: 1;
-  touch-action: none;
+  touch-action: pan-y;
 
   ${fromTablet`
     display: none;
@@ -104,16 +108,19 @@ export const IframeScaleWrapper = styled.div`
   `}
 `
 
-// 3. The actual Iframe (inner doc scrollbars are not styleable from here; scrolling="no" disables embed scroll)
-export const StyledIframe = styled.iframe.attrs({
-  scrolling: 'no',
-})`
+// 3. Embedded page scroll: disabled on small viewports (overlay blocks touches); tablet+ can scroll inside the preview.
+export const StyledIframe = styled.iframe`
   width: 337px;
   height: 800px;
   border: none;
   transform: scale(0.818);
   transform-origin: top left;
   overflow: hidden;
+
+  ${fromTablet`
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  `}
 
   ${fromDesktop`
     width: 368px;

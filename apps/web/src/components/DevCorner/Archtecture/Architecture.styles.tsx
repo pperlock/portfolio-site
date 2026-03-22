@@ -24,20 +24,26 @@ export const ArchitectureSubsection = styled.section`
   margin-top: ${spacing.xl};
   padding-top: ${spacing.lg};
   border-top: 1px solid ${colors.border};
+  > p {
+    ${fromTablet`
+    text-align: left;
+  `}
+  }
 `
 
 export const ServerDataFetchingTitle = styled.h3`
   font-family: ${underDevHeadlineFont};
-  font-size: ${typography.fontSizeLg};
+  font-size: ${typography.fontSize2xl};
   font-weight: 700;
   color: ${colors.textHeader};
   text-transform: uppercase;
   letter-spacing: -1px;
   line-height: 1.2;
   margin: 0 0 ${spacing.sm};
+  text-align: center;
 
   ${fromTablet`
-    font-size: ${typography.fontSize2xl};
+    text-align: left;
   `}
 `
 

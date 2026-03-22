@@ -78,7 +78,9 @@ const Architecture = ({ content }: ArchitectureProps) => {
 
       <ArchitectureSubsection>
         <ServerDataFetchingTitle>{serverDataFetching.title}</ServerDataFetchingTitle>
-        <Paragraph color="medium">{renderRichCopy(serverDataFetching.body, 'arch-sdf')}</Paragraph>
+        <Paragraph color="medium" align="center">
+          {renderRichCopy(serverDataFetching.body, 'arch-sdf')}
+        </Paragraph>
         <BffServerCallFlowDiagram content={serverDataFetching.diagram} />
       </ArchitectureSubsection>
     </>
