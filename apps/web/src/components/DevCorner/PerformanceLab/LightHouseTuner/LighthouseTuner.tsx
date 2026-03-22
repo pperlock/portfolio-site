@@ -20,7 +20,7 @@ import {
   KnobReflection,
 } from './LighthouseTuner.styles'
 
-import useLighthouseTuner from './useLighthouseTuner'
+import useLighthouseTuner from '../hooks/useLighthouseTuner'
 
 interface LighthouseTunerProps {
   selectedPageId?: string

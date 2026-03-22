@@ -1,4 +1,10 @@
-import { PagePreviewWrapper, PhoneFrame, PhoneScreen, StyledIframe } from './PagePreview.styles'
+import {
+  PagePreviewWrapper,
+  PhoneFrame,
+  PhoneScreen,
+  StyledIframe,
+  MobilePreviewScrollBlocker,
+} from './PagePreview.styles'
 
 const PagePreview = ({ page }) => {
   return (
@@ -6,6 +12,7 @@ const PagePreview = ({ page }) => {
       <PhoneFrame>
         <PhoneScreen>
           <StyledIframe src={page} title="Page Preview" />
+          <MobilePreviewScrollBlocker aria-hidden />
         </PhoneScreen>
       </PhoneFrame>
     </PagePreviewWrapper>

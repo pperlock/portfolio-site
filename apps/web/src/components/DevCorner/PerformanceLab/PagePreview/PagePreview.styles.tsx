@@ -1,5 +1,17 @@
 import styled from 'styled-components'
-import { fromTablet } from '@portfolio/design'
+import { fromTablet, colors } from '@portfolio/design'
+
+/** Captures touches on viewports below tablet so the iframe cannot scroll. */
+export const MobilePreviewScrollBlocker = styled.div`
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  touch-action: none;
+
+  ${fromTablet`
+    display: none;
+  `}
+`
 
 export const PagePreviewWrapper = styled.div`
   display: flex;
@@ -22,7 +34,7 @@ export const PhoneFrame = styled.div`
     inset 0 0 2px 2px #444;
   display: flex;
   flex-direction: column;
-  border: 4px solid #333;
+  border: 4px solid ${colors.textMuted};
   ${fromTablet`
     max-width: 375px;
   `}
@@ -53,17 +65,17 @@ export const PhoneScreen = styled.div`
   position: relative;
 `
 
-// 3. The actual Iframe
-export const StyledIframe = styled.iframe`
-  /* Render the real page a bit wider, then scale it down so
-     desktop min-width layouts fit without horizontal scroll */
-  width: 382px;
+// 3. The actual Iframe (inner doc scrollbars are not styleable from here; scrolling="no" disables embed scroll)
+export const StyledIframe = styled.iframe.attrs({
+  scrolling: 'no',
+})`
+  width: 311px;
   height: 800px;
   border: none;
-  transform: scale(0.85);
   transform-origin: top left;
+  overflow: hidden;
 
   ${fromTablet`
-    width: 418px;
+    width: 343px;
   `}
 `
