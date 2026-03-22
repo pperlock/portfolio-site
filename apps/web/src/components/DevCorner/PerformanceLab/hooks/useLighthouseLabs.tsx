@@ -3,7 +3,12 @@ import { useState, useMemo } from 'react'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 import { fetchLighthouse, getLighthouseQueryKey } from '@/lib/lighthouse/fetchLighthouse'
-import { LIGHTHOUSE_PAGES, LIGHTHOUSE_STALE_MS } from '@/constants'
+import {
+  LIGHTHOUSE_PAGES,
+  LIGHTHOUSE_STALE_MS,
+  buildPageSpeedWebReportUrl,
+  LIGHTHOUSE_STRATEGY,
+} from '@/constants'
 import type { ApiResponse, PageLighthouseState } from '@/types/Lighthouse'
 
 interface UseLighthouseLabsOptions {
@@ -59,8 +64,7 @@ const useLighthouseLabs = (options?: UseLighthouseLabsOptions) => {
             scores: {},
             error: resData?.error ?? 'Could not run Lighthouse check.',
             pageSpeedUrl:
-              resData?.pageSpeedUrl ??
-              `https://pagespeed.web.dev/analysis?url=${encodeURIComponent(page.url)}`,
+              resData?.pageSpeedUrl ?? buildPageSpeedWebReportUrl(page.url, LIGHTHOUSE_STRATEGY),
           }
         } else if (currentPageData) {
           state[page.id] = currentPageData

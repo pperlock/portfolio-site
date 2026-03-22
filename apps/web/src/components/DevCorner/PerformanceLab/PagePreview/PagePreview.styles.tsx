@@ -71,13 +71,13 @@ export const PhoneScreen = styled.div`
 export const StyledIframe = styled.iframe.attrs({
   scrolling: 'no',
 })`
-  width: 311px;
+  width: 326px;
   height: 800px;
   border: none;
   transform-origin: top left;
   overflow: hidden;
 
   ${fromTablet`
-    width: 343px;
+    width: 358px;
   `}
 `

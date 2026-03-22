@@ -86,11 +86,11 @@ export const TechStackTitle = styled.div`
   box-shadow: 0 0 10px 0 ${colors.BrushStrokeThree};
   transform: rotate(-7deg);
   ${fromTablet`
-    left: 40%;
-    top: 40px;
+    left: 34%;
+    top: 120px;
   `}
   ${fromMidTablet`
-    left: 38%;
+    left: 31%;
   `}
 `
 

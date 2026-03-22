@@ -1,7 +1,7 @@
 import React from 'react'
 import { VscLinkExternal } from 'react-icons/vsc'
 import type { PageLighthouseState } from '@/types'
-import { LIGHTHOUSE_PAGES } from '@/constants'
+import { LIGHTHOUSE_PAGES, hasLighthouseReportReady } from '@/constants'
 
 import { PerformanceSection, LighthouseMetricsColumn, ReportLink } from './PerformanceLab.styles'
 import LighthouseTuner from './LightHouseTuner/LighthouseTuner'
@@ -29,6 +29,11 @@ const PerformanceLab: React.FC<PerformanceLabProps> = ({
       initialPageState,
     })
 
+  const lighthouseReportUrl =
+    currentPageData && hasLighthouseReportReady(currentPageData)
+      ? currentPageData.pageSpeedUrl
+      : undefined
+
   return (
     <PerformanceSection>
       <PagePreview
@@ -45,10 +50,12 @@ const PerformanceLab: React.FC<PerformanceLabProps> = ({
           score={currentPageData?.scores.performance}
         />
 
-        <ReportLink href={currentPageData?.pageSpeedUrl} target="_blank" rel="noopener noreferrer">
-          {content.reportLinkText}
-          <VscLinkExternal />
-        </ReportLink>
+        {lighthouseReportUrl ? (
+          <ReportLink href={lighthouseReportUrl} target="_blank" rel="noopener noreferrer">
+            {content.reportLinkText}
+            <VscLinkExternal />
+          </ReportLink>
+        ) : null}
       </LighthouseMetricsColumn>
     </PerformanceSection>
   )

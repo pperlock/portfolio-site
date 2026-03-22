@@ -1,5 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import type { PointerEvent as ReactPointerEvent, RefObject } from 'react'
+import type {
+  MouseEvent as ReactMouseEvent,
+  PointerEvent as ReactPointerEvent,
+  RefObject,
+} from 'react'
 
 import {
   buildTunerPoints,
@@ -34,7 +38,7 @@ interface UseLighthouseTunerResult {
   /** True while inertia / snap animation is running (RAF). */
   isPhysicsRunning: boolean
   knobRef: RefObject<HTMLDivElement>
-  startDragging: (e?: ReactPointerEvent<HTMLDivElement>) => void
+  startDragging: (e?: ReactPointerEvent<HTMLDivElement> | ReactMouseEvent<HTMLDivElement>) => void
 }
 
 /**
@@ -60,6 +64,10 @@ const useLighthouseTuner = ({
   const knobRef = useRef<HTMLDivElement>(null)
   const isDragging = useRef(false)
   const capturedPointerIdRef = useRef<number | null>(null)
+  /** Element that called `setPointerCapture` (may differ from {@link knobRef}). */
+  const pointerCaptureElRef = useRef<HTMLElement | null>(null)
+  /** `pointerAngle - rotation` at pointer down so the dial does not snap to finger angle. */
+  const pointerGrabOffsetDegRef = useRef(0)
 
   const velocityParamRef = useRef(0)
   const lastParamRef = useRef(0)
@@ -150,7 +158,8 @@ const useLighthouseTuner = ({
   useEffect(() => {
     const handleMove = (clientX: number, clientY: number) => {
       if (!isDragging.current) return
-      const rawAngle = pointerAngleFromClientXY(knobRef.current, clientX, clientY)
+      const pointerAngle = pointerAngleFromClientXY(knobRef.current, clientX, clientY)
+      const rawAngle = pointerAngle - pointerGrabOffsetDegRef.current
       const clampedAngle = clampAngleToSweep(rawAngle)
       const p = angleToParam(clampedAngle)
 
@@ -171,14 +180,18 @@ const useLighthouseTuner = ({
       setIsDialDragging(false)
 
       const pid = capturedPointerIdRef.current
-      if (knobRef.current != null && pid != null) {
+      const captureEl = pointerCaptureElRef.current ?? knobRef.current
+      if (captureEl != null && pid != null) {
         try {
-          knobRef.current.releasePointerCapture(pid)
+          captureEl.releasePointerCapture(pid)
         } catch {
           /* already released */
         }
         capturedPointerIdRef.current = null
+        pointerCaptureElRef.current = null
       }
+
+      pointerGrabOffsetDegRef.current = 0
 
       snapTargetPageIdRef.current = findNearestStation(
         clampAngleToSweep(rotationRef.current),
@@ -214,19 +227,27 @@ const useLighthouseTuner = ({
     isDialDragging,
     isPhysicsRunning,
     knobRef,
-    startDragging: (e?: ReactPointerEvent<HTMLDivElement>) => {
+    startDragging: (e?: ReactPointerEvent<HTMLDivElement> | ReactMouseEvent<HTMLDivElement>) => {
       cancelPhysicsLoop()
       isDragging.current = true
       setIsDialDragging(true)
       lastParamRef.current = angleToParam(clampAngleToSweep(rotationRef.current))
       velocityParamRef.current = 0
 
-      if (e && typeof e.pointerId === 'number') {
+      if (e && Number.isFinite(e.clientX) && Number.isFinite(e.clientY)) {
+        const pointer0 = pointerAngleFromClientXY(knobRef.current, e.clientX, e.clientY)
+        pointerGrabOffsetDegRef.current = pointer0 - rotationRef.current
+      } else {
+        pointerGrabOffsetDegRef.current = 0
+      }
+
+      if (e && 'pointerId' in e && typeof e.pointerId === 'number') {
         const el = e.currentTarget
         if (el instanceof HTMLElement) {
           try {
             el.setPointerCapture(e.pointerId)
             capturedPointerIdRef.current = e.pointerId
+            pointerCaptureElRef.current = el
           } catch {
             /* unsupported or already captured */
           }

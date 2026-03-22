@@ -1,11 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+import { LIGHTHOUSE_STRATEGY } from '@/constants'
 import { runLighthousePageSpeed } from '@/lib/lighthouse/fetchLighthouseServer'
 
 export const GET = async (request: NextRequest) => {
   const { searchParams } = new URL(request.url)
   const url = searchParams.get('url')
-  const strategy = searchParams.get('strategy') === 'mobile' ? 'mobile' : 'desktop'
+  const rawStrategy = searchParams.get('strategy')
+  const strategy: 'desktop' | 'mobile' =
+    rawStrategy === 'mobile' ? 'mobile' : rawStrategy === 'desktop' ? 'desktop' : LIGHTHOUSE_STRATEGY
 
   if (!url) {
     return NextResponse.json({ error: 'Missing url query parameter' }, { status: 400 })

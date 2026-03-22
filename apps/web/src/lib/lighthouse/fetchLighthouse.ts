@@ -1,8 +1,6 @@
 import axios from 'axios'
 import type { ApiResponse, PageLighthouseState } from '@/types'
-
-const fallbackPageSpeedUrl = (url: string) =>
-  `https://pagespeed.web.dev/analysis?url=${encodeURIComponent(url)}`
+import { LIGHTHOUSE_STRATEGY, buildPageSpeedWebReportUrl } from '@/constants'
 
 /**
  * Client fetch for Lighthouse (backup when SSR did not hydrate this query, or after staleTime).
@@ -10,11 +8,11 @@ const fallbackPageSpeedUrl = (url: string) =>
  */
 export const fetchLighthouse = async (url: string): Promise<PageLighthouseState> => {
   const { data, status } = await axios.get<ApiResponse & { hint?: string }>('/api/lighthouse', {
-    params: { url, strategy: 'desktop' },
+    params: { url, strategy: LIGHTHOUSE_STRATEGY },
     validateStatus: s => (s >= 200 && s < 300) || s === 502 || s === 503,
   })
 
-  const pageSpeedUrl = data.pageSpeedUrl ?? fallbackPageSpeedUrl(url)
+  const pageSpeedUrl = data.pageSpeedUrl ?? buildPageSpeedWebReportUrl(url, LIGHTHOUSE_STRATEGY)
 
   if (status === 503 || status === 502 || data.error) {
     return {
@@ -38,6 +36,5 @@ export const fetchLighthouse = async (url: string): Promise<PageLighthouseState>
   }
 }
 
-export const getLighthouseQueryKey = (pageId: string, url: string) => {
-  return ['lighthouse', pageId, url] as const
-}
+export const getLighthouseQueryKey = (pageId: string, url: string) =>
+  ['lighthouse', pageId, url, LIGHTHOUSE_STRATEGY] as const

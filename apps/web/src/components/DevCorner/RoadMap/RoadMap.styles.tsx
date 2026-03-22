@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components'
-import { colors, fromDesktop, fromTablet } from '@portfolio/design'
+import { colors, fromDesktop, fromTablet, spacing } from '@portfolio/design'
 
 /* GitHub Projects–style dark kanban theme */
 const KANBAN_BG = '#0d1117'
@@ -29,7 +29,7 @@ export const KanbanBoardWrapper = styled.div`
   border: 1px solid ${KANBAN_BORDER};
   border-radius: 12px;
   overflow: hidden;
-  margin-top: 0.5rem;
+  margin: ${spacing.xs} 0 ${spacing.lg};
 `
 
 export const RoadmapGrid = styled.div`

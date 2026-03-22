@@ -205,12 +205,7 @@ export const KnobBase = styled.div`
     0 14px 22px rgba(0, 0, 0, 0.45);
   user-select: none;
   z-index: 10;
-  cursor: grab;
-  touch-action: none;
-
-  &:active {
-    cursor: grabbing;
-  }
+  cursor: default;
 `
 
 export const RotatingPart = styled.div<{ $rotation: number; $instant?: boolean }>`
@@ -331,6 +326,25 @@ export const KnobIndicator = styled.div`
     inset 0 1px 1px rgba(0, 0, 0, 0.4);
   z-index: 15;
   pointer-events: none;
+`
+
+/** Invisible hit target centered on the pip — dial drag uses grab offset so rotation tracks finger. */
+export const KnobIndicatorGrabZone = styled.div`
+  position: absolute;
+  top: calc(22% + 3px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: transparent;
+  cursor: grab;
+  touch-action: none;
+  z-index: 16;
+
+  &:active {
+    cursor: grabbing;
+  }
 `
 
 export const KnobReflection = styled.div`

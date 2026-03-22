@@ -1,11 +1,13 @@
 import axios from 'axios'
 
-import { PAGESPEED_API_BASE, CATEGORY_IDS } from '@/constants'
+import {
+  PAGESPEED_API_BASE,
+  CATEGORY_IDS,
+  LIGHTHOUSE_STRATEGY,
+  buildPageSpeedWebReportUrl,
+} from '@/constants'
 import type { PageLighthouseState } from '@/types'
 import { parseScores, parseMetrics } from '@/utils'
-
-const pageSpeedWebUrl = (url: string) =>
-  `https://pagespeed.web.dev/analysis?url=${encodeURIComponent(url)}`
 
 export type LighthousePageSpeedResult =
   | { ok: true; state: PageLighthouseState; finalUrl: string }
@@ -17,10 +19,10 @@ export type LighthousePageSpeedResult =
  */
 export async function runLighthousePageSpeed(
   url: string,
-  strategy: 'desktop' | 'mobile' = 'desktop'
+  strategy: 'desktop' | 'mobile' = LIGHTHOUSE_STRATEGY
 ): Promise<LighthousePageSpeedResult> {
   const apiKey = process.env.PAGESPEED_INSIGHTS_API_KEY
-  const pageSpeedUrl = pageSpeedWebUrl(url)
+  const pageSpeedUrl = buildPageSpeedWebReportUrl(url, strategy)
 
   if (!apiKey) {
     return {
@@ -89,7 +91,7 @@ export async function runLighthousePageSpeed(
 
 export async function fetchLighthousePageState(
   url: string,
-  strategy: 'desktop' | 'mobile' = 'desktop'
+  strategy: 'desktop' | 'mobile' = LIGHTHOUSE_STRATEGY
 ): Promise<PageLighthouseState> {
   const result = await runLighthousePageSpeed(url, strategy)
   return result.state

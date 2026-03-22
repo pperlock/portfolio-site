@@ -1,7 +1,33 @@
-import type { LighthouseMetrics, LighthouseCategoryId } from '@/types'
+import type { LighthouseMetrics, LighthouseCategoryId, PageLighthouseState } from '@/types'
 
 export const PAGESPEED_API_BASE = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed'
 export const HOME_URL = 'https://www.pattiperlock.com/'
+
+/**
+ * Form factor for PageSpeed API runs and for links to pagespeed.web.dev (must stay in sync).
+ * Change here only — client fetch, API route, and report URLs all use this.
+ */
+export const LIGHTHOUSE_STRATEGY: 'desktop' | 'mobile' = 'desktop'
+
+/**
+ * Public PageSpeed Insights report URL for a page, matching the strategy used for audits.
+ */
+export function buildPageSpeedWebReportUrl(
+  pageUrl: string,
+  strategy: 'desktop' | 'mobile' = LIGHTHOUSE_STRATEGY
+): string {
+  const u = new URL('https://pagespeed.web.dev/analysis')
+  u.searchParams.set('url', pageUrl)
+  u.searchParams.set('form_factor', strategy)
+  return u.toString()
+}
+
+/** True when this page has a completed Lighthouse run with scores and a report URL to open. */
+export function hasLighthouseReportReady(state: PageLighthouseState | undefined): boolean {
+  if (!state || state.loading || state.error) return false
+  const hasScore = Object.values(state.scores ?? {}).some(s => typeof s === 'number')
+  return Boolean(state.pageSpeedUrl && hasScore)
+}
 
 /** Lighthouse category scores (performance, accessibility, …): id + label in display order. */
 export const LIGHTHOUSE_SCORE_CATEGORIES = [

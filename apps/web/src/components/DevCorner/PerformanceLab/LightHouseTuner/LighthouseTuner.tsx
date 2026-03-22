@@ -16,6 +16,7 @@ import {
   SilverCap,
   TunerControls,
   KnobIndicator,
+  KnobIndicatorGrabZone,
   KnobReflection,
 } from './LighthouseTuner.styles'
 
@@ -78,18 +79,7 @@ const LighthouseTuner = ({ selectedPageId, onChange }: LighthouseTunerProps) => 
       </TunerDisplay>
 
       <TunerControls>
-        <KnobBase
-          ref={knobRef as React.RefObject<HTMLDivElement>}
-          onPointerDown={e => {
-            e.preventDefault()
-            startDragging(e)
-          }}
-          onMouseDown={e => {
-            e.preventDefault()
-            startDragging()
-          }}
-          aria-label="Tune Lighthouse page"
-        >
+        <KnobBase ref={knobRef as React.RefObject<HTMLDivElement>}>
           <RotatingPart $rotation={rotation} $instant={dialMotionInstant}>
             <NumberedSkirt />
             {tunerPoints.map((p, i) => {
@@ -100,6 +90,13 @@ const LighthouseTuner = ({ selectedPageId, onChange }: LighthouseTunerProps) => 
             })}
             <SilverCap />
             <KnobIndicator />
+            <KnobIndicatorGrabZone
+              aria-label="Tune Lighthouse page"
+              onPointerDown={e => {
+                e.preventDefault()
+                startDragging(e)
+              }}
+            />
           </RotatingPart>
           <KnobReflection />
         </KnobBase>

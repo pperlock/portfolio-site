@@ -94,7 +94,10 @@ export const LighthouseScoreCard = styled.div<{ $score?: number; $loading?: bool
     font-family: ${typography.fontFamilyHeading};
     font-weight: 700;
     fill: ${scores.bezelFill} !important;
-    letter-spacing: 0.08em;
+    /* Letter-spacing breaks SVG <text> centering (anchor stays at x=50; glyphs shift). */
+    letter-spacing: 0;
+    text-anchor: middle;
+    dominant-baseline: middle;
   }
 `
 export const LighthouseScoreLabel = styled.div`
