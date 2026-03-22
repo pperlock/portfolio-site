@@ -2,7 +2,6 @@ import React from 'react'
 import {
   PerformanceSection,
   TunerDisplay,
-  DialScrew,
   GlassOverlay,
   FenderLogo,
   TunerReadout,
@@ -20,6 +19,7 @@ import {
   KnobReflection,
 } from './LighthouseTuner.styles'
 
+import { DialCornerScrews } from '../DialCornerScrews'
 import useLighthouseTuner from '../hooks/useLighthouseTuner'
 
 interface LighthouseTunerProps {
@@ -54,10 +54,7 @@ const LighthouseTuner = ({ selectedPageId, onChange }: LighthouseTunerProps) => 
   return (
     <PerformanceSection>
       <TunerDisplay>
-        <DialScrew $x="left" $y="top" aria-hidden />
-        <DialScrew $x="right" $y="top" aria-hidden />
-        <DialScrew $x="left" $y="bottom" aria-hidden />
-        <DialScrew $x="right" $y="bottom" aria-hidden />
+        <DialCornerScrews />
         <GlassOverlay />
         <FenderLogo>LIGHTHOUSE</FenderLogo>
         <TunerReadout>{activeReadout}</TunerReadout>

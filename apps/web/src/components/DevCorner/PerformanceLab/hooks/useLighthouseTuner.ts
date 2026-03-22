@@ -5,7 +5,6 @@ import {
   buildTunerPoints,
   START_ANGLE,
   MIN_FREQUENCY,
-  MAX_FREQUENCY,
   type TunerPoint,
 } from '@/constants/lighthouse'
 import {

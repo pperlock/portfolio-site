@@ -1,5 +1,7 @@
 import styled from 'styled-components'
-import { fromTablet, colors } from '@portfolio/design'
+import { fromTablet, colors, VINTAGE_THEME } from '@portfolio/design'
+
+const { pagePreview, white } = VINTAGE_THEME
 
 /** Captures touches on viewports below tablet so the iframe cannot scroll. */
 export const MobilePreviewScrollBlocker = styled.div`
@@ -25,13 +27,13 @@ export const PhoneFrame = styled.div`
   width: 100%;
   max-width: 343px;
   height: 700px;
-  background-color: #1a1a1a;
+  background-color: ${pagePreview.chassis};
   border-radius: 40px;
   padding: 12px;
   position: relative;
   box-shadow:
     0 20px 40px rgba(0, 0, 0, 0.3),
-    inset 0 0 2px 2px #444;
+    inset 0 0 2px 2px ${pagePreview.bezelInset};
   display: flex;
   flex-direction: column;
   border: 4px solid ${colors.textMuted};
@@ -48,7 +50,7 @@ export const PhoneFrame = styled.div`
     transform: translateX(-50%);
     width: 150px;
     height: 25px;
-    background: #1a1a1a;
+    background: ${pagePreview.chassis};
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     z-index: 10;
@@ -59,7 +61,7 @@ export const PhoneFrame = styled.div`
 export const PhoneScreen = styled.div`
   width: 100%;
   height: 100%;
-  background: #fff;
+  background: ${white};
   border-radius: 28px;
   overflow: hidden; /* This keeps the iframe edges rounded */
   position: relative;

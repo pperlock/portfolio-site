@@ -2,7 +2,8 @@ import React from 'react'
 import type { PageLighthouseState } from '@/types'
 import { LIGHTHOUSE_SCORE_CATEGORIES } from '@/constants'
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar'
-import { DialScrew } from '../PerformanceLab.styles'
+import { VINTAGE_THEME } from '@portfolio/design'
+import { DialCornerScrews } from '../DialCornerScrews'
 import {
   ScoresBlock,
   LighthouseScoreCard,
@@ -18,10 +19,7 @@ interface LighthouseScoresProps {
 const LighthouseScores: React.FC<LighthouseScoresProps> = ({ scores, loading }) => {
   return (
     <ScoresBlock>
-      <DialScrew $x="left" $y="top" aria-hidden />
-      <DialScrew $x="right" $y="top" aria-hidden />
-      <DialScrew $x="left" $y="bottom" aria-hidden />
-      <DialScrew $x="right" $y="bottom" aria-hidden />
+      <DialCornerScrews />
       <ScoresGrid aria-label="Lighthouse scores for selected page">
         {LIGHTHOUSE_SCORE_CATEGORIES.map(({ id, label }) => {
           const isLoading = Boolean(loading)
@@ -30,7 +28,11 @@ const LighthouseScores: React.FC<LighthouseScoresProps> = ({ scores, loading }) 
           const numericScore = !isLoading && typeof rawScore === 'number' ? Math.round(rawScore) : 0
           const text = !isLoading && typeof rawScore === 'number' ? `${numericScore}` : '—'
           const pathColor =
-            numericScore >= 90 ? '#ffcc5c' : numericScore >= 50 ? '#ffae00' : '#f08a24'
+            numericScore >= 90
+              ? VINTAGE_THEME.scores.gaugeHigh
+              : numericScore >= 50
+                ? VINTAGE_THEME.tube
+                : VINTAGE_THEME.scores.gaugeLow
 
           return (
             <LighthouseScoreCard
@@ -46,8 +48,8 @@ const LighthouseScores: React.FC<LighthouseScoresProps> = ({ scores, loading }) 
                   text={text}
                   styles={buildStyles({
                     pathColor,
-                    textColor: '#111827',
-                    trailColor: '#e5e7eb',
+                    textColor: VINTAGE_THEME.slateText,
+                    trailColor: VINTAGE_THEME.neutralRail,
                     textSize: '26px',
                     pathTransitionDuration: 0.6,
                   })}

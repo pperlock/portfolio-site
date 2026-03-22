@@ -1,5 +1,7 @@
 /* =============================== Utils =============================== */
 
+export { hexToRgba } from "./hexToRgba";
+export { VINTAGE_THEME } from "./vintageTheme";
 export * from "./tokens";
 export * from "./types";
 

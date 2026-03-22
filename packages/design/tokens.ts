@@ -3,6 +3,8 @@
  * Used by styled-components (e.g. GlobalStyles, InsetSection) and optionally by theme provider.
  */
 
+import { VINTAGE_THEME } from "./vintageTheme";
+
 export const colors = {
   primary: "#000",
   text: "#000",
@@ -183,4 +185,5 @@ export const theme = {
   breakpoint,
   headerFontSize,
   socialIcons,
+  VINTAGE_THEME,
 };

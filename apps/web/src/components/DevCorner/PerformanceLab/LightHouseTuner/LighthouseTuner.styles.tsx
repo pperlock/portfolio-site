@@ -1,5 +1,7 @@
 import styled from 'styled-components'
-import { colors } from '@portfolio/design'
+import { VINTAGE_THEME } from '@portfolio/design'
+
+const { rgba, tuner, shell, glow, amber, console: vintageConsole, daphne } = VINTAGE_THEME
 
 export const PerformanceSection = styled.section`
   width: 100%;
@@ -12,8 +14,12 @@ export const TunerDisplay = styled.div`
   width: 100%;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(180deg, #4a3625 0%, #20160f 100%);
-  border: 6px solid #e1d4c2;
+  background: linear-gradient(
+    180deg,
+    ${tuner.caseWoodStart} 0%,
+    ${tuner.caseWoodEnd} 100%
+  );
+  border: 6px solid ${shell.creamEnd};
   border-radius: 16px;
   padding: 18px 22px 30px;
   isolation: isolate;
@@ -49,12 +55,12 @@ export const GlassOverlay = styled.div`
 `
 
 export const FenderLogo = styled.div`
-  color: #ff573d;
+  color: ${glow.pipeMain};
   font-size: 34px;
   text-align: center;
   font-weight: 900;
   letter-spacing: 6px;
-  text-shadow: 0 0 15px rgba(255, 87, 61, 0.6);
+  text-shadow: 0 0 15px ${rgba.pipe(0.6)};
   margin-bottom: 10px;
   z-index: 2;
   position: relative;
@@ -63,39 +69,17 @@ export const FenderLogo = styled.div`
 export const FrequencyScale = styled.div`
   position: relative;
   height: 74px;
-  border-top: 1px solid rgba(255, 202, 115, 0.28);
-  border-bottom: 1px solid rgba(255, 202, 115, 0.28);
+  border-top: 1px solid ${rgba.amberFace(0.28)};
+  border-bottom: 1px solid ${rgba.amberFace(0.28)};
   margin-top: 6px;
   z-index: 2;
-`
-
-export const DialScrew = styled.span<{ $x: 'left' | 'right'; $y: 'top' | 'bottom' }>`
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #ffffff, ${colors.BrushStrokeThree});
-  box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.35),
-    0 1px 2px rgba(0, 0, 0, 0.4);
-  ${({ $x }) => ($x === 'left' ? 'left: 14px;' : 'right: 14px;')}
-  ${({ $y }) => ($y === 'top' ? 'top: 14px;' : 'bottom: 14px;')}
-
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 2px;
-    border-radius: 50%;
-    border: 1px solid rgba(0, 0, 0, 0.45);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
-  }
 `
 
 export const KcSide = styled.div<{ $side: 'left' | 'right' }>`
   position: absolute;
   top: -6px;
   ${({ $side }) => ($side === 'left' ? 'left: 0;' : 'right: 0;')}
-  color: #ffca73;
+  color: ${amber};
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
   letter-spacing: 0.25em;
@@ -110,14 +94,16 @@ export const FrequencyMark = styled.div<{ $active?: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: ${({ $active }) => ($active ? '#ffe8a3' : '#ffca73')};
+  color: ${({ $active }) =>
+    $active ? vintageConsole.amberBright : amber};
   font-family: 'JetBrains Mono', monospace;
   z-index: 2;
 
   .tick {
     width: 2px;
     height: 12px;
-    background: ${({ $active }) => ($active ? '#ffe8a3' : '#ffca73')};
+    background: ${({ $active }) =>
+      $active ? vintageConsole.amberBright : amber};
     border-radius: 2px;
   }
 
@@ -126,12 +112,12 @@ export const FrequencyMark = styled.div<{ $active?: boolean }>`
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 0.04em;
-    text-shadow: 0 0 10px rgba(255, 202, 115, 0.15);
+    text-shadow: 0 0 10px ${rgba.amberFace(0.15)};
 
     /* Make the active station pop as the needle crosses. */
     opacity: ${({ $active }) => ($active ? 1 : 0.75)};
     filter: ${({ $active }) =>
-      $active ? 'drop-shadow(0 0 10px rgba(255, 202, 115, 0.25))' : 'none'};
+      $active ? `drop-shadow(0 0 10px ${rgba.amberFace(0.25)})` : 'none'};
   }
 `
 
@@ -144,16 +130,20 @@ export const Needle = styled.div<{
   top: 0px;
   bottom: 0px;
   width: 2px;
-  background: linear-gradient(180deg, #ff6e54 0%, #ff573d 100%);
-  box-shadow: 0 0 16px rgba(255, 87, 61, 0.7);
+  background: linear-gradient(
+    180deg,
+    ${glow.pipeHot} 0%,
+    ${glow.pipeMain} 100%
+  );
+  box-shadow: 0 0 16px ${rgba.pipe(0.7)};
   left: ${({ $position }) => `${$position}%`};
   transition: ${({ $instant }) =>
     $instant ? 'none' : 'left 0.2s cubic-bezier(0.22, 1, 0.36, 1), filter 0.3s ease'};
   z-index: 5;
   filter: ${({ $isAligned }) =>
     $isAligned
-      ? 'drop-shadow(0 0 8px rgba(255, 87, 61, 1))'
-      : 'drop-shadow(0 0 2px rgba(255, 87, 61, 0.4))'};
+      ? `drop-shadow(0 0 8px ${rgba.pipe(1)})`
+      : `drop-shadow(0 0 2px ${rgba.pipe(0.4)})`};
 
   &::after {
     content: '';
@@ -164,7 +154,7 @@ export const Needle = styled.div<{
     height: 6px;
     border-radius: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(255, 87, 61, 0.9);
+    background: ${rgba.pipe(0.9)};
   }
 `
 
@@ -175,7 +165,7 @@ export const TunerReadout = styled.div`
   align-items: center;
   justify-content: center;
   font-family: 'JetBrains Mono', monospace;
-  color: #ffca73;
+  color: ${amber};
   font-weight: 700;
   letter-spacing: 0.18em;
   line-height: 1;
@@ -188,11 +178,11 @@ export const TunerReadout = styled.div`
   position: relative;
 
   background: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 202, 115, 0.18);
+  border: 1px solid ${rgba.amberFace(0.18)};
   border-radius: 999px;
   box-shadow:
     inset 0 0 10px rgba(0, 0, 0, 0.35),
-    0 0 16px rgba(255, 202, 115, 0.06);
+    0 0 16px ${rgba.amberFace(0.06)};
 `
 
 export const TunerControls = styled.div`
@@ -211,7 +201,7 @@ export const KnobBase = styled.div`
   border-radius: 50%;
   background: radial-gradient(circle at 30% 25%, #2a2a2a 0%, #0f0f0f 55%, #000 100%);
   box-shadow:
-    0 0 0 9px rgba(157, 193, 216, 0.35),
+    0 0 0 9px ${daphne.glow},
     0 14px 22px rgba(0, 0, 0, 0.45);
   user-select: none;
   z-index: 10;
@@ -335,9 +325,9 @@ export const KnobIndicator = styled.div`
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #ff573d; /* Matching your needle color */
+  background: ${glow.pipeMain};
   box-shadow:
-    0 0 5px rgba(255, 87, 61, 0.8),
+    0 0 5px ${rgba.pipe(0.8)},
     inset 0 1px 1px rgba(0, 0, 0, 0.4);
   z-index: 15;
   pointer-events: none;
@@ -349,7 +339,7 @@ export const KnobReflection = styled.div`
   left: 10%;
   right: 10%;
   height: 40%;
-  background: linear-gradient(to bottom, rgba(255, 202, 115, 0.15) 0%, transparent 100%);
+  background: linear-gradient(to bottom, ${rgba.amberFace(0.15)} 0%, transparent 100%);
   filter: blur(8px);
   pointer-events: none;
   z-index: 20;

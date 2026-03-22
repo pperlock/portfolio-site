@@ -1,37 +1,7 @@
 import styled, { keyframes } from 'styled-components'
+import { VINTAGE_THEME } from '@portfolio/design'
 
-export const VINTAGE_LAB_THEME = {
-  // The outer Daphne Blue console casing
-  shell: {
-    main: '#9dc1d8', // Daphne Blue teal
-    paper: '#f4f1ea', // Aged paper background
-    shadow: 'rgba(0,0,0,0.1)',
-  },
-
-  // The recessed internal diagnostic panel
-  console: {
-    bakelite: '#2a1f1a', // Deep warm brown interior
-    frame: '#dcd0bc', // Thick cream/brass border
-    bronze: '#8d7d65', // Muted labels/log text
-    amber: '#ffca73', // Golden-amber primary text
-  },
-
-  // The glowing "Light-Pipe" and vacuum tube elements
-  glow: {
-    tube: '#ffae00', // Classic vacuum tube amber
-    pipeMain: '#ff573d', // Deep red-orange light-pipe base
-    pipeHot: '#ff6e54', // Bright orange heat-haze top
-    stopper: '#e5e7eb', // Brushed silver mechanical cap
-    shadow: 'rgba(255, 87, 61, 0.6)', // Atmospheric red-orange glow
-  },
-
-  // Functional UI state colors
-  status: {
-    success: '#ffae00', // In this theme, Amber = Ready
-    loading: '#ffca73',
-    error: '#ef4444',
-  },
-} as const
+const { shell, ink, console: vintageConsole, ui, glow, rgba, neutralRail } = VINTAGE_THEME
 
 // --- Animations ---
 export const pulse = keyframes`
@@ -63,10 +33,14 @@ export const Shell = styled.div`
 `
 export const ConsoleContainer = styled.div`
   /* Main panel surface – match the lighter \"Latest Audit\" background tone */
-  background: linear-gradient(180deg, ${VINTAGE_LAB_THEME.shell.paper}, #e1d4c2);
+  background: linear-gradient(
+    180deg,
+    ${shell.paper},
+    ${shell.creamEnd}
+  );
   border-radius: 16px;
   padding: 24px 28px;
-  color: #2f241a;
+  color: ${ink.primary};
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
   box-shadow:
     0 22px 40px rgba(0, 0, 0, 0.45),
@@ -74,7 +48,7 @@ export const ConsoleContainer = styled.div`
     inset 0 -1px 0 rgba(0, 0, 0, 0.4);
   position: relative;
   overflow: hidden;
-  border: 3px solid ${VINTAGE_LAB_THEME.console.frame};
+  border: 3px solid ${shell.frame};
   width: 100%;
   max-width: 800px;
 
@@ -97,13 +71,13 @@ export const Header = styled.div`
   padding-bottom: 12px;
   margin-bottom: 20px;
   font-size: 0.75rem;
-  color: ${VINTAGE_LAB_THEME.console.bronze};
+  color: ${vintageConsole.bronze};
 `
 
 export const RunProgress = styled.div`
   height: 5px;
   border-radius: 999px;
-  background: rgba(47, 36, 26, 0.18);
+  background: ${ui.panelInset};
   overflow: hidden;
   margin: -8px 0 16px;
   position: relative;
@@ -118,10 +92,10 @@ export const RunProgress = styled.div`
     border-radius: inherit;
     background: linear-gradient(
       90deg,
-      ${VINTAGE_LAB_THEME.glow.pipeMain},
-      ${VINTAGE_LAB_THEME.glow.pipeHot}
+      ${glow.pipeMain},
+      ${glow.pipeHot}
     );
-    box-shadow: 0 0 8px ${VINTAGE_LAB_THEME.glow.shadow};
+    box-shadow: 0 0 8px ${rgba.pipe(0.6)};
     animation: ${runSweep} 1.25s linear infinite;
   }
 `
@@ -140,34 +114,12 @@ export const StatRow = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 8px 0;
-  border-bottom: 1px dotted rgba(80, 63, 52, 0.9);
-`
-
-export const Screw = styled.span<{ $x: 'left' | 'right'; $y: 'top' | 'bottom' }>`
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #ffffff, ${VINTAGE_LAB_THEME.shell.main});
-  box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.35),
-    0 1px 2px rgba(0, 0, 0, 0.4);
-  ${({ $x }) => ($x === 'left' ? 'left: 18px;' : 'right: 18px;')}
-  ${({ $y }) => ($y === 'top' ? 'top: 18px;' : 'bottom: 18px;')}
-
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 2px;
-    border-radius: 50%;
-    border: 1px solid rgba(0, 0, 0, 0.45);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
-  }
+  border-bottom: 1px dotted ${ui.dottedLine};
 `
 
 export const ProgressBar = styled.div<{ score: number }>`
   height: 4px;
-  background: #161b22;
+  background: ${ui.progressTrack};
   flex-grow: 1;
   margin: 0 15px;
   position: relative;
@@ -185,10 +137,10 @@ export const ProgressBar = styled.div<{ score: number }>`
     width: ${({ score }) => score}%;
     background: linear-gradient(
       90deg,
-      ${VINTAGE_LAB_THEME.glow.pipeMain},
-      ${VINTAGE_LAB_THEME.glow.pipeHot}
+      ${glow.pipeMain},
+      ${glow.pipeHot}
     );
-    box-shadow: 0 0 10px ${VINTAGE_LAB_THEME.glow.shadow};
+    box-shadow: 0 0 10px ${rgba.pipe(0.6)};
     border-radius: inherit;
     transition: width 1s ease-in-out;
   }
@@ -201,8 +153,8 @@ export const ProgressBar = styled.div<{ score: number }>`
     height: 8px;
     width: 10px;
     border-radius: 999px;
-    background: ${VINTAGE_LAB_THEME.glow.stopper};
-    box-shadow: 0 0 6px ${VINTAGE_LAB_THEME.glow.shadow};
+    background: ${neutralRail};
+    box-shadow: 0 0 6px ${rgba.pipe(0.6)};
     transform: translateX(-50%);
     left: ${({ score }) => score}%;
     transition: left 1s ease-in-out;
@@ -210,12 +162,12 @@ export const ProgressBar = styled.div<{ score: number }>`
 `
 
 export const LiveTag = styled.span`
-  background: rgba(255, 206, 120, 0.12);
+  background: ${ui.liveTagBg};
   padding: 2px 10px;
   border-radius: 999px;
   font-size: 0.7rem;
-  border: 1px solid rgba(255, 206, 120, 0.35);
-  color: #2f241a;
+  border: 1px solid ${ui.liveTagBorder};
+  color: ${ink.primary};
   animation: ${pulse} 2s infinite;
 `
 

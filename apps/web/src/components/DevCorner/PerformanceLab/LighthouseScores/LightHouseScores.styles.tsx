@@ -1,5 +1,7 @@
 import styled, { css, keyframes } from 'styled-components'
-import { colors, fromTablet, spacing, typography } from '@portfolio/design'
+import { colors, fromTablet, spacing, typography, VINTAGE_THEME } from '@portfolio/design'
+
+const { bezel, scores } = VINTAGE_THEME
 
 const pulse = keyframes`
   0% {
@@ -17,7 +19,11 @@ export const ScoresBlock = styled.div`
   padding: ${spacing.sm};
   border-radius: 12px;
   border: 3px solid ${colors.textMuted};
-  background: linear-gradient(180deg, #c9c1b4, #b8afa0);
+  background: linear-gradient(
+    180deg,
+    ${bezel.scoresTop},
+    ${bezel.scoresBottom}
+  );
   box-shadow:
     0 16px 26px rgba(0, 0, 0, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.45),
@@ -64,30 +70,30 @@ export const LighthouseScoreCard = styled.div<{ $score?: number; $loading?: bool
     border-radius: 999px;
     background: radial-gradient(
       circle at 30% 20%,
-      rgba(255, 255, 255, 0.2),
-      rgba(210, 160, 60, 0.45) 32%,
-      rgba(165, 95, 30, 0.55) 62%,
-      rgba(70, 30, 15, 1) 100%
+      ${scores.bezelGradientTop},
+      ${scores.bezelGradMid} 32%,
+      ${scores.bezelGradDeep} 62%,
+      ${scores.bezelGradOuter} 100%
     );
     box-shadow:
-      0 0 0 1px rgba(120, 53, 15, 0.7),
+      0 0 0 1px ${scores.bezelRim},
       0 4px 8px rgba(0, 0, 0, 0.45),
       inset 0 0 12px rgba(0, 0, 0, 0.6);
   }
 
   .CircularProgressbar-trail {
-    stroke: rgba(0, 0, 0, 0.18) !important; /* subtle inner edge */
+    stroke: ${scores.bezelStroke} !important; /* subtle inner edge */
   }
 
   .CircularProgressbar-path {
     stroke-linecap: round;
-    filter: drop-shadow(0 0 6px rgba(255, 190, 90, 0.35));
+    filter: drop-shadow(0 0 6px ${scores.bezelGlow});
   }
 
   .CircularProgressbar-text {
     font-family: ${typography.fontFamilyHeading};
     font-weight: 700;
-    fill: #3b2a1c !important;
+    fill: ${scores.bezelFill} !important;
     letter-spacing: 0.08em;
   }
 `
@@ -95,7 +101,7 @@ export const LighthouseScoreLabel = styled.div`
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #4f4132;
+  color: ${scores.bezelLabel};
   margin-top: 0.15rem;
   font-weight: 600;
 `

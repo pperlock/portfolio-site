@@ -1,5 +1,14 @@
-import { spacing, fromTablet, colors, typography, fromDesktop } from '@portfolio/design'
+import {
+  spacing,
+  fromTablet,
+  colors,
+  typography,
+  fromDesktop,
+  VINTAGE_THEME,
+} from '@portfolio/design'
 import styled from 'styled-components'
+
+const { ui, slateText, paper, ink, daphne, white, neutralRail } = VINTAGE_THEME
 
 export const AccessibilityLayout = styled.div`
   display: flex;
@@ -31,7 +40,7 @@ export const AccessibilityMetricsColumn = styled.div`
 export const LighthouseMessage = styled.p`
   margin: 0.75rem 0 0;
   font-size: 0.9rem;
-  color: #374151;
+  color: ${ui.messageGray};
   text-align: center;
 `
 
@@ -54,7 +63,7 @@ export const LighthouseScoreValue = styled.div`
   font-size: 1.75rem;
   font-weight: 700;
   line-height: 1.2;
-  color: #111827;
+  color: ${slateText};
 `
 
 export const LighthouseLink = styled.a`
@@ -74,26 +83,30 @@ export const PageSelect = styled.select`
   padding: 12px 40px 12px 14px;
   font-size: 14px;
   border-radius: 999px;
-  border: 1px solid rgba(79, 95, 120, 0.9);
-  background: linear-gradient(145deg, #f8f3e8, #e8ddcc);
-  color: #2f241a;
+  border: 1px solid ${ui.chromeBorder};
+  background: linear-gradient(
+    145deg,
+    ${paper.selectWarmStart},
+    ${paper.selectWarmEnd}
+  );
+  color: ${ink.primary};
   appearance: none;
   cursor: pointer;
 
   transition: all 0.2s ease;
 
   &:hover {
-    border-color: #9dc1d8;
+    border-color: ${daphne.main};
   }
 
   &:focus {
     outline: none;
-    border-color: #9dc1d8;
-    box-shadow: 0 0 0 3px rgba(157, 193, 216, 0.35);
+    border-color: ${daphne.main};
+    box-shadow: 0 0 0 3px ${daphne.glow};
   }
 
   &:disabled {
-    background: #f5f5f5;
+    background: ${paper.disabled};
     cursor: not-allowed;
   }
 `
@@ -109,7 +122,7 @@ export const PageSelectArrow = styled.div`
   height: 0;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
-  border-top: 6px solid rgba(47, 36, 26, 0.9);
+  border-top: 6px solid ${ui.warmBorder};
 `
 
 export const ThemedSelectRoot = styled.div`
@@ -123,8 +136,8 @@ export const ThemedSelectTrigger = styled.button`
   padding: 12px 40px 12px 14px;
   font-size: 14px;
   border-radius: 999px;
-  border: 1px solid rgba(79, 95, 120, 0.9);
-  background: linear-gradient(145deg, #9dc1d8, #7ba2bd);
+  border: 1px solid ${ui.chromeBorder};
+  background: linear-gradient(145deg, ${daphne.main}, ${daphne.deep});
   color: ${colors.BrushStrokeThree};
   font-weight: 600;
   text-align: left;
@@ -132,13 +145,13 @@ export const ThemedSelectTrigger = styled.button`
   transition: all 0.2s ease;
 
   &:hover {
-    border-color: #9dc1d8;
+    border-color: ${daphne.main};
   }
 
   &:focus-visible {
     outline: none;
-    border-color: #9dc1d8;
-    box-shadow: 0 0 0 3px rgba(157, 193, 216, 0.35);
+    border-color: ${daphne.main};
+    box-shadow: 0 0 0 3px ${daphne.glow};
   }
 `
 
@@ -153,9 +166,9 @@ export const ThemedSelectMenu = styled.ul`
   margin: 0;
   padding: 8px;
   border-radius: 14px;
-  border: 1px solid rgba(79, 95, 120, 0.9);
-  background: #ffffff;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  border: 1px solid ${ui.chromeBorder};
+  background: ${white};
+  box-shadow: 0 12px 24px ${ui.menuShadow};
 `
 
 export const ThemedSelectOption = styled.button<{ $active?: boolean }>`
@@ -167,11 +180,11 @@ export const ThemedSelectOption = styled.button<{ $active?: boolean }>`
   cursor: pointer;
   font-size: 0.95rem;
   color: ${colors.BrushStrokeThree};
-  background: ${({ $active }) => ($active ? 'rgba(157, 193, 216, 0.35)' : 'transparent')};
+  background: ${({ $active }) => ($active ? daphne.glow : 'transparent')};
   font-weight: 600;
 
   &:hover {
-    background: rgba(157, 193, 216, 0.24);
+    background: ${daphne.glowSoft};
   }
 `
 
@@ -180,7 +193,7 @@ export const DialScrew = styled.span<{ $x: 'left' | 'right'; $y: 'top' | 'bottom
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #ffffff, ${colors.BrushStrokeThree});
+  background: radial-gradient(circle at 30% 30%, #ffffff, ${daphne.main});
   box-shadow:
     0 0 0 1px rgba(0, 0, 0, 0.35),
     0 1px 2px rgba(0, 0, 0, 0.4);
@@ -206,13 +219,13 @@ export const LighthouseBarChart = styled.div`
 export const LighthouseChartNote = styled.p`
   margin-top: ${spacing.lg};
   font-size: 0.8rem;
-  color: #6b7280;
+  color: ${ui.mutedGray};
 `
 
 export const MetricsPanel = styled.section`
   border-radius: 14px;
-  border: 1px solid #e5e7eb;
-  background: #ffffff;
+  border: 1px solid ${neutralRail};
+  background: ${white};
   padding: ${spacing.md};
   max-width: 360px;
 `
@@ -221,7 +234,7 @@ export const MetricsTitle = styled.h3`
   margin: 0 0 0.75rem;
   font-size: 0.95rem;
   font-weight: 600;
-  color: #111827;
+  color: ${slateText};
 `
 
 export const MetricsList = styled.dl`
@@ -231,7 +244,7 @@ export const MetricsList = styled.dl`
   column-gap: 0.75rem;
   row-gap: 0.4rem;
   font-size: 0.85rem;
-  color: #111827;
+  color: ${slateText};
 `
 
 export const MetricsLabel = styled.dt`
@@ -241,13 +254,13 @@ export const MetricsLabel = styled.dt`
 export const MetricsValue = styled.dd`
   margin: 0;
   text-align: right;
-  color: #4b5563;
+  color: ${ui.slateMid};
 `
 
 export const MetricsNote = styled.p`
   margin: 0.75rem 0 0;
   font-size: 0.78rem;
-  color: #6b7280;
+  color: ${ui.mutedGray};
 `
 export const PerformanceSection = styled.div`
   display: flex;

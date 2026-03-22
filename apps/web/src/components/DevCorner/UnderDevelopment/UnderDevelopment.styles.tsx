@@ -1,5 +1,7 @@
 import styled, { keyframes } from 'styled-components'
-import { colors, fromTablet, spacing, typography } from '@portfolio/design'
+import { colors, fromTablet, spacing, typography, VINTAGE_THEME } from '@portfolio/design'
+
+const { underDevelopment, daphne } = VINTAGE_THEME
 
 const breathe = keyframes`
   0%, 100% { opacity: 1; }
@@ -11,7 +13,7 @@ export const UnderDevWrapper = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #f8f9fa; /* Clean, light neutral */
+  background: ${underDevelopment.sectionBg};
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
   ${fromTablet`
@@ -42,7 +44,7 @@ export const ImageContainer = styled.div`
 `
 
 export const StatusBadge = styled.span`
-  background: #9dc1d8; /* Matching the Daphne Blue */
+  background: ${daphne.main};
   color: ${colors.bg};
   padding: ${spacing.xs} ${spacing.sm};
   border-radius: 20px;
@@ -72,7 +74,7 @@ export const Subtext = styled.p`
 export const LoadingBar = styled.div`
   width: 200px;
   height: 4px;
-  background: #e0e0e0;
+  background: ${underDevelopment.loadingTrack};
   margin-top: ${spacing.md};
   position: relative;
   overflow: hidden;
@@ -82,7 +84,7 @@ export const LoadingBar = styled.div`
     position: absolute;
     width: 40%;
     height: 100%;
-    background: #9dc1d8;
+    background: ${daphne.main};
     animation: slide 2s infinite linear;
   }
 

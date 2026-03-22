@@ -3,7 +3,6 @@ import {
   Shell,
   ConsoleContainer,
   Header,
-  Screw,
   RunProgress,
   Grid,
   StatRow,
@@ -11,6 +10,8 @@ import {
   LiveTag,
   HeaderLabel,
 } from './PerformanceMetrics.styles'
+import { DialCornerScrews } from '../DialCornerScrews'
+import { VINTAGE_THEME } from '@portfolio/design'
 import { METRIC_ROWS } from '@/constants'
 import { parseMetricValue, calculateHealth, formatAuditDate } from '@/utils'
 import type { LighthouseMetrics } from '@/types'
@@ -37,11 +38,7 @@ const PerformanceMetrics = ({
   return (
     <Shell>
       <ConsoleContainer>
-        {/* Subtle Daphne-blue screws in the panel corners */}
-        <Screw $x="left" $y="top" aria-hidden />
-        <Screw $x="right" $y="top" aria-hidden />
-        <Screw $x="left" $y="bottom" aria-hidden />
-        <Screw $x="right" $y="bottom" aria-hidden />
+        <DialCornerScrews />
 
         <Header>
           <HeaderLabel isLoading={isLoading}>{headerLabel}</HeaderLabel>
@@ -68,11 +65,28 @@ const PerformanceMetrics = ({
             })}
           </div>
 
-          <div style={{ borderLeft: '1px solid #30363d', paddingLeft: '20px' }}>
-            <div style={{ fontSize: '0.6rem', color: '#2f241a', marginBottom: '10px' }}>
+          <div
+            style={{
+              borderLeft: `1px solid ${VINTAGE_THEME.ui.borderDivider}`,
+              paddingLeft: '20px',
+            }}
+          >
+            <div
+              style={{
+                fontSize: '0.6rem',
+                color: VINTAGE_THEME.ink.primary,
+                marginBottom: '10px',
+              }}
+            >
               OPTIMIZATION_LOG
             </div>
-            <div style={{ fontSize: '0.7rem', lineHeight: '1.4', color: '#2f241a' }}>
+            <div
+              style={{
+                fontSize: '0.7rem',
+                lineHeight: '1.4',
+                color: VINTAGE_THEME.ink.primary,
+              }}
+            >
               [OK] React v18.3.0
               <br />
               [OK] Tree-shaking active
