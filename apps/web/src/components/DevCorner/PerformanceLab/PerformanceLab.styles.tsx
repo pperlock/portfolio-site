@@ -84,11 +84,7 @@ export const PageSelect = styled.select`
   font-size: 14px;
   border-radius: 999px;
   border: 1px solid ${ui.chromeBorder};
-  background: linear-gradient(
-    145deg,
-    ${paper.selectWarmStart},
-    ${paper.selectWarmEnd}
-  );
+  background: linear-gradient(145deg, ${paper.selectWarmStart}, ${paper.selectWarmEnd});
   color: ${ink.primary};
   appearance: none;
   cursor: pointer;
@@ -262,18 +258,40 @@ export const MetricsNote = styled.p`
   font-size: 0.78rem;
   color: ${ui.mutedGray};
 `
+/** Mobile: tuner → preview → scores/metrics. Desktop: preview left, tuner + results right. */
 export const PerformanceSection = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
   margin: ${spacing.lg} auto 0;
   gap: ${spacing.lg};
   flex: 0 0 auto;
   max-width: 800px;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    'tuner'
+    'preview'
+    'results';
+
   ${fromDesktop`
     max-width: 100%;
-    flex-direction: row;
-    align-items: flex-start;
+    grid-template-columns: minmax(260px, 400px) minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      'preview tuner'
+      'preview results';
+    align-items: start;
   `}
+`
+
+export const TunerArea = styled.div`
+  grid-area: tuner;
+  min-width: 0;
+`
+
+export const PreviewArea = styled.div`
+  grid-area: preview;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
 `
 
 export const ResultsSection = styled.div`
@@ -295,11 +313,27 @@ export const LighthouseMetricsColumn = styled.div`
   min-width: 0;
 `
 
+export const ResultsArea = styled(LighthouseMetricsColumn)``
+
+/** Reserves one line + icon so the report link does not shift layout when it appears. */
+export const ReportLinkSlot = styled.div`
+  margin-top: 20px;
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+
+  ${fromTablet`
+    justify-content: flex-start;
+  `}
+`
+
 export const ReportLink = styled.a`
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin-top: 20px;
   color: ${colors.textMuted};
   font-size: ${typography.fontSizeSm};
   font-family: 'JetBrains Mono', monospace;

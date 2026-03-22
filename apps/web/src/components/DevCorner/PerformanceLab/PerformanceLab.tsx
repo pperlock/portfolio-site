@@ -3,7 +3,14 @@ import { VscLinkExternal } from 'react-icons/vsc'
 import type { PageLighthouseState } from '@/types'
 import { LIGHTHOUSE_PAGES, hasLighthouseReportReady } from '@/constants'
 
-import { PerformanceSection, LighthouseMetricsColumn, ReportLink } from './PerformanceLab.styles'
+import {
+  PerformanceSection,
+  TunerArea,
+  PreviewArea,
+  ResultsArea,
+  ReportLinkSlot,
+  ReportLink,
+} from './PerformanceLab.styles'
 import LighthouseTuner from './LightHouseTuner/LighthouseTuner'
 import LighthouseScores from './LighthouseScores/LighthouseScores'
 import usePerformanceLab from './hooks/usePerformanceLab'
@@ -36,11 +43,15 @@ const PerformanceLab: React.FC<PerformanceLabProps> = ({
 
   return (
     <PerformanceSection>
-      <PagePreview
-        page={selectedPageId ? LIGHTHOUSE_PAGES.find(p => p.id === selectedPageId)?.url : undefined}
-      />
-      <LighthouseMetricsColumn>
+      <TunerArea>
         <LighthouseTuner selectedPageId={selectedPageId ?? undefined} onChange={handlePageSelect} />
+      </TunerArea>
+      <PreviewArea>
+        <PagePreview
+          page={selectedPageId ? LIGHTHOUSE_PAGES.find(p => p.id === selectedPageId)?.url : undefined}
+        />
+      </PreviewArea>
+      <ResultsArea>
         <LighthouseScores scores={currentPageData?.scores} loading={currentPageData?.loading} />
 
         <PerformanceMetrics
@@ -50,13 +61,15 @@ const PerformanceLab: React.FC<PerformanceLabProps> = ({
           score={currentPageData?.scores.performance}
         />
 
-        {lighthouseReportUrl ? (
-          <ReportLink href={lighthouseReportUrl} target="_blank" rel="noopener noreferrer">
-            {content.reportLinkText}
-            <VscLinkExternal />
-          </ReportLink>
-        ) : null}
-      </LighthouseMetricsColumn>
+        <ReportLinkSlot>
+          {lighthouseReportUrl ? (
+            <ReportLink href={lighthouseReportUrl} target="_blank" rel="noopener noreferrer">
+              {content.reportLinkText}
+              <VscLinkExternal />
+            </ReportLink>
+          ) : null}
+        </ReportLinkSlot>
+      </ResultsArea>
     </PerformanceSection>
   )
 }
