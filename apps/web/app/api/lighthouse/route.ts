@@ -8,7 +8,8 @@ import { runLighthousePageSpeed } from '@/lib/lighthouse/fetchLighthouseServer'
  * (e.g. Dev Corner). Without this, the default serverless limit can return 502 before Google responds.
  * @see https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#maxduration
  */
-export const maxDuration = 180
+/** Match `vercel.json` so PageSpeed can finish on heavy routes (requires Vercel Pro-level limits). */
+export const maxDuration = 300
 
 export const GET = async (request: NextRequest) => {
   const { searchParams } = new URL(request.url)

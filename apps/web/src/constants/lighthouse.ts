@@ -96,6 +96,13 @@ export const LIGHTHOUSE_PAGE_ENTRIES: LighthousePageEntry[] = [
 export const LIGHTHOUSE_PAGES: { id: string; title: string; url: string }[] =
   LIGHTHOUSE_PAGE_ENTRIES.map(({ id, title, url }) => ({ id, title, url }))
 
+/**
+ * Pages not prefetched in the idle batch — they are heavy and/or would run PageSpeed while
+ * the user is already on this route, competing with many parallel audits (502s / rate limits).
+ * Results load on-demand when selected in the Performance Lab tuner.
+ */
+export const LIGHTHOUSE_SKIP_IDLE_PREFETCH_IDS = ['dev-corner'] as const
+
 export const LIGHTHOUSE_STALE_MS = 5 * 60 * 1000 // 5 minutes
 
 export const METRIC_ROWS = [
