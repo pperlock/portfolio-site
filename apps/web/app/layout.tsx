@@ -1,3 +1,4 @@
+import 'react-circular-progressbar/dist/styles.css'
 import React from 'react'
 import { Inter } from 'next/font/google'
 import { headers } from 'next/headers'
@@ -5,6 +6,7 @@ import StyledComponentsRegistry from './StyledComponentsRegistry'
 import { NAME } from '@/constants'
 import Layout from '@/components/Layout/Layout/Layout'
 import ScrollToTop from '@/components/Layout/ScrollToTop/ScrollToTop'
+import { QueryProvider } from '@/providers'
 
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700'] })
 
@@ -31,12 +33,14 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <StyledComponentsRegistry requestId={requestId}>
-          <div className="App">
-            <ScrollToTop />
-            <Layout>{children}</Layout>
-          </div>
-        </StyledComponentsRegistry>
+        <QueryProvider>
+          <StyledComponentsRegistry requestId={requestId}>
+            <div className="App">
+              <ScrollToTop />
+              <Layout>{children}</Layout>
+            </div>
+          </StyledComponentsRegistry>
+        </QueryProvider>
       </body>
     </html>
   )

@@ -7,4 +7,13 @@ export const CONTACT_INFO = {
   github: 'https://github.com/pperlock',
 }
 
+export type NavLink = {
+  label: string
+  href: string
+  activeColor: string
+  isSubtle?: boolean
+}
+
 export * from './skills'
+export * from './github'
+export * from './lighthouse'

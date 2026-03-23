@@ -13,7 +13,7 @@ import { NAME } from '@/constants'
 
 const Footer = () => {
   return (
-    <StyledFooter>
+    <StyledFooter id="site-footer">
       <PageAlignmentWrapper>
         <FooterWrapper>
           <BackToTop />

@@ -1,4 +1,12 @@
-export const NAV_LINKS = {
+export type NavLinkConfig = {
+  label: string;
+  href: string;
+  activeColor: string;
+  /** When true, footer nav can render this link with de-emphasized styling */
+  isSubtle?: boolean;
+};
+
+export const NAV_LINKS: Record<string, NavLinkConfig> = {
   about: { label: "about", href: "/about", activeColor: "BrushStrokeOne" },
   portfolio: {
     label: "portfolio",
@@ -10,5 +18,10 @@ export const NAV_LINKS = {
     label: "contact",
     href: "/contact",
     activeColor: "BrushStrokeOne",
+  },
+  devCorner: {
+    label: "dev corner",
+    href: "/dev-corner",
+    activeColor: "BrushStrokeThree",
   },
 };

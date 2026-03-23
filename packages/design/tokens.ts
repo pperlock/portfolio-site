@@ -3,6 +3,8 @@
  * Used by styled-components (e.g. GlobalStyles, InsetSection) and optionally by theme provider.
  */
 
+import { VINTAGE_THEME } from "./vintageTheme";
+
 export const colors = {
   primary: "#000",
   text: "#000",
@@ -54,6 +56,7 @@ export const typography = {
   fontFamilyHeading:
     '"proxima nova semibold", "Helvetica Neue", Helvetica, Arial, sans-serif',
   fontSizeBase: "1rem",
+  fontSizeXs: "0.5rem",
   fontSizeSm: "0.875rem",
   fontSizeLg: "1.125rem",
   fontSizeXl: "1.5rem",
@@ -182,4 +185,5 @@ export const theme = {
   breakpoint,
   headerFontSize,
   socialIcons,
+  VINTAGE_THEME,
 };

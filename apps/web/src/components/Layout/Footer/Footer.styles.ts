@@ -16,15 +16,7 @@ export const StyledFooter = styled.footer`
 export const FooterWrapper = styled.div`
   max-width: ${layout.containerMax};
   margin: 0 auto;
-  padding: 0 1rem;
   position: relative;
-
-  ${fromTablet`
-    padding: 0 2rem;
-  `}
-  ${fromDesktop`
-    padding: 0;
-  `}
 
   &::before {
     content: '';
@@ -92,7 +84,6 @@ export const FooterNavGroup = styled.div`
   ${fromTablet`
     flex-direction: row;
     align-items: center;
-    gap: 2rem;
   `}
 `
 

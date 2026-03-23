@@ -37,7 +37,7 @@ export const HeroRow = styled.div`
     gap: ${spacing.xs};
   `}
   ${fromDesktop`
-   gap: ${spacing.xl};
+    gap: ${spacing.xl};
   `}
 `
 

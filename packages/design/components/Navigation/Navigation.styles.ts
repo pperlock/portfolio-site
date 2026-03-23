@@ -1,15 +1,33 @@
 import Link from "next/link";
 import styled from "styled-components";
-import { motion, colors, fromTablet, spacing } from "../../tokens";
+import { motion, colors, fromTablet, spacing, fromDesktop } from "../../tokens";
 
-const linkColor = ({ $variant, $isActive, $activeBrushColor }) =>
+interface NavProps {
+  $variant: string;
+  $isMobileMenuOpen: boolean;
+}
+
+type LinkColorProps = {
+  $variant: string;
+  $isActive?: boolean;
+  $activeBrushColor?: string;
+};
+
+interface NavLinkProps {
+  $variant?: string;
+  $isActive?: boolean;
+  $activeBrushColor?: string;
+  $isSubtle?: boolean;
+}
+
+const linkColor = ({ $variant, $isActive, $activeBrushColor }: LinkColorProps) =>
   $variant === "header" && $isActive && $activeBrushColor
     ? colors[$activeBrushColor]
     : $variant === "footer"
       ? colors.text
       : colors.bg;
 
-const navTabletStyles = (props) => `
+const navSharedRowStyles = (props: NavProps) => `
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -18,10 +36,9 @@ const navTabletStyles = (props) => `
   max-height: none;
   overflow: visible;
   opacity: 1;
-  gap: 2.5rem;
   margin: 0;
   padding: 0;
-  color: ${linkColor(props)};
+  color: ${linkColor({ $variant: props.$variant })};
   & > * {
     opacity: 1;
     transform: none;
@@ -29,10 +46,12 @@ const navTabletStyles = (props) => `
   }
 `;
 
-export const Nav = styled.nav<{
-  $variant?: string;
-  $isMobileMenuOpen?: boolean;
-}>`
+const navTabletStyles = (props: NavProps) => `
+  gap: ${props.$variant === "footer" ? "0.8rem" : "1.5rem"};
+  ${navSharedRowStyles(props)}
+`;
+
+export const Nav = styled.nav<NavProps>`
   ${({ $variant, $isMobileMenuOpen }) =>
     $variant === "header" &&
     `
@@ -64,26 +83,13 @@ export const Nav = styled.nav<{
     `}
   gap: 1.5rem;
 
-  /* Footer: row layout on all breakpoints; gap stays 1.5rem until tablet+ (below). */
-  ${({ $variant }) =>
-    $variant === "footer" &&
-    `
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    color: ${colors.text};
-    & > * {
-      opacity: 1;
-      transform: none;
-      transition-delay: 0;
-    }
-  `}
+  ${(props) => props.$variant === "footer" && navTabletStyles(props)}
 
   ${(props) => fromTablet`${navTabletStyles(props)}`}
+
+  ${fromDesktop`
+    gap: 2.5rem;
+  `}
 `;
 
 export const SocialsWrapper = styled.div`
@@ -124,8 +130,12 @@ export const SocialsLabel = styled.span`
   `}
 `;
 
-const navLinkStyles = (props) => `
-  color: ${linkColor(props)};
+const navLinkStyles = (props: NavLinkProps) => `
+  color: ${linkColor({
+    $variant: props.$variant ?? "footer",
+    $isActive: props.$isActive,
+    $activeBrushColor: props.$activeBrushColor,
+  })};
   text-decoration: none;
   text-transform: lowercase;
   transition: ${motion.transition};
@@ -136,12 +146,6 @@ const navLinkStyles = (props) => `
     opacity: 0.7;
   }
 `;
-
-type NavLinkProps = {
-  $variant?: string;
-  $isActive?: boolean;
-  $activeBrushColor?: string;
-};
 
 export const NavLink = styled.a<NavLinkProps>`
   ${(props) => navLinkStyles(props)}

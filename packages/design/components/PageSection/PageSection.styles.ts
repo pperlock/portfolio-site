@@ -4,7 +4,7 @@ import {
   shadow,
   layout,
   fromTablet,
-  fromDesktop,
+  fromWide,
   typography,
   spacing,
 } from "../../tokens";
@@ -28,7 +28,7 @@ export const SectionContainer = styled.div`
     padding: ${spacing.lg} 0;
   `}
 
-  ${fromDesktop`
+  ${fromWide`
     padding: ${spacing.xl} 0;
   `}
 `;
