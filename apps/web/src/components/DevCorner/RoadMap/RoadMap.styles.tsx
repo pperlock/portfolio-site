@@ -77,7 +77,24 @@ export const DevLinksWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.85rem;
+  align-items: flex-start;
+`
+
+export const DevLinkWrap = styled.div`
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: 0.3rem;
+`
+
+export const DevLinkCaption = styled.span`
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: ${colors.textMedium};
+  line-height: 1.2;
+  user-select: none;
 `
 
 export const BodyWrap = styled.div`

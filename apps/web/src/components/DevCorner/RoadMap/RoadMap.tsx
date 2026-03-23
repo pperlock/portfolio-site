@@ -7,6 +7,8 @@ import {
   RoadmapGrid,
   TitleAndLinksRow,
   DevLinksWrapper,
+  DevLinkWrap,
+  DevLinkCaption,
   DevLink,
   DevLinkInner,
   DevLinkFront,
@@ -48,34 +50,37 @@ const RoadMap = ({ content }: RoadMapProps) => {
       <TitleAndLinksRow>
         <LowerCaseTitle tag="h2">{title}</LowerCaseTitle>
         <DevLinksWrapper>
-          {devLinks.map(({ label, subtitle, href, description }) => {
+          {devLinks.map(({ label, subtitle, href, description }, index) => {
             const Icon = label === 'GitHub' ? FaGithub : FaProjectDiagram
+            const caption = index === 0 ? 'Repo' : index === 1 ? 'Project' : null
             return (
-              <DevLink
-                key={href}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-              >
-                <DevTooltip role="tooltip">
-                  <DevTooltipTitle>{label}</DevTooltipTitle>
-                  <DevTooltipSubtitle>{subtitle}</DevTooltipSubtitle>
-                  <DevTooltipDescription>{description}</DevTooltipDescription>
-                </DevTooltip>
-                <DevLinkInner>
-                  <DevLinkFront aria-hidden>
-                    <DevLinkIcon>
-                      <Icon />
-                    </DevLinkIcon>
-                  </DevLinkFront>
-                  <DevLinkBack aria-hidden>
-                    <DevLinkIcon>
-                      <Icon />
-                    </DevLinkIcon>
-                  </DevLinkBack>
-                </DevLinkInner>
-              </DevLink>
+              <DevLinkWrap key={href}>
+                <DevLink
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                >
+                  <DevTooltip role="tooltip">
+                    <DevTooltipTitle>{label}</DevTooltipTitle>
+                    <DevTooltipSubtitle>{subtitle}</DevTooltipSubtitle>
+                    <DevTooltipDescription>{description}</DevTooltipDescription>
+                  </DevTooltip>
+                  <DevLinkInner>
+                    <DevLinkFront aria-hidden>
+                      <DevLinkIcon>
+                        <Icon />
+                      </DevLinkIcon>
+                    </DevLinkFront>
+                    <DevLinkBack aria-hidden>
+                      <DevLinkIcon>
+                        <Icon />
+                      </DevLinkIcon>
+                    </DevLinkBack>
+                  </DevLinkInner>
+                </DevLink>
+                {caption ? <DevLinkCaption>{caption}</DevLinkCaption> : null}
+              </DevLinkWrap>
             )
           })}
         </DevLinksWrapper>
