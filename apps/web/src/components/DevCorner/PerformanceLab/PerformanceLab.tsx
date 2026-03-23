@@ -48,7 +48,9 @@ const PerformanceLab: React.FC<PerformanceLabProps> = ({
       </TunerArea>
       <PreviewArea>
         <PagePreview
-          page={selectedPageId ? LIGHTHOUSE_PAGES.find(p => p.id === selectedPageId)?.url : undefined}
+          page={
+            selectedPageId ? LIGHTHOUSE_PAGES.find(p => p.id === selectedPageId)?.url : undefined
+          }
         />
       </PreviewArea>
       <ResultsArea>

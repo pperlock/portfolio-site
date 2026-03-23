@@ -42,8 +42,36 @@ export async function runLighthousePageSpeed(
   apiUrl.searchParams.set('key', apiKey)
   CATEGORY_IDS.forEach(cat => apiUrl.searchParams.append('category', cat))
 
+  /** PageSpeed can exceed 60s on JS-heavy routes; stay under typical `maxDuration` (e.g. 180s). */
+  const PAGESPEED_REQUEST_MS = 170_000
+
   try {
-    const { data } = await axios.get(apiUrl.toString())
+    const { data } = await axios.get(apiUrl.toString(), {
+      timeout: PAGESPEED_REQUEST_MS,
+      validateStatus: status => status < 500,
+    })
+
+    if (!data?.lighthouseResult) {
+      const apiMsg =
+        data &&
+        typeof data === 'object' &&
+        'error' in data &&
+        data.error &&
+        typeof (data as { error?: { message?: string } }).error === 'object'
+          ? (data as { error: { message?: string } }).error?.message
+          : undefined
+      return {
+        ok: false,
+        state: {
+          loading: false,
+          scores: {},
+          pageSpeedUrl,
+          error:
+            apiMsg ??
+            'PageSpeed did not return Lighthouse results for this URL. It may be slow to load or blocked from Google’s runners.',
+        },
+      }
+    }
 
     const categories = data?.lighthouseResult?.categories
     const audits = data?.lighthouseResult?.audits
@@ -67,6 +95,21 @@ export async function runLighthousePageSpeed(
       finalUrl: data?.lighthouseResult?.finalUrl ?? url,
     }
   } catch (err) {
+    if (axios.isAxiosError(err)) {
+      if (err.code === 'ECONNABORTED' || err.message.toLowerCase().includes('timeout')) {
+        return {
+          ok: false,
+          state: {
+            loading: false,
+            scores: {},
+            pageSpeedUrl,
+            error:
+              'PageSpeed request timed out. Heavy pages (like Dev Corner) can exceed limits—increase API route maxDuration on your host or try again.',
+          },
+        }
+      }
+    }
+
     const body = axios.isAxiosError(err) ? err.response?.data : undefined
     const message =
       body && typeof body === 'object'

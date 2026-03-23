@@ -42,7 +42,7 @@ const DevCornerHero = ({ title, subtitle, image, navLinks }: DevCornerHeroProps)
             </PageNav>
           </Content>
           <ImageWrap>
-            <Image src={image} alt="" fill sizes="100vw" style={{ objectFit: 'cover' }} priority />
+            <Image src={image} alt="" width={343} height={340} priority />
           </ImageWrap>
         </Body>
       </InnerContainer>

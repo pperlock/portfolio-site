@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 import {
   UnderDevWrapper,
   StatusBadge,
@@ -13,7 +14,7 @@ const UnderDevelopment = () => {
   return (
     <UnderDevWrapper>
       <ImageContainer>
-        <img src="radio.png" alt="Vintage Fender Radio - Stay Tuned" />
+        <Image src="/radio.png" alt="Vintage Fender Radio - Stay Tuned" width={600} height={600} />
       </ImageContainer>
 
       <UnderDevTextWrapper>

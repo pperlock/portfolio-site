@@ -19,11 +19,7 @@ export const ScoresBlock = styled.div`
   padding: ${spacing.sm};
   border-radius: 12px;
   border: 3px solid ${colors.textMuted};
-  background: linear-gradient(
-    180deg,
-    ${bezel.scoresTop},
-    ${bezel.scoresBottom}
-  );
+  background: linear-gradient(180deg, ${bezel.scoresTop}, ${bezel.scoresBottom});
   box-shadow:
     0 16px 26px rgba(0, 0, 0, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.45),

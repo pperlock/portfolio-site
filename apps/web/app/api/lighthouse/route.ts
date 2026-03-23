@@ -3,6 +3,13 @@ import { NextRequest, NextResponse } from 'next/server'
 import { LIGHTHOUSE_STRATEGY } from '@/constants'
 import { runLighthousePageSpeed } from '@/lib/lighthouse/fetchLighthouseServer'
 
+/**
+ * PageSpeed Insights runs Lighthouse remotely and often needs 30–120s+ on heavier pages
+ * (e.g. Dev Corner). Without this, the default serverless limit can return 502 before Google responds.
+ * @see https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#maxduration
+ */
+export const maxDuration = 180
+
 export const GET = async (request: NextRequest) => {
   const { searchParams } = new URL(request.url)
   const url = searchParams.get('url')

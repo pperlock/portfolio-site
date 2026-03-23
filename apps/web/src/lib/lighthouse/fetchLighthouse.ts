@@ -20,10 +20,7 @@ export const fetchLighthouse = async (url: string): Promise<PageLighthouseState>
       scores: {},
       metrics: data.metrics,
       pageSpeedUrl,
-      error:
-        typeof data.error === 'string'
-          ? data.error
-          : 'Could not run Lighthouse check.',
+      error: typeof data.error === 'string' ? data.error : 'Could not run Lighthouse check.',
     }
   }
 
