@@ -10,6 +10,7 @@ import RoadMap from './RoadMap'
 import UnderDevelopment from './UnderDevelopment'
 import PerformanceLab from './PerformanceLab'
 import { DevCornerLighthousePrefetcher } from './DevCornerLighthousePrefetcher'
+import { DevCornerFloatingBackToTop } from './DevCornerFloatingBackToTop'
 
 interface DevCornerProps {
   content: DevCornerContent
@@ -19,6 +20,7 @@ const DevCorner = ({
 }: DevCornerProps) => {
   return (
     <>
+      <DevCornerFloatingBackToTop />
       <DevCornerLighthousePrefetcher />
       <DevCornerHero
         title={hero.title}
