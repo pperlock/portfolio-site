@@ -223,7 +223,7 @@ export const Step = styled.div`
 
   ${fromDesktop`
     flex: 1 1 0;
-    max-width: 300px;
+    max-width: 270px;
   `}
 `
 
