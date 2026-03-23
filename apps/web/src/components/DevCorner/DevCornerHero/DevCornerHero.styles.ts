@@ -55,10 +55,16 @@ export const Content = styled.div`
 
 export const ImageWrap = styled.div`
   width: 100%;
-  max-width: 500px;
+  max-width: 343px;
   margin: 0 auto;
   aspect-ratio: 4 / 3;
   position: relative;
+  height: 340px;
+
+  ${fromTablet`
+    max-width: 400px;
+    height: 387px;
+  `}
 `
 
 export const PageNav = styled.nav`

@@ -3,7 +3,7 @@ export const devCornerContent = {
     title: 'Under the hood',
     subtitle:
       'Explore the engineering behind this portfolio — its architecture, design system, performance metrics, and the roadmap for what’s coming next.',
-    image: '/tech-talk-wide.png',
+    image: '/tech-talk.png',
     brushStrokes: false as const,
     tiltImage: false as const,
   },
