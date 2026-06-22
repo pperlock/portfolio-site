@@ -28,11 +28,19 @@ export interface CaseStudyNavigation {
   portfolio: string
 }
 
+export interface CaseStudyRoute {
+  id: string
+  title: string
+  link: string
+  navigationOrder: number
+}
+
 export interface CaseStudyContent {
   navigation: CaseStudyNavigation
   contributionsTitle: string
   summaryTitle: string
   badge: string
+  caseStudyRoutes?: CaseStudyRoute[]
 }
 
 export interface WorkItem {

@@ -4,6 +4,8 @@ export type NavLinkConfig = {
   activeColor: string;
   /** When true, footer nav can render this link with de-emphasized styling */
   isSubtle?: boolean;
+  /** When true, link is omitted from the header nav (footer still shows it) */
+  hideInHeader?: boolean;
 };
 
 export const NAV_LINKS: Record<string, NavLinkConfig> = {
@@ -12,6 +14,7 @@ export const NAV_LINKS: Record<string, NavLinkConfig> = {
     label: "portfolio",
     href: "/portfolio",
     activeColor: "BrushStrokeTwo",
+    hideInHeader: true,
   },
   resume: { label: "resume", href: "/resume", activeColor: "BrushStrokeThree" },
   contact: {

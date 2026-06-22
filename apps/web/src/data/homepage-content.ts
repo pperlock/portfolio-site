@@ -71,12 +71,5 @@ export const homepageContent = {
         supporting: 'Supporting',
       },
     },
-    latestWork: {
-      title: 'Latest Work',
-      button: {
-        label: 'See More',
-        href: '/portfolio',
-      },
-    },
   },
 }

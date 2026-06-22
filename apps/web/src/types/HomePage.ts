@@ -56,7 +56,7 @@ export interface HomePageContent {
   sections: {
     hero: HeroContentType
     atAGlance: AtAGlanceContent
-    latestWork: LatestWorkContent
+    latestWork?: LatestWorkContent
     experienceSummary: ExperienceSummaryContent
     skills: SkillsContent
   }

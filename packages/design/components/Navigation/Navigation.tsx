@@ -23,7 +23,9 @@ const Navigation = ({
   onNavigate,
 }: NavigationProps) => {
   const pathname = usePathname();
-  const navLinks = Object.values(NAV_LINKS);
+  const navLinks = Object.values(NAV_LINKS).filter(
+    (link) => variant !== "header" || !link.hideInHeader,
+  );
 
   return (
     <Nav $variant={variant} $isMobileMenuOpen={isMobileMenuOpen}>
